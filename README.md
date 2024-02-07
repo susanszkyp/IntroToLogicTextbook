@@ -8,8 +8,8 @@ The textbook is written in LaTeX. The file `textbook_main.tex` is the top docume
 
  ## License
 
- This textbook is produced as an Open Educatiocal Resource (OER). It is licenced under [CC BY-NC-SA 4.0 DEED Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en). 
+ This textbook is produced as an _Open Educational Resource_ (OER). It is licenced under [CC BY-NC-SA 4.0 DEED Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en). 
 
  ## Thankses
 
- The textbook is currently being written with the help of a Writing Across the Curriculum (WAC) fellowship at City College, City University of New York. 
+ This textbook is currently being written with the help of a _Writing Across the Curriculum_ (WAC) fellowship at _City College, City University of New York_. 
