@@ -1,0 +1,45 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sussproofs}[2020/04/01 sussproofs Axiomatic Proof Macro LaTeX package]
+
+% REQUIRES THE FOLLOWING PACKAGES :
+% For easy specification of optional arguments and possible further extensions.
+%
+	\RequirePackage{xparse}
+%
+% THE COUNTER :
+% This is used to number the lines 
+%
+	\newcounter{axiomatic}
+%
+% THE ENVIRONMENT :
+% The environment is a simple tabular with 3 columns: the first for numbering the 
+% lines, the second for the formula, the third for the justification. The counter
+% resets to 0 for each proof. 
+% 
+	\newenvironment{axiomatic}
+		{%
+			\setcounter{axiomatic}{0}%
+			\begin{tabular}{lll}%
+		}
+		{%
+			\end{tabular} 
+		}
+%
+% WHAT GOES INSIDE :
+% Each new line is specified by \nl with two mandatory and one optional argument. 
+% If the optional argument is passed, an \hline is activated after the line break
+% in the tabular environment. Either way, \nl steps the counter, argument 2 goes 
+% into the second column, while argument 3 goes to the third in parentheses.
+%
+	\NewDocumentCommand{\nl}{m m o }
+	{%
+		\IfNoValueTF{#3}%
+			{%
+			\refstepcounter{axiomatic}(\theaxiomatic)&#1&(#2)\\
+			}%	
+			{%
+			\refstepcounter{axiomatic}(\theaxiomatic)&#1&(#2)\\ \hline
+			}%
+	}%
+%
+% END OF DEFINITION

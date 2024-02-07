@@ -1,0 +1,60 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{logictextbook}[Style file for logic textbook]
+
+\RequirePackage[margin=1in]{geometry}
+
+
+\RequirePackage{prooftrees}
+
+\RequirePackage[hypertexnames=false]{hyperref}
+\RequirePackage[type={CC}, modifier={by-nc-sa}, version={4.0}, ]{doclicense}
+
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+
+\newcommand{\pred}[2]{\mathfrak{P}^{#1}_{#2}}
+\newcommand{\cons}[1]{\mathfrak{c}_{#1}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\oset}[1]{\langle#1\rangle}
+
+\newtheorem{prop}{Proposition}
+
+\theoremstyle{definition} 
+\newtheorem{defn}{Definition}[section]
+\newtheorem{exc}{Exercise}[section]
+
+\theoremstyle{remark} 
+\newtheorem{remark}{Remark}[section]
+
+\RequirePackage{setspace}
+\onehalfspacing
+
+\RequirePackage{pifont}
+
+\RequirePackage{sussproofs}
+
+\newcommand{\bcirc}{\ding{108}}
+\newcommand{\bstar}{\ding{72}}
+\newcommand{\btri}{\ding{115}}
+\newcommand{\bbox}{\ding{110}}
+
+\newcommand{\fpbox}[1]{
+	\begin{center}
+		\fbox{
+			\begin{minipage}{0.9\textwidth}
+				#1
+			\end{minipage}
+		}
+	\end{center}
+}
+
+\newcommand{\fpboxstar}[1]{
+	\begin{center}
+		\fbox{
+			\begin{minipage}{0.9\textwidth}%
+				\ding{43} #1
+			\end{minipage}
+		}
+	\end{center}
+}

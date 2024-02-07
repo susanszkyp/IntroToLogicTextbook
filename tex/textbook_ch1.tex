@@ -1,0 +1,823 @@
+\chapter{Formal languages}
+
+The purpose of this textbook is to teach you some of the ins and outs of formal logic. However, if you have ever come across an introductory logic textbook, you will see that this one is nothing like it. Logic is a very abstract science, and this abstract nature is very intimidating at first. It certainly was for me when I first started! I think this is hindered, not helped by immediately trying to relate the formal stuff to bigger, and even harder, topics like natural language (think English) and the nature of human reasoning. 
+
+Instead, we will start by getting familiar with the formal stuff itself. The idea is to make seemingly complicated ideas easy to grasp and understand (or at least, eas\textit{ier}). After all, in formal logic, being formal is very important. It is part of what it means to be rigorous. On the other hand, some of this rigour can make things seem more complicated than they really are, and that gap is exactly what we will be focusing on. 
+
+\section{The simplest writing game}
+
+Writing games are, unsurprisingly, about writing. They are about putting symbols next to each other following some specified rules, or alternatively, looking at a bunch of symbols next to each other and breaking them down into their `constituent parts' (meaning the symbols that make them up) according to rules. 
+
+The simplest writing game is about putting symbols next to each other without any special rule. But what are these symbols? Well, they can be any symbols you want, although each one will result in a different game. Since we are talking about the simplest writing game, let's start with the simplest of symbol sets -- having only one symbol. Let's say this symbol is: \bcirc{}.
+
+\begin{center}
+\fbox{\begin{minipage}{0.9\textwidth}
+\ding{43} What this symbol looks like is not overly important since it is the rules that specify its nature. Think of chess here. Usually, there are a bunch of different-looking chess-pieces, each with their own rules of movement. For example, the king moves one square in any direction on the board. But what the king looks like isn't important. If you were to lose the king piece from your set, you could use a pebble and nobody would bat an eye \textit{provided you followed the rule of how it moves on the board}.
+\end{minipage}}
+\end{center}
+
+Once we have our symbol \bcirc{}, we need our one and only rule about putting the symbol down. Clearly, the first step is to allow one to put down \bcirc{} by itself. Let's formulate it: 
+
+\textsc{Rule 1:} As a first step, you can put down \bcirc{} by itself. 
+
+According to \textsc{Rule 1}, I can now do this:
+
+\begin{center}
+	\bcirc{}
+\end{center}
+
+This rule allows us to write down one, and only one, formula, namely, the symbol \bcirc{} by itself. `Formula' is the word we will be using to refer to any sequence of symbols of the right sort. The reason for this will become obvious in due time. 
+
+But first, notice what happens when we add the following rules:
+
+\fpbox{
+\textsc{Rule 2L:} At any step, you can put down \bcirc{} to the left of your existing formula. 
+}
+
+\fpbox{\textsc{Rule 2R:} At any step, you can put down \bcirc{} to the right of your existing formula.}
+
+We can now immediately produce a lot more formulas. Here is a sample: 
+
+\begin{enumerate}
+	\item \bcirc{}\bcirc{}
+	\item \bcirc{}\bcirc{}\bcirc{}\bcirc{}\bcirc{}\bcirc{}
+	\item \bcirc{}\bcirc{}\bcirc{}\bcirc{}
+	\item \bcirc{}\bcirc{}\bcirc{}\bcirc{}\bcirc{}\bcirc{}\bcirc{}\bcirc{}
+\end{enumerate}
+
+
+\begin{exc}
+With \textsc{Rule 1}, we could only produce one formula. How many formulas can we produce with \textsc{Rule 1}, \textsc{Rule 2L} and \textsc{Rule 2R} together?
+\end{exc}
+
+\begin{center}
+	---STOP---
+\end{center}
+
+The answer is: very many! In fact, \textit{infinitely many}! Here is another thing you can ponder:
+
+\begin{exc}
+With \textsc{Rule 1}, \textsc{Rule 2L} and \textsc{Rule 2R}, we can produce infinitely many formulas. Does that mean that any one of these formulas will be infinitely long? \textit{Hint: think of how many natural numbers there are, and how long any representation of a specific number may be. }
+\end{exc}
+
+Of course, this writing game is not overly interesting, since it can only produce rows of black circles. But we can still ask some interesting questions about it. For example, suppose we do away with \textsc{Rule 2L} and take \textsc{Rule 2R} as our only rule other than \textsc{Rule 1}. Here are two questions you may ask yourself:
+
+\begin{exc}
+Can you recreate the same formulas with \textsc{Rule 1} and \textsc{Rule 2R} that you could with \textsc{Rule 1}, \textsc{Rule 2L} and \textsc{Rule 2R}?
+\end{exc}
+
+\begin{exc}\label{unread}
+Can you tell exactly how a given formula was created using \textsc{Rule 1}, \textsc{Rule 2L} and \textsc{Rule 2R}? How about \textsc{Rule 1} and \textsc{Rule 2R}?
+\end{exc}
+
+Speaking of creating formulas, we can also be \textit{very specific} about how we created a given formula in either rule systems. In fact, the type of extremely specific representation we will be using can be adapted for many other (and much more interesting!) rule systems. 
+
+The main idea behind an explicit representation of the creation of a formula is that anyone can see if you actually followed the appropriate rules. In other words, for every correct formula, you can (at least in principle) show how it can be constructed. Alternatively, there is no \textit{in}correct formula for which you can show how it could be constructed (with the given rules). 
+
+Let's say you are considering the correctness of the following formula: \begin{center}\bcirc\bcirc\bcirc\bcirc
+\end{center}
+
+If this formula is indeed a correct one, we should be able to specify how we built it using only the rules that are given to us. Let's take \textsc{Rule 1}, \textsc{Rule 2L} and \textsc{Rule 2R} first. Here is how we can represent in a compact way how we built the above formula:
+
+\medskip
+\begin{axiomatic}
+\nl{\bcirc}{by \textsc{Rule 1}}
+\nl{\bcirc\bcirc}{by \textsc{Rule 2L}}
+\nl{\bcirc\bcirc\bcirc}{by \textsc{Rule 2R}}
+\nl{\bcirc\bcirc\bcirc\bcirc}{by \textsc{Rule 2R}}
+\end{axiomatic}
+\medskip
+
+Let's return to Exercise \ref{unread}. There, the question was whether we could tell for a formula like \bcirc\bcirc\bcirc\bcirc{} how exactly it was created. Now we can show that this is not the case if we have both \textsc{Rule 2L} and \textsc{Rule 2R} since at any step other than the first, we can use either the left or the right hand rule to arrive at the next step.
+
+For example, we could have created our formula as such:
+
+\medskip
+\begin{axiomatic}
+	\nl{\bcirc}{by \textsc{Rule 1}}
+	\nl{\bcirc\bcirc}{by \textsc{Rule 2R}}
+	\nl{\bcirc\bcirc\bcirc}{by \textsc{Rule 2L}}
+	\nl{\bcirc\bcirc\bcirc\bcirc}{by \textsc{Rule 2L}}
+\end{axiomatic}
+\medskip
+
+Again, the created formula is the exact same, but the way it was created is completely different. On the other hand, this is not the case if we only have \textsc{Rule 1} and \textsc{Rule 2R}, for then the only way to arrive at our formula is as follows: 
+
+\medskip
+\begin{axiomatic}
+	\nl{\bcirc}{by \textsc{Rule 1}}
+	\nl{\bcirc\bcirc}{by \textsc{Rule 2R}}
+	\nl{\bcirc\bcirc\bcirc}{by \textsc{Rule 2R}}
+	\nl{\bcirc\bcirc\bcirc\bcirc}{by \textsc{Rule 2R}}
+\end{axiomatic}
+\medskip
+
+In fact, we can make this fact more precise as follows:
+
+\begin{prop}
+Any formula built with \textsc{Rule 1} and \textsc{Rule 2R} is built using \textsc{Rule 1} first, and then using \textsc{Rule 2R} a number of times. 
+\end{prop}
+
+Indeed, we can make this fact \textit{even more} precise since with any construction of a formula like above, we start with a formula of a lone symbol, which is $1$ character long. Then, at each step, using \textsc{Rule 2R}, we make it $1$ symbol longer. Accordingly, if a formula is made up of $n$ black circles (where $n$ is any natural number you can think of), then we know it was built by one application of \textsc{Rule 1} and $n-1$ applications of \textsc{Rule 2R}.
+
+\fpboxstar{Let's think a bit about $n$ above. I said that $n$ may be any natural number. The reason why this is useful is that this way, we can state extremely general facts. For example, the above regularity about our formulas holds for \textit{any} formula, no matter its length. So if $n=1$ it is true, and if $n=1353463256$, it is also true. Because it is true for \textit{any} natural number we can substitute for $n$.}
+
+\section{Alphabets, formulas, languages}
+
+So far, our formulas are not very interesting. They are just black circles one after another. So let's make some generalizations that allow us to produce more interesting formulas. The first thing we can do is add some more symbols. Since these symbols are just the basic building blocks of more complicated expressions, usually, they are called the \textit{alphabet}. 
+
+The English alphabet consists of 26 symbols (normal people call these `letters'). Ours so far consists of one symbols, \bcirc. There is absolutely no limit as to how many symbols you can have in your alphabet. For now, we shall add 3 more symbols, and declare our alphabet.
+
+\fpbox{
+\textsc{Alphabet:} our alphabet consists of the following symbols: 
+	\begin{center}
+	\bcirc, \btri, \bstar, \bbox
+	\end{center}
+}
+
+Then, we can change our rules so that the base rule, \textsc{Rule 1}, lets us put down any member of the alphabet by itself, and similarly, so that our productive rule, \textsc{Rule 2R}, lets us put down any member of the alphabet to the right of the formula we already have. 
+
+We can also be more specific about what we are doing when we are giving these rules. For in fact, what we are \textit{really} doing is defining what a formula is! So we can write:
+
+\fpbox{
+\textsc{Base Rule:} Any member of the alphabet by itself is a formula. 
+}
+
+\fpbox{
+\textsc{Productive Rule:} If $X$ is a formula and $Y$ is a member of the alphabet, then $XY$ is a formula. 
+}
+
+This may be confusing at first. What is $X$? Well, $X$ is any formula! What is $Y$? Well, $Y$ is any member of our alphabet! But how do we know what counts as a formula (here, $X$) if we are just now defining it? You already know the answer to this. We build formulas in steps, and at each step, we get a new formula. So anything we can construct with our rules is a formula. 
+
+Let's look at an example carefully. Suppose that you want to determine whether \bbox\bcirc\bbox\btri{} is a formula in our new system. In order to make sure that it is, we need to show that it is, using our rules. As a first step, we know that \bbox\ by itself is a formula, since it is a member of the alphabet (this is the \textsc{Base Rule}). In turn, using the \textsc{Productive Rule}, we can infer that there are at least four other formulas. Namely:
+\begin{center}
+	\bbox\bcirc, \bbox\btri, \bbox\bstar, \bbox\bbox.
+\end{center}
+
+This is so because we know \bbox{} is a formula already, and the \textsc{Productive Rule} tells us that if $X$ (here $X=$ \bbox) is a formula and $Y$ is a member of the alphabet, then $XY$, the result of putting \bbox{} first, then putting down whatever $Y$ we want from the alphabet, is also a formula. So in particular, \bbox\bcirc{} is a formula (when $Y=$ \bcirc).
+
+Now we can use this reasoning again, but this time, the $X$ in our \textsc{Productive Rule} is \bbox\bcirc, and $Y$ needs to be \bbox. So then by the rule, $XY$, that is, \bbox\bcirc\bbox{} is a formula. Finally, using the \textsc{Produce Rule} again with $X=$ \bbox\bcirc\bbox{} and $Y=$ \btri{}, we can see that \bbox\bcirc\bbox\btri{} is a formula too. 
+
+Of course, this is very wordy. But we already know how to make this reasoning more compact. Like this: 
+
+\medskip
+\begin{axiomatic}
+	\nl{\bbox}{by \textsc{Base Rule}}
+	\nl{\bbox\bcirc}{\textsc{Productive Rule}: 1}
+	\nl{\bbox\bcirc\bbox}{\textsc{Productive Rule}: 2}
+	\nl{\bbox\bcirc\bbox\btri}{\textsc{Productive Rule}: 3}
+\end{axiomatic}
+\medskip
+
+Notice that we are now referring not only to the rule, but to the line number on which the rule is used. This is so since the \textsc{Productive Rule} needs two `inputs': something we already know to be a formula, the other a member of the alphabet. And what we know to be a formula is what appears on one of the previous lines. 
+
+Finally, it is a good idea to have some general term to refer to combinations of alphabets and rules of construction (either of the base type or the productive type) to not get lost in all these different combinations. In the literature, these are called different \textit{languages}. We will come to see why this is the case in due time (though you may already see the connections). At any rate, languages are usually referred to by the fancy letter `l' like this: $\mathcal{L}$. And when there is more than one, we can use subscripts or superscripts (or both) to distinguish them. 
+
+Here is a nice table of the languages we considered so far: 
+
+\begin{center}
+\begin{tabular}{lll}
+	\textbf{Language} & \textbf{Alphabet} & \textbf{Rules} \\\hline
+	$\mathcal{L}_1$ & \bcirc & \textsc{Rule 1}, \textsc{Rule 2L}, \textsc{Rule 2R}\\
+	$\mathcal{L}_2$ & \bcirc & \textsc{Rule 1}, \textsc{Rule 2R}\\
+	$\mathcal{L}_3$ & \bcirc, \bbox, \btri, \bstar & \textsc{Base Rule}, \textsc{Productive Rule}
+\end{tabular}
+\end{center}
+
+\fpboxstar{
+Note that languages as we defined them are identified by their alphabet and the rules for constructing their formulas. This means that two distinct languages may have the exact same formulas, even if they are constructed through different rules. 
+}
+
+\begin{exc}
+Consider the languages $\mathcal{L}_1$, $\mathcal{L}_2$, and $\mathcal{L}_3$. Which of these three languages share all their formulas? 
+\end{exc}
+
+\begin{exc}
+Consider the languages $\mathcal{L}_2$ and $\mathcal{L}_3$. Is it true that all the formulas of $\mathcal{L}_1$ are formulas of $\mathcal{L}_2$? What about the converse: is it true that all the formulas of $\mathcal{L}_2$ are formulas of $\mathcal{L}_1$?
+\end{exc}
+
+Sometimes, it is useful to abstract away from the specific symbols of a language, and just concentrate on the `roles' they play in the writing game. We already discussed this above as the idea relates to chess. Namely, it doesn't matter what forms the chess pieces take as long as they retain the role assigned to them by the rules of the game. 
+
+We can formulate this idea related to our languages as follows. If we have a language with a certain alphabet consisting of $n$ distinct symbols, we can replace that alphabet with an alternative one, provided it also has $n$ distinct symbols, and we specify which symbol is exchanged for which new symbol. Then, we can call our new language an \textit{alphabetic variant} of the old one. \label{alphvar}
+
+What the idea of an alphabetic variant of a language captures is that we are \textit{really} playing the same writing game, but with different looking pieces. Here is an alphabetic variant of $\mathcal{L}_3$: change \bcirc{} to the letter \textit{A}, change \bbox{} to the letter \textit{E}, change \btri{} to the letter \textit{S}, and change \bstar{} to the letter \textit{T}. The two rules, \textsc{Base Rule} and \textsc{Productive Rule} are the same as before. You can call this language $\mathcal{L}_4$:
+
+\begin{center}
+	\begin{tabular}{lll}
+		\textbf{Language} & \textbf{Alphabet} & \textbf{Rules} \\\hline
+		$\mathcal{L}_4$ & A, E, S, T & \textsc{Base Rule}, \textsc{Productive Rule}
+	\end{tabular}
+\end{center}
+
+\begin{exc}[The English word game]
+Here is a new game. Write down as many formulas of the language $\mathcal{L}_4$ as you can that coincide with English words. An example is: EATS. Make sure that you are capable of specifying how each word can be derived using the alphabet and the two rules of $\mathcal{L}_4$
+\end{exc}
+
+\begin{exc}
+Make your own alphabetic variant of one of the languages above. You can use whatever symbols you'd like. Then, give 5 example formulas from your new language. 
+\end{exc}
+
+\begin{exc}
+Consider the language $\mathcal{L}_{EA}$, the English Alphabet language. Unsurprisingly, the alphabet of $\mathcal{L}_{EA}$ is the whole (uppercase) English alphabet. The two rules are still the \textsc{Base Rule} and the \textsc{Productive Rule}. Answer the following questions:
+
+\begin{enumerate}
+	\item Are there more formulas of $\mathcal{L}_{EA}$ than English words, or are there more English words than formulas of $\mathcal{L}_{EA}$? In the first case, you should be able to give a formula that is not a word, in the second case, you should be able to give a word that is not a formula. 
+	\item Are the following expressions formulas of $\mathcal{L}_{EA}$?
+		\begin{enumerate}
+			\item COMPUTER
+			\item A.I.
+			\item BLACKBOARD
+			\item BLACK BOARD
+			\item RUN!
+		\end{enumerate}
+	\item Is $\mathcal{L}_{EA}$ an alphabetic variant of any of the languages $\mathcal{L}_1$, $\mathcal{L}_2$, $\mathcal{L}_3$, $\mathcal{L}_4$? Don't forget to give an explanation!
+\end{enumerate}
+\end{exc}
+
+To finish this chapter, let's define a language which properly captures a class of expressions we use in everyday life. By `properly', I mean that every such expression will be a formula of the language, and every formula of the language will be such an expressions. These expressions will be the positive natural numbers, so let's call our language $\mathcal{L}_{\mathbb{N}^+}$ (where ${\mathbb{N}^+}$ is the symbol for the positive natural numbers).
+
+Every positive natural number is a finite sequence of the numbers $0$, $1$, $2$, $3$, $4$, $5$, $6$, $7$, $8$, $9$ with the exception that no number starts with $0$. Accordingly, our alphabet will be the following:
+
+\fpbox{
+\textsc{Alphabet} of $\mathcal{L}_{\mathbb{N}^+}$: the alphabet consists of the symbols $0$, $1$, $2$, $3$, $4$, $5$, $6$, $7$, $8$, $9$
+}
+
+\noindent Then, we have the following slightly modified \textsc{Base Rule}:
+
+\fpbox{\textsc{Base Rule} of $\mathcal{L}_{\mathbb{N}^+}$: every symbol of the alphabet of $\mathcal{L}_{\mathbb{N}^+}$ is a formula except $0$.}
+
+\noindent On the other hand, we don't need to change the \textsc{Productive Rule}, since the \textsc{Base Rule} takes care of any exceptions. Thus: 
+
+\fpbox{
+	\textsc{Productive Rule}  of $\mathcal{L}_{\mathbb{N}^+}$: If $X$ is a formula and $Y$ is a member of the alphabet, then $XY$ is a formula. 
+}
+
+\begin{exc}
+Explain why the language $\mathcal{L}_{\mathbb{N}^+}$ is capable of producing all positive natural numbers as formulas, and why it is incapable of producing a formula that is not a positive natural number. In your explanation, mention why there can be no formula produced that starts with a sequence of zeroes (a sequence of the symbol $0$).
+\end{exc}
+
+\begin{exc}\label{natnum}
+Think of a way to change the \textsc{Base Rule} and the \textsc{Productive Rule} for $\mathcal{L}_{\mathbb{N}^+}$ so that all the non-negative integers (the positive natural numbers plus $0$) are produced as formulas, but no `unnatural numbers' like $000323$ are produced. 
+\end{exc}
+
+\begin{center}
+	--STOP--
+\end{center}
+
+\noindent Here is one way to answer Exercise \ref{natnum} and define the language $\mathcal{L}_\mathbb{N}$. Change the base rule so that it does allow for having each symbol as a formula by itself. 
+
+\fpbox{\textsc{Base Rule} of $\mathcal{L}_\mathbb{N}$: every symbol of the alphabet of $\mathcal{L}_{\mathbb{N}^+}$ is a formula.}
+
+Then, we make sure that the \textsc{Productive Rule} does not allow construction from $0$, only from the other symbols as follows: 
+
+\fpbox{
+	\textsc{Productive Rule} for $\mathcal{L}_\mathbb{N}$: If $X$ is a formula other than $0$ and $Y$ is a member of the alphabet, then $XY$ is a formula. 
+}
+
+\begin{exc}
+It is obvious that the new rule does not allow the construction of formulas like $05$. Does it allow the construction of longer `unnatural' numbers like `$00304$'? Check that this is indeed impossible with the above rules. 
+\end{exc}
+
+\begin{exc}
+A trickier question. After you have a specification for the language $\mathcal{L}_\mathbb{N}$, can you give one for $\mathcal{L}_\mathbb{Z}$, which consists of all integers? Note: integers are the positive and negative natural numbers, plus zero. 
+\end{exc}
+
+\section{A more elaborate writing game}
+
+So far, our writing games basically put us into the role of a typewriter, where at each step, we could make a formula 1 symbol longer from our alphabet than it was before. The problem with this approach is that as it stands, it doesn't really distinguish between those sequences of symbols that may be interesting for one reason or another, and those which are just gibberish.
+
+In fact, we \textit{really} didn't need to go to the lengths we did, using base rules and productive rules, to specify any of the languages above. For note that in general, given their respective alphabets, in almost all of these languages, any finite sequence of symbols from the alphabet constituted a formula. With some modification, this definition can also be adapted to the languages $\mathcal{L}_\mathbb{N}$ and $\mathcal{L}_\mathbb{Z}$. 
+
+\begin{exc}
+As just mentioned, for the languages preceding $\mathcal{L}_\mathbb{N}$ and $\mathcal{L}_\mathbb{Z}$, we could specify immediately: \textit{Any finite sequence of symbols of the alphabet is a formula of the language.} How would you change this definition to capture being a formula of $\mathcal{L}_\mathbb{N}$ and $\mathcal{L}_\mathbb{Z}$? 
+\end{exc}
+
+\subsection{The language $\mathcal{L}_f$}
+
+To illustrate another way, most languages you are familiar with have various levels of expressions, and at each level, certain `well-formed' expressions are distinguished from those that are not so. For example, as mentioned above, $\mathcal{L}_{EA}$ is the English Alphabet language, which has as formulas all finite sequences of letters of the English alphabet. This entails that every English word is a formula of $\mathcal{L}_{EA}$, but most formulas of $\mathcal{L}_{EA}$ are just random combinations of letters and not words of the English language. Similarly, when it comes to combinations of words in English, most of them are not well-formed. For example, while ``I am running late from class'' is a well-formed expression, ``am class running I late from'' is not. In other words, English sentences make up a small subset of all combinations of words of English. 
+
+To make these ideas more vivid, we can introduce a new language, which we will call $\mathcal{L}_F$. `$F$' in the subscript stands for \textit{file system}. You are probably familiar with file systems on your computer, that is, the \textit{files} and \textit{folders} on your computer that you can navigate with a click of a button. These file systems have several `levels', based on the folders you have. Importantly, folders are stackable, so that you can have a folder inside a folder, and a folder inside a folder inside a folder, etc. The language $\mathcal{L}_F$ will be able to specify which folders and files are in which folders, and once given an expression, you will be able to read off the file structure given by a certain formula of the language. 
+
+\fpboxstar{
+One thing that you may be less familiar with is the idea of a \textit{root} folder. Note that on every computer, files and folders are in other folders, but only until they aren't. Specifically, there is a folder on your computer that is not itself in any folder. That is your \textsf{root} (on Windows, think of \textsf{C:\textbackslash}). As we specify the language $\mathcal{L}_f$ in the following, we will be assuming that we are either in the root folder or a relative root folder. Essentially, we will be able to specify what is `under' the folder we are working in, but not anything above it.  
+}
+
+To start with our usual specification of the alphabet, we shall make use of certain base expressions, denoting (intuitively) the single files of our file system, and other expressions that are used merely to give structure to more complex expressions. 
+
+Let's suppose that we have 5 distinct files, which we may denote $f_1$, $f_2$, $f_3$, $f_4$ and $f_5$ for simplicity. Next, we shall use the comma symbol ($,$) to delineate individual files and folders that are `on the same level', that is, in the same folder. For example, we may say something like $f_1, f_3, f_5$ to specify there are three files. We also need a way to signal that some files and folders together form a folder. For this, we can put everything that belongs to a folder into curly brackets $\{$ and $\}$. So $f_1, f_3, f_5$ denotes the files at the highest level, while $\{f_1, f_3, f_5\}$ denotes these files in a single folder. 
+
+The above `intuitive' specification can be put into our usual notation as follows.
+
+\fpbox{
+\textsc{Alphabet:} The alphabet of $\mathcal{L}_f$ consists of the symbols:
+\[
+f_1 \mid f_2\mid f_3\mid f_4 \mid f_5\mid , \mid \{ \mid \} 
+\]
+}
+
+I used the symbol `$\mid$' to give the above list since the comma symbol `$,$' is itself a symbol of our language, so listing it with commas would look confusing. Specifying a language inside another is usually a painful experience. 
+
+Now for the base rule, we can say the following:
+
+\fpbox{
+\textsc{Base Rule} of $\mathcal{L}_f$: the symbols $f_1, f_2, f_3, f_4, f_5$ by themselves are all formulas. Moreover, $\{\}$ is also a formula. 
+}
+
+Then, we need two separate productive rules, one for listing the contents of a folder, and another for denoting that some list of things is \textit{in} a folder. Accordingly:
+
+\fpbox{\textsc{Productive Rule 1} of $\mathcal{L}_f$: if $X$ and $Y$ are formulas, then $X, Y$ is a formula. 
+}
+
+\fpbox{\textsc{Productive Rule 2} of $\mathcal{L}_f$: if $X$ is a formula, then $\{X\}$ is a formula. 
+}
+
+Now we can start writing down formulas, and then try to understand what they actually say. One thing that immediate looks out of place is $\{\}$. Intuitively, what $\{\}$ denotes is the empty folder. After all, there may be folders that do not have anything in them. In turn, there can be several empty folders in a folder, and in general, there may be a whole tower of folders that do not have any files at any level. 
+
+\begin{exc} \label{exclfone}
+Check whether the following sequences of symbols are formulas of the language $\mathcal{L}_f$, and if so, try to write down what file structure they represent:
+
+\begin{enumerate}
+	\item $\{\}$
+	\item $\{\}, \{\}$
+	\item $\{\{\},\{\}\}$
+	\item $\{\{\{\}\}$
+	\item $\{\{\{\}, \{\}\}, \{\}\}$
+	\item $\{\{\}, \{\}\}, \{\}$
+\end{enumerate}
+\end{exc}
+
+Of course, you can have file systems with actual files in them too, and you can specify these in our language. 
+
+\begin{exc} \label{exclftwo}
+Check whether the following sequences of symbols are formulas of the language $\mathcal{L}_f$, and if so, try to write down what file structure they represent:
+
+\begin{enumerate}
+	\item $f_1, f_2, \{\{f_2, f_4\}, \{f_3,f_3\}\}$ 
+	\item $\{f_1, \{\}\}$
+	\item $f_1$
+	\item $\{\{\{\{f_4f_2\}\}\}\}$
+	\item $\{\{f_2\}, \{\{f_3\}, f_5\}, \{f_1\}\}$
+	\item $\{f_1\}, \{\{f_2\}\}, \{\{\{f_3\}\}\}$
+\end{enumerate}
+\end{exc}
+
+\begin{exc}
+Look at the first formula of Exercise \ref{exclftwo} again. Can you see something peculiar in what it says? How would you make sense of it?
+\end{exc}
+
+Let's return to the distinction between well-formed formulas and random sequences of symbols of the alphabet. Given how the language $\mathcal{L}_f$ is specified, not every sequence of symbols of the alphabet constitutes a formula. In Exercises \ref{exclfone} and \ref{exclftwo}, there were two sequences of symbols of the alphabet that are not formulas of the language\footnote{Specifically, number 4 in each.} Here, it actually becomes useful to show by a derivation as before whether something is a formula of the language. 
+
+To save some space, let's call \textsc{Productive Rule 1} `\textsc{PR1}', and \textsc{Productive Rule 2} `\textsc{PR2}'. Similarly, we can use `\textsc{BR}' instead of \textsc{Base Rule}. Here are two sample derivations of formulas from above.
+
+\begin{figure}[h]
+	\centering
+	\begin{axiomatic}
+		\nl{$\{\}$}{BR}
+		\nl{$\{\}, \{\}$}{PR1: 1, 1}
+		\nl{$\{\{\}, \{\}\}$}{PR2: 2}
+		\nl{$\{\{\}, \{\}\}, \{\}$}{PR1: 1, 3}
+	\end{axiomatic}
+	\caption{Derivation of $\{\{\}, \{\}\}, \{\}$.}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+\begin{axiomatic}
+	\nl{$f_1$}{BR}
+	\nl{$\{\}$}{BR}
+	\nl{$f_1, \{\}$}{PR1: 1, 2}
+	\nl{$\{f_1, \{\}\}$}{PR2: 3}
+\end{axiomatic}
+\caption{Derivation of $\{f_1, \{\}\}$.}
+\end{figure}
+
+\begin{exc}
+Derive all the other formulas of the language $\mathcal{L}_f$ from Exercises \ref{exclfone} and \ref{exclftwo}. Note: if something is not a formula, you cannot derive it (though you can certainly try).
+\end{exc}
+
+Finally, let's think a bit about $\{$ and $\}$. These curly braces are really what give our language its structure and its expressive power. In fact, though the comma is useful for humans like us to parse formulas, it is not really necessary. We can change the \textsc{PR1} to omit it like this:
+
+\fpbox{\textsc{Productive Rule 1}$^*$ of $\mathcal{L}_f$: if $X$ and $Y$ are formulas, then $XY$ is a formula. 
+}
+
+Then, we get the following formulas from above:
+\begin{align*}
+	\{\{\}, \{\}\}, \{\} &\mapsto \{\{\}\{\}\}\{\}\\
+	\{f_1, \{\}\} &\mapsto \{f_1\{\}\}
+\end{align*}
+
+\begin{exc}
+Rewrite all the formulas of $\mathcal{L}_f$ from Exercises \ref{exclfone} and \ref{exclftwo} assuming we changed \textsc{PR1} into \textsc{PR1}$^*$ (in other words, we did away with the previous comma convention).
+\end{exc}
+
+On the other hand, we really cannot do away with our curly braces, since they are the ones that tell us what we should consider as being in a folder. It is very important where we put those braces, since the resulting formula may represent something entirely different from what we intended. For example, if you are interested in how many folders there are in your root folder, it matters whether the formula is $\{\}, \{\}, \{\}, \{\}$ or $\{\{\}, \{\}, \{\}, \{\}\}$. The first one says there are 3 folders, the second says there is only one. 
+
+\begin{exc}
+How many files or folders are there in \textsf{root} if the formula specifies the file structure $f_1, f_2, \{\{f_2, f_4\}, \{f_3,f_3\}\}$?
+\end{exc}
+
+\newpage
+
+\section{The language $\mathcal{L}_{AE}$}
+
+The next language we will consider is the language $\mathcal{L}_{AE}$, the language of artihmetic expressions. This language is something you are familiar with from your high school studies. Essentially, expressions in $\mathcal{L}_{AE}$ are the arithmetic expressions that you had to compute with, and which can flank the identity symbol $=$. For example, $(3+4)-(5 \times 6)$, $(300\times 33)$, $(5555-3333)$, $(23 \times 3)$. Note that which numbers we are working with is not immaterial, since these numbers will appear in these formulas. Accordingly, we will be using the positive and negative integers plus $0$ (i.e., $\mathcal{L}_\mathbb{Z}$).
+
+Let's start by explicitly defining $\mathcal{L}_\mathbb{Z}$. Making use of the above simplifications regarding expressions without structural delineators, we may say:
+
+\fpbox{
+Alphabet of $\mathcal{L}_\mathbb{Z}$: The alphabet of the language consists of $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$ and $-$. 
+}
+
+\fpbox{Formulas of $\mathcal{L}_\mathbb{Z}$: Any finite sequence of symbols $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$ is a \textit{positive integer} provided the first member of the sequence is not $0$. If $X$ is a positive integer, $-X$ is a negative integer. Then, $X$ is an integer (formula) provided it is a positive integer, a negative integer, or it is $0$.  
+}
+
+\begin{remark}
+Note that this definition is slightly different from the previous ones. It first directly defines the positive integers. Then, it defines the negative integers from the positive ones. Then, it considers $0$, and adds these three groups together. 
+\end{remark}
+
+Based on $\mathcal{L}_\mathbb{Z}$, one can define the language of arithmetic expressions, $\mathcal{L}_{AE}$ quite simply. Clearly, its alphabet will consist of the alphabet of $\mathcal{L}_\mathbb{Z}$, plus additional symbols to formulate arithmetic expressions. These symbols are the usual ones, that is: $+$, $\times$, and $-$.\footnote{The division operator $\div$ is omitted since not every integer divided by another will result in an integer. This is not technically a problem for the language, but it would be confusing.} We also need the crucial delineators, which in arithmetic expressions are just the parentheses $($ and $)$. 
+
+Thus, we have:
+
+\fpbox{
+\textsc{Alphabet} of $\mathcal{L}_{AE}$: the symbols $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$, $+$, $\times$, $-$, $($, and $)$.
+}
+
+\fpbox{
+\textsc{Base Rule} of $\mathcal{L}_{AE}$: every integer (formula of $\mathcal{L}_\mathbb{Z}$) is an arithmetic expression. 
+}
+
+\fpbox{
+	\textsc{Productive Rule} of $\mathcal{L}_{AE}$: if $X$ and $Y$ are arithmetic expressions, then $(X+Y)$, $(X-Y)$, and $(X \times Y)$ are arithmetic expressions. 
+}
+
+Now as before, for any arithmetic expression we can come up with, we can prove that they \textit{are} formulas of $\mathcal{L}_{AE}$. For example, take $((414 \times -14134)\times (835+345))$. 
+
+\begin{center}
+\begin{axiomatic}
+\nl{$414$}{BR}
+\nl{$-14134$}{BR}
+\nl{$(414 \times -14134)$}{PR: 1,2}
+\nl{$835$}{BR}
+\nl{$345$}{BR}
+\nl{$(835 + 345)$}{PR: 4,5}
+\nl{$((414 \times -14134)\times (835+345))$}{PR: 3, 6}
+\end{axiomatic}
+\end{center}
+
+Or another one of a different form: $(34 \times ((99- -36)\times 9))$.
+
+\begin{center}
+	\begin{axiomatic}
+		\nl{$99$}{BR}
+		\nl{$-36$}{BR}
+		\nl{$(99- -36)$}{PR: 1,2}
+		\nl{$9$}{BR}
+		\nl{$((99- -36)\times 9)$}{PR: 3, 4}
+		\nl{$34$}{BR}
+		\nl{$(34 \times ((99- -36)\times 9))$}{PR: 6, 5}
+	\end{axiomatic}
+\end{center}
+
+Let us continue our discussion of the structure of our newfound expressions. In arithmetic expressions, delineators are used to give an order to the computation represented by the formulas. Sometimes, the order in which these operations are carried out does not matter, but many times, it makes a crucial difference. For example, $(4+5)+3$ computes to the same number as $4+(5+3)$ (namely, $12$), but $(4-5)-3$ does not compute to the same number as $4-(5-3)$. In fact, the first one is a negative number, $-4$, while the second is a positive number, $2$. So it is clearly very important to place parentheses in the right places.  
+
+\begin{exc}
+Give an example of an arithmetic expressions with three (not necessarily distinct) numbers connected by two (not necessarily distinct) arithmetic operations where how the parentheses are placed does not matter. Then, give another example where how the parentheses are placed does matter. Don't forget to write down your reasoning in each case. 
+\end{exc}
+
+What is not very helpful about the linear derivations that we have been using so far is that in their line-by-line representation, they do not really show us visually what the structure of our expressions is. However, this can be remedied by using so-called \textit{syntactic trees} to represent how formulas are formed. 
+
+Note that in each derivation, we first take the base expressions, and then form more complex expressions, and then more complex expressions from previous expressions, until we get to the desired formula. Moreover, more complex expressions are formed by putting together two simpler expressions with an arithmetic operator, flanked by the left and right parentheses. 
+
+Let's return to $((414 \times -14134)\times (835+345))$ as our example. Then, we could represent this in tree-form as follows:
+
+\begin{center}
+\begin{forest}
+[$((414 \times -14134)\times (835+345))$
+	[$(414 \times -14134)$
+		[$414$]
+		[$-14134$]
+	]
+	[$(835+345)$
+		[$835$]
+		[$345$]
+	]
+]
+\end{forest}
+\end{center}
+
+As you can see, this type of representation shows you the starting points, which we get by the \textsc{Base Rule}. These are at the bottom. Then, as we build up the more complex formulas, it shows how we put together those simpler expressions to get the more complex ones. 
+
+Our other example, $(34 \times ((99- -36)\times 9))$, will result in a different looking tree. Namely:
+
+\begin{center}
+\begin{forest}
+	[$(34 \times ((99- -36)\times 9))$
+		[$34$]
+		[$((99- -36)\times 9)$
+			[$(99- -36)$
+				[$99$]
+				[$-36$]
+			]
+			[$9$]
+		]
+	]
+\end{forest}
+\end{center}
+
+You can also read these trees from top to bottom. In fact, for some reason, mathematicians call the highest formula the \textit{root} of the tree, from which it \textit{branches}. The lowest points (to which no other points are connected) are the tree's \textit{leaves}. Finally, any path from the root to one of the leaves is a \textit{branch}. So really, the tree is upside-down! 
+
+At any rate, if reading the tree from bottom-to-top tells you how a formula is formed, reading it from top-to-bottom tells you have a formula can be broken down into its constituent parts. 
+
+There is a question which formulas to take as constituent when a tree branches. For example, why is it the case that in the first example, we branched to $(414 \times -14134)$ and $(835+345)$, while in the second example, we branched to $34$ and $((99- -36)\times 9)$? The answer: the parentheses tell us. At each step, there is a \textit{main arithmetic operator}, which connects together the two formulas we branch to. Other arithmetic operators occur inside parentheses, and are to be broken down at a later step. 
+
+\begin{exc} \label{lae}
+Decide which is the main operator in each of these formulas:
+
+\begin{enumerate}
+	\item $((93+73)\times(43-15))$
+	\item $(975 \times (44+1))$
+	\item $((77\times 3)- 33)$
+	\item $(((3 \times (5+4)) \times 9)-7)$
+	\item $((((3 \times 5)+4) \times 9)-7)$
+	\item $(((3 \times 5)+4) \times (9-7))$
+\end{enumerate}
+\end{exc}
+
+When you are drawing a syntactic tree, it is useful to start with the formula you are aiming to construct. Then, at each step, you have to find the main operator, and put the two formulas it connects on separate branches below it. If you repeat this process enough times, each tree will have integers on its leaves. If some leaf is not an integer, you have to continue. 
+
+\begin{exc}
+Construct syntax trees for each of the six formulas in Exercise \ref{lae}. Observe the difference between the last three formulas, which only differ in their structure (the way the parentheses are distributed). 
+\end{exc}
+
+As discussed above, parentheses determine the order of computation for each arithmetic expression. And in fact, when you look at syntax trees for these expressions, you can read off the order of computation from their structure. In order to compute any arithmetic expression, you need to start from the leaves, which are integers. Then, the next thing you have to compute is the expression immediately above. Once computed, you can move to the next level, substituting the result of the computation for the occurrence of the expression in the more complex formula above, then computing again. Repeating these steps until you get to the top will give you the final result. 
+
+This description is probably a bit confusing on first read, so here is a simple example with $(3+5) \times (6-2)$. The starting point is the whole tree: 
+
+\begin{center}
+\begin{forest}
+	[$((3+5) \times (6-2))$
+		[$(3+5)$
+			[$3$]
+			[$5$]
+		]
+		[$(6-2)$
+			[$6$]
+			[$2$]
+		]
+	]
+\end{forest}
+\end{center}
+
+Then, take left side first and compute $(3+5)$, resulting in:
+
+\begin{center}
+	\begin{forest}
+		[$((3+5) \times (6-2))$
+		[$8$
+		]
+		[$(6-2)$
+		[$6$]
+		[$2$]
+		]
+		]
+	\end{forest}
+\end{center}
+
+Then, we compute the right side, getting: 
+
+\begin{center}
+	\begin{forest}
+		[$((3+5) \times (6-2))$
+		[$8$
+		]
+		[$4$
+		]
+		]
+	\end{forest}
+\end{center}
+
+We can then substitute the results of our computation in the more complex formula above. This will result in:
+
+\begin{center}
+	\begin{forest}
+		[$8 \times 4$
+		]
+	\end{forest}
+\end{center}
+
+Accordingly, the answer is $32$. 
+
+\section{The language $\mathcal{L}_0$}
+
+\subsection{Individual constants}
+
+We now have most of what we need to specify a very important logical language we will be working with, the language of \textit{zeroth-order} logic, denoted $\mathcal{L}_0$. The alphabet of $\mathcal{L}_0$ consists, first, of infinitely many symbols called \textit{individual constants} or \textit{names}. These may be represented by \textit{indexing} a single symbol with the natural numbers, as if we had a list. Like this:
+\[
+\mathfrak{c}_1, \mathfrak{c}_2, \mathfrak{c}_3, \mathfrak{c}_4, \mathfrak{c}_5, ...
+\]
+
+You can read this as: $\mathfrak{c}_1$ is the first constant, $\mathfrak{c}_2$ is the second constant, $\mathfrak{c}_3$ is the third constant, and so on. Clearly, we cannot list all of the constants (for each $n$), just as we cannot list \textit{all} the natural numbers. That would take an infinitely long paper, and let's not talk about the time involved! This is why we have the three dots $...$, implying it goes on forever. More succintly, we may say: $\mathfrak{c}_n$ is a constant for every natural number $n$. 
+
+Note also that the use of $\mathfrak{c}$ here is completely arbitrary. I chose it because it is the first letter in the word `constant', but I could have chosen $\mathfrak{a}$ or $\mathfrak{b}$. On the other hand, once we specify that we use $\mathfrak{c}$, we have to stick with it. In other words, the choice of $\mathfrak{c}$ \textit{is} arbitrary, but using $\mathfrak{c}$ afterwards is not arbitrary, since we explicitly chose it over other alternatives. 
+
+\subsection{Predicates}
+
+Second, similar to constants, we also have infinitely many symbols called \textit{predicates} in our alphabet. These will be denoted by $\mathfrak{P}$. In fact, these predicates come with an additional index called their \textit{arity}, denoting the number of arguments they each take (see below). So really, for each natural number $k$, there are infinitely many predicates for that natural number (arity) $k$. This might be a bit confusing at first, so let's look at some examples. 
+
+First, the infinitely many predicates of arity $1$ can be represented:
+\[
+\mathfrak{P}^1_1, \mathfrak{P}^1_2, \mathfrak{P}^1_3, \mathfrak{P}^1_4, \mathfrak{P}^1_5, ...
+\]
+Then, the infinitely many predicates of arity $2$ can be represented: 
+\[
+\mathfrak{P}^2_1, \mathfrak{P}^2_2, \mathfrak{P}^2_3, \mathfrak{P}^2_4, \mathfrak{P}^2_5, ...
+\]
+So really, the list goes on infinitely not just vertically, but horizontally too! So in full generality: 
+\begin{gather*}
+\mathfrak{P}^1_1, \mathfrak{P}^1_2, \mathfrak{P}^1_3, \mathfrak{P}^1_4, \mathfrak{P}^1_5, ...\\
+\mathfrak{P}^2_1, \mathfrak{P}^2_2, \mathfrak{P}^2_3, \mathfrak{P}^2_4, \mathfrak{P}^2_5, ...\\
+\mathfrak{P}^3_1, \mathfrak{P}^3_2, \mathfrak{P}^3_3, \mathfrak{P}^3_4, \mathfrak{P}^3_5, ...\\
+\vdots
+\end{gather*}
+
+Just as before, this may be represented a lot more succintly by simply saying: $\mathfrak{P}^k_n$ is a constant for each pair of natural numbers $k, n$. In other words, no matter what natural number you choose for $k$ and $n$, substituting it for $k$ and $n$ in $\mathfrak{P}^k_n$ will get you a predicate of the language. Sometimes, we may say $\mathfrak{P}^k_n$ is a $k$-place predicate. 
+
+\begin{exc}
+Decide for the following symbols whether they are a constant or a predicate. If they are a predicate, identify their arity. 
+
+\begin{enumerate}
+	\item $\mathfrak{c}_5$
+	\item $\mathfrak{c}_{67}$
+	\item $c^5_4$
+	\item $\mathfrak{P}^4_7$
+	\item $\mathfrak{P}^{98}_{456}$
+	\item $\mathfrak{P}^{1000000}_1$
+	\item $\mathfrak{P}_{1000000}^1$
+\end{enumerate}
+\end{exc}
+
+\subsection{The connectives and the rest}
+
+Just like with the language $\mathcal{L}_{AE}$, simpler expressions will be combined together to form more complex expressions using special symbols (similar to the $+$, $-$, and $\times$ signs). We call these symbols \textit{connectives}, for obvious reasons. Table \ref{connect} lists the four connectives we will be using. Note that each symbol comes with a fixed arity, like our predicates. The table also includes, in scare quotes, the closest natural language approximation for the meaning of these symbols. For now (and perhaps altogether), this is irrelevant. 
+
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{c|l|l}
+Symbol & Name & Arity \\ \hline
+$\wedge$ & conjunction, `and' & 2  \\
+$\vee$ & disjunction, `or' & 2 \\
+$\rightarrow$ & conditional, `if-then' & 2 \\
+$\neg$ & negation, `not' & 1
+\end{tabular}
+\end{center}
+\caption{The connectives of $\mathcal{L}_0$}
+\label{connect}
+\end{table}
+
+
+\fpboxstar{
+	You may already know some or all of these connectives by their name, but perhaps not by their specific symbol (e.g., $\sim$ instead of $\neg$, $\&$ instead of $\wedge$). As noted when talking about alphabetic variants previously (see p. \pageref{alphvar}), what the exact symbols of the alphabet are do not really matter, only the role they play. On the other hand, most contemporary writings on logic use these symbols for the connectives, as opposed to some of the older variants, so our choice is not entirely arbitrary. 
+}
+
+Finally, we will keep using the left and right parentheses `$($' and `$)$', along with the comma symbol `$,$'. Thus: 
+
+\fpbox{
+	\textsc{Alphabet of $\mathcal{L}_0$:} The alphabet of $\mathcal{L}_0$ consists of the following: for each natural number $n$ the constant $\mathfrak{c}_n$, for each pair of natural numbers $n$ and $k$ a predicate $\mathfrak{P}^k_n$ (of arity $k$), the connectives $\wedge, \vee, \neg, \rightarrow$, the left `$($' and right `$)$' parentheses, and the comma `$,$'. 
+}
+
+\subsection{The formulas of $\mathcal{L}_0$}
+
+
+Now that we have our alphabet, we can look at how our formulas are built up. Just as with some of the other languages we considered, not any sequence of symbols will qualify as a formula. Our base rule looks like this:
+
+\fpbox{
+	\textsc{Base Rule of $\mathcal{L}_0$:} if $\mathfrak{c}_{n_1}, ..., \mathfrak{c}_{n_k}$ are $k$-many (not necessarily distinct) individual constants and $\mathfrak{P}^k_i$ is a predicate of arity $k$, then $\mathfrak{P}^k_i(\mathfrak{c}_{n_1}, ..., \mathfrak{c}_{n_k})$ is a formula. We shall also call any such formula an \textit{atomic formula}.
+}
+
+This is an extremely precise formulation of our base rule, and thus can be rather confusing at first. However, it really isn't very complicated, for all it says is that if you take any predicate with arity $k$, then you need to have $k$ individual constants following it in order for it to be a formula. In other words, any predicate $\mathfrak{P}^k_n$ wears on its sleeves how many individual constants it demands -- namely, $k$ many! Note however that these individual constants need not be distinct. For example, for $\mathfrak{P}^2_5$, we may write $\mathfrak{P}^2_5(\mathfrak{c}_5, \mathfrak{c}_5)$ just as well as $\mathfrak{P}^2_5(\mathfrak{c}_5, \mathfrak{c}_3)$. 
+
+\begin{exc}
+Determine if the following are (atomic) formulas of the language $\mathcal{L}_0$. In each case, explain your reasoning. 
+
+\begin{enumerate}
+	\item $\mathfrak{P}^3_1(\mathfrak{c}_3, \mathfrak{c}_5, \mathfrak{c}_1)$
+	\item $\mathfrak{P}^1_4(\mathfrak{c}_{66})$
+	\item $\mathfrak{P}^5_5(\mathfrak{c}_5, \mathfrak{c}_4, \mathfrak{c}_3, \mathfrak{c}_2, \mathfrak{c}_1)$
+	\item $\mathfrak{P}^2_6(\mathfrak{c}_2, \mathfrak{c}_2)$
+	\item $\mathfrak{P}^2_6(\mathfrak{c}_2)$
+	\item $\mathfrak{P}^2_3(\mathfrak{c}_4, \mathfrak{c}_9, \mathfrak{c}_1)$
+\end{enumerate}
+\end{exc}
+
+After our atomic formulas are defined, we can give our usual productive rule, which enables us to form more complex, i.e., `non-atomic' formulas iteratively. 
+
+\fpbox{
+	\textsc{Productive Rule of $\mathcal{L}_0$:} if $X$ and $Y$ are formulas of $\mathcal{L}_0$, then the following are also formulas of $\mathcal{L}_0$:
+	\begin{enumerate}
+		\item $\neg X$;
+		\item $(X \wedge Y)$;
+		\item $(X \vee Y)$;
+		\item $(X \rightarrow Y)$.
+	\end{enumerate}
+}
+
+Of course, $X$ and $Y$ are variables, which can denote (as noted) any formula of $\mathcal{L}_0$, both atomic and non-atomic (complex).
+
+\begin{exc}
+Determine whether the following expressions are formulas of the language $\mathcal{L}_0$. If not, explain why, and how they could be made into formulas of the language. 
+
+\begin{enumerate}
+	\item $((\neg \pred{3}{4}(\cons{1}, \cons{2}, \cons{1}) \neg \pred{1}{4}(\cons{3})) \rightarrow \pred{2}{5}(\cons{4}, \cons{4}))$
+	\item $((\neg \pred{3}{4}(\cons{1}, \cons{2}, \cons{1}) \wedge \neg \pred{1}{4}(\cons{3})) \rightarrow \pred{2}{5}(\cons{4}, \cons{4}))$
+	\item $(\neg \pred{3}{4}(\cons{1}, \cons{2}, \cons{1}) \wedge \neg \pred{1}{4}(\cons{3})) \rightarrow \pred{2}{5}(\cons{4}, \cons{4}))$
+	\item $((\neg \pred{3}{4}(\cons{1}, \cons{2}, \cons{1}) \wedge \neg \pred{1}{4}(\cons{3})) \rightarrow \pred{4}{5}(\cons{4}, \cons{4}))$
+	\item $((\neg(\neg \pred{3}{4}(\cons{1}, \cons{2}, \cons{1})) \wedge \neg \pred{1}{4}(\cons{3})) \rightarrow \pred{2}{5}(\cons{4}, \cons{4}))$
+\end{enumerate}
+\end{exc}
+
+\subsection{Analyzing formulas; again}
+
+As before, we can now start analyzing the possible formulas of the language $\mathcal{L}_0$, checking whether they are in fact well-formed formulas of the language, and how they can be constructed. We previously saw two ways of doing this, one \textit{linear}, the other making use of \textit{trees}. These two ways are both applicable to formulas of $\mathcal{L}_0$. In general, $X$ is a formula of the language $\mathcal{L}_0$ if, and only if, it has a linear derivation and a tree derivation. Thus, if an expression cannot be derived, it is not a formula of $\mathcal{L}_0$, but if it is a formula of $\mathcal{L}_0$, you must be able to derive it somewhow.
+
+As an example, let's analyze the formula:
+\[
+((\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3)) \rightarrow \mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4))
+\]
+
+From bottom to top, \textit{linearly}, we can show that this is indeed a formula of the language as follows:
+
+\begin{center}
+\begin{axiomatic}
+\nl{$\mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c}_2, \mathfrak{c}_2)$}{\textsc{BR}}
+\nl{$\mathfrak{P}^1_4(\mathfrak{c}_3)$}{\textsc{BR}}
+\nl{$\mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4)$}{\textsc{BR}}
+\nl{$\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1})$}{\textsc{PR} $\neg$: 1}
+\nl{$\neg\mathfrak{P}^1_4(\mathfrak{c}_3)$}{\textsc{PR} $\neg$: 2}
+\nl{$(\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3))$}{\textsc{PR} $\wedge$: 4, 5}
+\nl{$((\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3)) \rightarrow \mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4))$}{PR $\rightarrow$: 3, 6}
+\end{axiomatic}
+\end{center}
+
+From top to bottom, using a \textit{tree} and visualizing its structure, we can do it as follows: 
+
+\begin{center}
+	\begin{forest}
+		[{$((\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3)) \rightarrow \mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4))$}
+		[{$(\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3))$}
+			[{$\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1})$}
+				[{$\mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1})$}]
+			]
+			[{$\neg \mathfrak{P}^1_4(\mathfrak{c}_3)$}
+				[{$\mathfrak{P}^1_4(\mathfrak{c}_3)$}]
+			]
+		]
+		[{$\mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4)$}]
+		]
+	\end{forest}
+\end{center}
+
+As before, we can also ask about the \textit{main operator} for each formula. The main operator is always the one introduced from the previous level or levels. Here:
+
+\begin{enumerate}
+	\item The formulas $\mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1})$, $\mathfrak{P}^1_4(\mathfrak{c}_3)$, and $\mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4)$ are atomic, and have no operator;
+	\item The main operator of $\neg\mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1})$ and $\neg\mathfrak{P}^1_4(\mathfrak{c}_3)$ is $\neg$;
+	\item The main operator of $(\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3))$ is $\wedge$;
+	\item The main operator of $((\neg \mathfrak{P}^3_4(\mathfrak{c}_1, \mathfrak{c_2}, \mathfrak{c_1}) \wedge \neg \mathfrak{P}^1_4(\mathfrak{c}_3)) \rightarrow \mathfrak{P}^2_5(\mathfrak{c}_4, \mathfrak{c}_4))$ is $\rightarrow$.
+\end{enumerate}
+
+\begin{exc}
+Derive the following formulas using either the linear method or the tree method. In each case, determine what the main operator of the formulas is. 
+
+\begin{enumerate}
+	\item $((\pred{2}{2}(\cons{3}, \cons{5})\vee \neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \vee \pred{1}{1}(\cons{1}))$
+	\item $(\pred{2}{2}(\cons{3}, \cons{5})\vee \neg(\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \vee \pred{1}{1}(\cons{1})))$
+	\item $(\pred{2}{2}(\cons{3}, \cons{5})\rightarrow (\neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \rightarrow \pred{1}{1}(\cons{1})))$
+	\item $(\neg\pred{2}{2}(\cons{3}, \cons{5})\leftrightarrow (\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \wedge \neg \pred{1}{1}(\cons{1})))$
+	\item $(\neg\neg(\pred{2}{2}(\cons{3}, \cons{5})\leftrightarrow \neg (\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \wedge \neg \pred{1}{1}(\cons{1})))$
+	\item $\neg(\neg(\neg\pred{2}{2}(\cons{3}, \cons{5})\leftrightarrow \neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1})) \vee \neg \pred{1}{1}(\cons{1}))$
+\end{enumerate}
+\end{exc}
+
+\subsection{Why the weird typeface?}
+
+You may be wondering why we are using this weird typeface where a simple $P$ looks like this: $\mathfrak{P}$; and a simple $c$ looks like this: $\mathfrak{c}$. This is because as we move forward, we will start using $P$, $c$, and some other letters to simplify our formulas if it does not matter at that moment which exact formula of the language we are talking about. This often happens when we want to talk about a class of formulas sharing the same structure. Thus, they will serve a separate, but very important, purpose. 
+
+Variables like $P$ and $c$ are usually called \textit{meta}variables, emphasizing that they are \textit{not} part of the language, but outside of it. You may think of $n$ here and the natural numbers. When we want to talk about some natural number or other, we use $n$, even though $n$ is not a (representation of a) natural number itself (it is not a formula of $\mathcal{L}_\mathbb{N}$). Similarly, when we want to talk about some predicate or other, we may use the uppercase $P, Q, R, ...$, and when we want to talk about some constant or another, we may use the lowercase $a, b, c, ...$. 
+
+For example, we may represent a set of atomic formulas $P(c_1, c_2, c_3)$, meaning all formulas such that they start with $\mathfrak{P}^3_n$ for some $n$, and continue with the required three (not necessarily distinct) constants $\mathfrak{c}_k$, $\mathfrak{c}_j$, $\mathfrak{c}_l$. That is, any formula of form: $\mathfrak{P}^3_n(\mathfrak{c}_k, \mathfrak{c}_j, \mathfrak{c}_l)$ for some $n$, $k$, $j$, $l$. We may also write something like $Q(c_1, c_1)$, which would correspond to the class of all formulas $\mathfrak{P}^2_n(\mathfrak{c}_k, \mathfrak{c}_k)$ for some $n$, $k$. Clearly, these specifications are painful, hence the simplification. 
+
+Though these variables are arbitrary, just like $n$, $k$, $j$, etc., you should make sure they don't clash in a given context. Thus, using something like $P(c_1, c_2) \wedge P(c_1, c_2, c_3)$ is bad, because the two $P$ clearly denote two distinct classes of predicates, one $2$-place, one $3$-place. 
+
+\section{From syntax to semantics}
+
+So far, we have been working with languages as a bunch of symbols of their alphabets put one after the other in various ways. This allowed us to specify, for a given language, which formulas belong to the language, and which formulas do not. However, something we have not done yet is specify the \textit{meaning} of these formulas. Clearly, we use languages to convey ideas about various topics. We do this through well-formed formulas of the language at hand that have a specific meaning. This is true of formal langugages as it is true for natural ones like English. 
+
+Some of the languages above already came with some previously understood meaning. For example, for the formulas of $\mathcal{L}_{AE}$, the language of arithmetic expressions, we already know what they mean, at least intuitively, through our knowledge of mathematics. Similarly, for $\mathcal{L}_f$, we already knew what those formulas meant given our knowledge of how a computer works, and more specifically, how their file system is usually structured. 
+
+On the other hand, for langugages like $\mathcal{L}_0$, that you may not know, we specified which formulas belong to the langugage, and which formulas do not, but so far, we have not given them any meaning, which would tell us what ideas we can convey with these formulas. In the next part of the book (after a brief detour), this is precisely what we will be doing. 
+
+Technically, what we have been doing so far is specifying the \textit{syntax} of our languages. Syntax is the way expressions are formulated in a language. In the next part, we will be dealing with the \textit{semantics} of some languages, which is specifying the various ways in which these expressions have, or can be given, meaning. 
+
+However, before we begin talking about meaning, we have to learn a bit about \textit{set theory}. In modern mathematics, set theory is a foundational discipline, since many different mathematical structures can be formulated in it. Indeed, our semantics will be formulated in set theory. Thus, we will go through some fundamental aspects of set theory, those we will need to continue on our journey through formal logic. 

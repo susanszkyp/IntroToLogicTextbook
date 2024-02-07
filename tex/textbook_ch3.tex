@@ -1,0 +1,205 @@
+\chapter{Semantics}
+
+If you have already taken an introductory logic course, you may remember talk of entailment, and in connection, validity. In particular, taking an argument with some premises and a conclusion, validity was probably specified along the following lines: if the premises are true, the conclusion must also be true. Then, it was said, the premises `entail' the conclusion. 
+
+But so far, we have only been dealing with formal languages as being made up of various sequences of meaningless symbols, according to various rules. Where does truth enter the picture? 
+
+The answer is: semantics. In some sense, syntax and semantics are two sides of the same coin. Syntax specifies the way primitive symbols may be combined to form more complex expressions. Semantics, on the other hand, specifies how the meaning of more complex expressions can be computed from the meaning of primitive symbols. As we shall see, the rules of computation for the `values' of expressions will match the rules of formulation of expressions in our syntax. 
+
+Once we have a grasp on the rules of meaning for $\mathcal{L}_0$, we can start designating some formulas of the language as `true', and some as `false', based on their respective meaning (and some other stuff, which we shall get to in due course). We will also see how the truth values of various sets of formulas relate to the truth values of other sets of formulas. From this, it will take just one additional step to specify how sometimes, some premises being true \textit{ensures} that the conclusion \textit{must} also be true. 
+
+\fpboxstar{
+From now on, until further notice, we will only be discussing the language $\mathcal{L}_0$, the language of zeroth-order logic. 
+}
+
+As noted above, semantics proceeds along the lines of syntax. In the syntax of $\mathcal{L}_0$, we have two types of base symbols: constants and predicates. As we have seen, every \textit{atomic} formula is made up of an $n$-place predicate, followed by $n$ constant symbols, in brackets, separated by commas. So in order to give meaning to our atomic formulas, we first have to specify the meaning of constants and predicates. Then, we shall be able to compute the meaning of our atomic formulas. In turn, this will allow us to specify the meaning of our more complex formulas. 
+
+\section{Constants}
+
+Let's start with the simplest case; constants. Constants in our language $\mathcal{L}_0$ function like names. In particular, their meaning is just what they designate, or refer to. 
+
+Note that we are talking about two distinct `planes' here. On the side of syntax, we have symbols without meaning. On the side of semantics, we have things assigned to them. Giving a semantics to our language is then bridging a gap, assigning things to our constants. These things are not symbols, they are the things themselves. You may have heard of the phrase `domain of discourse'. The domain of discourse, or simply domain, is just the \textit{set} of things we may talk about using a language.
+
+\begin{exc}
+How does this notion of a domain relate to the notions of domain and codomain regarding functions?
+\end{exc}
+
+ In particular:
+
+\begin{center}
+\begin{tabular}{rcl}
+	\textsc{Constants} & $\mapsto$ & \textsc{Domain}\\\hline
+	constant & $\mapsto$ & thing
+\end{tabular}
+\end{center}
+
+You may remember the symbol $\mapsto$ from our discussion of set theory. It designates that a certain function outputs the right-hand side value given the value on the left-hand side. And indeed, giving meaning to our language is just specifying a function that, in part, assigns to every constant a thing (sometimes called an `object') from our domain. Like this:
+\begin{center}
+	\begin{tabular}{rcl}
+		\textsc{Constants} & $\mapsto$ & \textsc{Domain}\\\hline
+		$\cons{1}$ & $\mapsto$ & Robert J. Oppenheimer
+	\end{tabular}
+\end{center}
+
+According to the above specification, the constant $\cons{1}$ designates Oppenheimer in our language. Note that while $\cons{1}$ is a symbol of the language, Oppenheimer, the thing (`person') it designates is, again, the real thing. We can continue assigning things to our constants to our own delight. For example, we can specify:
+\begin{center}
+	\begin{tabular}{rcl}
+		\textsc{Constants} & $\mapsto$ & \textsc{Domain}\\\hline
+		$\cons{1}$ & $\mapsto$ & Robert J. Oppenheimer\\
+		$\cons{2}$ & $\mapsto$ & Taylor Swift\\
+		$\cons{3}$ & $\mapsto$ & the number $5$\\
+		$\cons{4}$ & $\mapsto$ & World War II\\
+		& \vdots & 
+	\end{tabular}
+\end{center}
+
+As you can see, there is no limit to what a constant can designate. Thing and object is meant here in a very loose sense. It can be a person, a physical object, an event, an idea, whatever you want. 
+
+Let's recap. We have constants, which are symbols of our language. We have objects, in a loose sense, which are members of the domain of discourse. And we have a function, which assigns to each constant a member of the domain of discourse, as illustrated in the table above. This function is usually called an \textit{interpretation function}, since it interprets the uninterpreted symbols of a language. We can make this more precise as follows:
+
+\begin{defn}
+A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for the constants of $\mathcal{L}_0$, denoted by $\mathsf{CON}_{\mathcal{L}_0}$, (relative to $\mathbf{D}$) is a function $\mathbf{I}: \mathsf{CON}_{\mathcal{L}_0} \to \mathbf{D}$. If $c$ is a constant of $\mathcal{L}_0$, then $\mathbf{I}(c) \in \mathbf{D}$, and is what $c$ \textit{designates}, \textit{denotes} or \textit{refers to}. Alternatively, we may say $\mathbf{I}(c)$ is the \textit{value} of the symbol $c$. 
+\end{defn}
+
+\fpboxstar{
+As you can see, interpretations are functions from the set of all constants to the domain. This means that to each constant, only one member of the domain corresponds. So unlike with real names like `Peter', which may designate many different people, a constant of $\mathcal{L}_0$ designates only one. On the other hand, the function $\mathbf{I}$ need not be one-to-one. This means that some distinct constants may designate the same thing, just like `Miley Stewart' and `Hannah Montana' designate the same person (in the hit TV show \textit{Hannah Montana}). 
+}
+
+Having constants or names that refer to things is the first step towards giving meaning to our expressions, but it is not enough to get us to truth. Names, by themselves, are neither true nor false, they just refer. The other ingredient we need is giving meaning to our \textit{predicates}.
+
+\section{Predicates} 
+
+Predicates in logic are used to express \textit{properties} of objects or \textit{relations} between them. Again, properties and relations are meant here in a very loose sense, and their representation, in set theory, is very minimal in detail. 
+
+\subsection{... of 1-place}
+
+Suppose you want your $1$-place predicate $\pred{1}{1}$ in $\mathcal{L}_0$ to express the property `is a physicist'. We already introduced a domain of discourse, or domain, $\mathbf{D}$ about which are language should be about. So given our domain, how do we capture that $\pred{1}{1}$ should have the meaning `is a physicist'? Well, we can specify a subset of the domain $\mathbf{D}$, let's call it $\mathbf{P}$, which consists of just the physicists in our domain. In set-builder notation, we can say: 
+\[
+\mathbf{P}=\set{x\mid x\in \mathbf{D} \text{ and } x \text{ is a physicist}}
+\]
+$\mathbf{P}$ here is a subset of the domain $\mathbf{D}$, since by definition, every $x \in \mathbf{P}$ is also in $\mathbf{D}$. Moreover, it only includes those members of the domain that are physicists. That is, the set of physicists in the domain. This may be called the \textit{property} `is a physicist', as we noted in the last chapter. Then, we can use the interpretation function to connect our $1$-place \textit{predicate} to the \textit{property} (subset of the domain). 
+
+Again, represented in a figure: 
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$1$-\textsc{place predicates} & $\mapsto$ & \textsc{Subsets of Domain (properties)}\\\hline
+		$1$-place predicate & $\mapsto$ & set of things
+	\end{tabular}
+\end{center} 
+
+And in particular: 
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$1$-\textsc{place predicates} & $\mapsto$ & \textsc{Subsets of Domain (properties)}\\\hline
+		$\pred{1}{1}$ & $\mapsto$ & $\mathbf{P}$ (`is a physicist')
+	\end{tabular}
+\end{center} 
+
+Again, the meaning of our predicates can be anything, as long as it is a property in the domain, that is, a subset of things of the domain. For example, it can be the set of things (of the domain $\mathbf{D}$) that are singers (the property of being a singer), the set of things that are numbers (the property of being a number), the set of things that are world wars (the property of being a world war), and so on. You can even have properties that only have one member, like `is the first female artist with four Top 10 albums at once'. 
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$1$-\textsc{place predicates} & $\mapsto$ & \textsc{Subsets of Domain (properties)}\\\hline
+		$\pred{1}{1}$ & $\mapsto$ & $\mathbf{P}$ (`is a physicist')\\
+		$\pred{1}{2}$ & $\mapsto$ & $\mathbf{S}$ (`is a singer')\\
+		$\pred{1}{3}$ & $\mapsto$ & $\mathbf{N}$ (`is a number')\\
+		$\pred{1}{4}$ & $\mapsto$ & $\mathbf{W}$ (`is a world war')\\
+		& $\vdots$ & 
+	\end{tabular}
+\end{center} 
+
+\subsection{... of 2-places}
+
+The above approach takes care of our $1$-place predicates. But predicates can come with more places (the superscript for $\mathfrak{P}$). Suppose you want to assign meaning to a $2$-place predicate $\pred{2}{1}$, and in particular, you want it to mean `$x$ loves $y$'. Here, a set will not do, since we want to capture a \textit{relation}, not a \textit{property}. In particular we want to capture that a person is in the relation of loving another person (or thing in general). 
+
+If you think back to our discussion of set theory, you already know how to do this. Instead of a set of objects, you can take a \textit{set of pairs} here, that represents two objects of the domain standing in the loving relation. Once again, we may introduce a relation $\mathbf{L}$ on the domain, and specify it as such: 
+\[
+\mathbf{L}=\set{\oset{x, y} \mid x,y \in \mathbf{D} \text{ and } x\text{ loves }y} 
+\]
+So $\mathbf{L}$ here is the set of pairs such that the first member of each pair loves the second member of that pair. So if our domain includes Julie and Jane, and Julie loves Jane, but Jane does not love Julie, we would have that $\oset{Julie, Jane} \in \mathbf{L}$, but $\oset{Jane, Julie} \notin \mathbf{L}$. So again:
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$2$-\textsc{place predicates} & $\mapsto$ & \textsc{Sets of Pairs of Domain ($2$-place relations)}\\\hline
+		$2$-place predicate & $\mapsto$ & pairs of things
+	\end{tabular}
+\end{center} 
+
+And in particular: 
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$2$-\textsc{place predicates} & $\mapsto$ & \textsc{Sets of Pairs of Domain ($2$-place relations)}\\\hline
+		$\pred{2}{1}$ & $\mapsto$ & $\mathbf{L}$ (`loves')
+	\end{tabular}
+\end{center} 
+
+Again, you can introduce whatever relation you want here, as long as it can be represented by a set of pairs of members of the domain. For example, `is the favorite number of', `is a sibling of', `stands 2 feet to the right of', and so on. That is: 
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$2$-\textsc{place predicates} & $\mapsto$ & \textsc{Sets of Pairs of Domain ($2$-place relations)}\\\hline
+		$\pred{2}{1}$ & $\mapsto$ & $\mathbf{L}$ (`loves')\\
+		$\pred{2}{2}$ & $\mapsto$ & $\mathbf{F}$ (`is the favorite number of')\\
+		$\pred{2}{3}$ & $\mapsto$ & $\mathbf{B}$ (`is a sibling of')\\
+		$\pred{2}{4}$ & $\mapsto$ & $\mathbf{R}$ (`stands 2 feet to the right of')
+	\end{tabular}
+\end{center} 
+
+In each case, $\mathbf{L}$, $\mathbf{F}$, $\mathbf{B}$, $\mathbf{R}$ are just sets of pairs representing all pairs of members of the domain that are in the specified relation. 
+
+Notice that each of these binary relations have, either on the left or the right side, a member of $\mathbf{D}$, the domain. By the Cartesian product of $\mathbf{D}$ with itself once, i.e., $\mathbf{D} \times \mathbf{D}$ or $\mathbf{D}^2$, we can get the set of \textit{all} pairs of members of $\mathbf{D}$. Now relations on $\mathbf{D}$ will be subsets of $\mathbf{D}^2$, since each will be either the universal relation on $\mathbf{D}$, the empty set, or somewhere in between. In the above example, $\oset{Julie, Jane} \in \mathbf{L}$, but $\oset{Jane, Julie} \notin \mathbf{L}$, so $\mathbf{L}$ is a non-empty proper subset of $\mathbf{D}^2$.
+
+\fpboxstar{Note that it is very important to be clear about the directionality of a relation. For example, we may have a predicate with assigned meaning `loves'. But we may also have a predicate with assigned meaning `is loved by'. Now, if the relation $\mathbf{L}$ is the relation `loves', and $\mathbf{L}'$ is the relation `is loved by', then each pair will be reversed relative to the other one. For example, if $\oset{Julie, Jane} \in \mathbf{L}$, but $\oset{Jane, Julie} \notin \mathbf{L}$, then $\oset{Julie, Jane} \notin \mathbf{L}'$, but $\oset{Jane, Julie} \in \mathbf{L}$, since $x$ loves $y$ if, and only if, $y$ is loved by $x$. That is, if Julie loves Jane but Jane does not love Julie, then Jane is loved by Julie but Julie is not loved by Jane.}
+
+\subsection{... of \emph{n}-places}
+
+You may see a pattern here. Predicates of $1$-place (unary predicates) were interpreted as sets. Predicates of $2$-places (binary predicates) were interpreted as $2$-place relations. But of course, our language has predicates of every arity (every number of `place'), and to each, we may want to attribute some meaning. Well, this is not hard to do, since for any $n$-place predicate, we can assign an $n$-place relation. The important thing is just that if a predicate is of form $\pred{n}{k}$, then its meaning must agree with $n$, so it has to be a set of $n$-tuples. 
+
+\begin{exc}
+Give a natural example of a $3$-place, $4$-place, and $5$-place relation. 
+\end{exc}
+
+Following our handy figure, we have:
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$n$-\textsc{place predicates} & $\mapsto$ & \textsc{Sets of $n$-tuples of Domain ($n$-place relations)}\\\hline
+		$n$-place predicate & $\mapsto$ & set of $n$-tuples ($n$-place relation)
+	\end{tabular}
+\end{center} 
+
+Making it a bit more concrete, but still quite abstract, we have: 
+
+\begin{center}
+	\begin{tabular}{rcl}
+		$n$-\textsc{place predicates} & $\mapsto$ & \textsc{Sets of $n$-tuples of Domain ($n$-place relations)}\\\hline
+		$\pred{1}{1}$ & $\mapsto$ & $\mathbf{R}_1 \subseteq \mathbf{D}$\\
+		& $\vdots$ &\\
+		$\pred{2}{1}$ & $\mapsto$ & $\mathbf{R}_i \subseteq \mathbf{D}^2$\\
+		& $\vdots$ &\\
+		$\pred{n}{1}$ & $\mapsto$ & $\mathbf{R}_k \subseteq \mathbf{D}^n$\\
+		& $\vdots$ &\\
+	\end{tabular}
+\end{center} 
+
+We can then extend our interpretation function $\mathbf{I}$ to cover now not only constants, but predicates as well. 
+
+\begin{defn}
+A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for the predicates of $\mathcal{L}_0$, denoted by $\mathsf{PRED}_{\mathcal{L}_0}$, (relative to $\mathbf{D}$) is a function $\mathbf{I}$ such that for each predicate $\pred{n}{k}$, $\mathbf{I}(\pred{n}{k})=\mathbf{R}$ for some $\mathbf{R} \subseteq \mathbf{D}^n$ (the Cartesian product of $\mathbf{D}$ taken $n$-times with itself). 
+\end{defn}
+
+In fact, we can put together our definition of an interpretation function for constants, and our definition of an interpretation function for predicates, into one definition. We can also introduce a new notion; \textit{structure}. Structure is just a shorthand for what we have been saying over and over again; that when give meaning to our expressions, we do it with an interpretation function $\mathbf{I}$ against the backdrop of a domain $\mathbf{D}$. So a structure $\mathbf{S}$ is just a pair $\oset{\mathbf{D}, \mathbf{I}}$ where $\mathbf{D}$ is the domain, and $\mathbf{I}$ is the interpretation function under consideration. With this in hand, we can say: 
+
+\begin{defn}
+A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
+%
+\begin{enumerate}
+	\item if $c$ is any constant of $\mathcal{L}_0$, $\mathbf{I}(c) \in \mathbf{D}$, and;
+	\item if $P^n$ is any predicate  of arity $n$ ($n$-place predicate) of $\mathcal{L}_0$, $\mathbf{I}(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
+\end{enumerate}
+\end{defn}
+
+As you can see, logicians can say a lot of stuff in very few words. This may seem intimidating at first. But remember that all these terse definitions hide quite intuitive ideas. We spent a lot of time pondering these ideas so that you can read and understand the definition above, and the nuances and niceties it expresses so elegantly. This also gives you a very important skill: to go further. In more advanced logic textbooks, you won't find such long explanations as we have given. But now you won't need them either!\footnote{Indeed, this is why they don't include them...}
