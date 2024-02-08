@@ -131,6 +131,8 @@ For example, suppose $S=\set{a, b}$ and $Q=\set{1, 2}$. Then, $S \times Q=\set{\
 
 Now importantly, $S$ and $Q$ need not be different, so that $S\times S$ is itself a set, the set of all ordered pairs made up of members of $S$. So for example, if $S=\{a, b, c\}$, then $S \times S=\set{\oset{a, b}, \oset{a, c}, \oset{b, a}, \oset{b, c}, \oset{c, a}, \oset{c, b}, \oset{a, a}, \oset{b,b}, \oset{c,c}}$. From this, you may see why taking the Cartesian product of two sets is denoted by the $\times$ (`product') operator, since if a set $S$ has $3$ members, then $S \times S$ will have $9$ members, and so on. We can also write this more succintly as $S^2$, and $S^3$, etc. 
 
+\fpboxstar{The name `Cartesian product' comes from an interesting historical fact. `Cartesian' refers to René Descartes, one of the most important philosophers in history, who was also a pioneering mathematician. As such, he devised the coordinate system you probably already know from mathematics. What does this have to do with Cartesian products? For example, think of the Cartesian product of $\mathbb{N} \times \mathbb{N}$. Its members are all pairs of natural number $\oset{n, k}$. Like $\oset{3, 4}$, $\oset{1,1}$, $\oset{6, 0}$. But of course, these are exactly the coordinates of a two-dimensional coordinate system on the natural numbers.}
+
 \begin{exc}
 
 Answer the following questions. For each question, don't forget to explain your reasoning. 	
@@ -155,17 +157,17 @@ However, with ordered sets, we can do all of this in one set, representing the \
 %
 \[F=\set{\oset{\text{Jamal}, \text{Kerry}}, \oset{\text{Kerry}, \text{Jamal}}, \set{\text{Zoltan}, \text{Jamal}}, \oset{\text{Jamal}, \text{Zoltan}}}\]
 %
-Note that we included, for both Jamal and Kerry, and Jamal and Zoltan, the two names in both configurations. This is useful, since we may desire to add lopsided relations that are not mutual. For example, suppose we want to represent that Jamal is friends with Kerry, and Kerry is friends with Jamal, Zoltan is friends with Jamal and Jamal is friends with Zoltan, and also that Kerry thinks Zoltan is her friends, but Zoltan does not view Kerry as a friend. Then, we can encode this as: 
+Note that we included, for both Jamal and Kerry, and Jamal and Zoltan, the two names in both configurations. This is useful, since we may desire to add lopsided relations that are not mutual. For example, suppose we want to represent that Jamal is friends with Kerry, and Kerry is friends with Jamal, Zoltan is friends with Jamal and Jamal is friends with Zoltan, and also that Kerry thinks Zoltan is her friend, but Zoltan does not view Kerry as a friend. Then, we can encode this as: 
 %
 \[F'=\set{\oset{\text{Jamal}, \text{Kerry}}, \oset{\text{Kerry}, \text{Jamal}}, \set{\text{Zoltan}, \text{Jamal}}, \oset{\text{Jamal}, \text{Zoltan}}, \oset{\text{Kerry}, \text{Zoltan}}}\]
 %
-Here, $F'$ represents the `is friends with' relation. Using this blueprint, any relation can be represented, starting from such pairs to more elaborate ones, like `$x$ is in berween $y$ and $z$', which would be a set of triples. 
+Here, $F'$ represents the `is friends with' relation again (in a different situtation). But using this blueprint, any relation can be represented, starting from such pairs to more elaborate ones, like `$x$ is in berween $y$ and $z$', which would be a set of triples, and so on. 
 
 Related to sets of ordered pairs are three important notions that are usually specified. First, a relation may be \textit{reflexive}. This means that for any $x$ (that occurs in the `field' of a relation $R$, see below), $\oset{x, x} \in R$. For example, if $L$ encodes the `loves' relation, and everyone loves themselves, then for every person $x$, $\oset{x, x} \in L$. This way, $L$ would be reflexive. On the other hand, if there is a person $y$ such that $\oset{y, y} \notin L$, then $L$ would not be reflexive, because there would be a person who does not love themselves. 
 
 Second, a relation may be symmetric, if whenever $\oset{x, y} \in R$, $\oset{y, x} \in R$ as well. This was already illustrated above with our three friends, Jamal, Kerry, and Zoltan. Specifically, $F$ was a relation that was symmetric, since whenever $x$ was a friend of $y$, $y$ was a friend of $x$. On the other hand, $F'$ was not symmetric, since there was a person, Kerry, who was friends with Zoltan, but Zoltan was not friends with Kerry. 
 
-Finally, a relation may be transitive. Transitive relations are everywhere in logic, though they are not always apparent. A transitive relation is more elaborate than the above two, since it is specified between three things. Namely, a transitive relation is such that if $\oset{x, y} \in R$, and $\oset{y, z} \in R$, then $\oset{x, z} \in R$. One relation that is usually transitive is airplane travel with connections. Suppose you can travel by plane from New York to Los Angeles, and from Los Angeles to Tokyo. Then, that also means that you can travel from New York to Tokyo (with a connecting flight in Los Angeles). In other words if $A$ represents the set of all cities reachable by air travel, if $\oset{\text{NYC}, \text{LA}} \in A$, and $\oset{\text{LA}, \text{Tokyo}} \in A$, then $\oset{\text{NYC}, \text{LA}} \in A$. Since this holds for every three cities, the relation $A$ is transitive. Incidentally, this relation is also symmetric, since flights go back and forth (or perhaps in larger circles).  
+Finally, a relation may be transitive. Transitive relations are everywhere in logic, though they are not always apparent. A transitive relation is more elaborate than the above two, since it is specified between three things. Namely, a transitive relation is such that if $\oset{x, y} \in R$, and $\oset{y, z} \in R$, then $\oset{x, z} \in R$. One relation that is usually transitive is airplane travel with connections. Suppose you can travel by plane from New York to Los Angeles, and from Los Angeles to Tokyo. Then, that also means that you can travel from New York to Tokyo (with a connecting flight in Los Angeles). In other words if $A$ represents the set of all pairs of cities reachable by air travel, if $\oset{\text{NYC}, \text{LA}} \in A$, and $\oset{\text{LA}, \text{Tokyo}} \in A$, then $\oset{\text{NYC}, \text{LA}} \in A$. Since this holds for every three cities, the relation $A$ is transitive. Incidentally, this relation is also symmetric, since flights go back and forth (or perhaps in larger circles).  
 
 \fpboxstar{%
 If you have taken an introductory logic course before, you may remember the connective `$\rightarrow$', standing for `if ..., then ...'. You may also remember that in your proof system, you could show that if you had as premises $X \rightarrow Y$ and $Y \rightarrow Z$, then you could derive $X \rightarrow Z$. Some systems even have a dedicated rule for this, called the `hypothetical syllogism' or `chain rule'. Now all this rule says is that $\rightarrow$ is transitive! In other words, if you take the set $I$ of all pairs $X$, $Y$ of propositions where $X \rightarrow Y$, and $\oset{X, Y}, \oset{Y, Z} \in I$, then $\oset{X, Z} \in I$ (at least in classical logic). 
@@ -232,15 +234,17 @@ What about many-to-one functions? Indeed, these are possible. Suppose we have a 
 	\vdots
 \end{gather*}
 
-Since there are many people on Earth, there will be many that share their age at any one moment (at least as things currently stand). Above, you can immediately see that Leonardo DiCaprio and Christian Bale are the same age at the moment (though only for 30 days each year). Thus, the person-to-person's-age function is many-to-one. Again, note that it \textit{is} a function, and thus not one-to-many, and this is by nature, since every person only has one age.
+Since there are many people on Earth, there will be many that share their age at any one moment (at least as things currently stand). Above, you can immediately see that Leonardo DiCaprio and Christian Bale are the same age at the moment of writing this book (though only for 30 days each year). Thus, the person-to-person's-age function is many-to-one. Again, note that it \textit{is} a function, and thus not one-to-many, and this is by nature, since every person only has one age.
 
 On the other hand, some functions are not many-to-one, but \textit{one-to-one}. This means that for two distinct inputs, they never have the same output. Take the $+2$ function again. The $+2$ function on the natural numbers is one-to-one, since for each two distinct natural numbers $n, k$, $n+2\neq k+2$. This is easy to see since if $n+2=k+2$ were the case, then $n=k$ would also be the case, even though we specified those two numbers must be distinct. In other words, the same output can only be had if the input is really the same. One-to-one functions are also called \textit{injective}. 
 
-At times, we may want to explicitly specify not only the \textit{domain} on which the function is defined (like how the function $+2$ has as domain the natural numbers), but also what its \textit{codomain} is, which is a (not necessarily proper) superset of its range. For example, we may say that $+2$ is a function from the domain $\mathbb{N}$ of natural numbers to the codomain $\mathbb{N}$ of natural numbers. This may be written $+2: \mathbb{N} \to \mathbb{N}$. Note that this is different from the above $n \mapsto n+2$ which specifies that for each $n$, $n$ is `mapped to' $n+2$, i.e., $+2(n)=n+2$. 
+At times, we may want to explicitly specify not only the \textit{domain} on which the function is defined (like how the function $+2$ has as domain the natural numbers), but also what its \textit{codomain} is, which is a (not necessarily proper) superset of its range. For example, we may say that $+2$ is a function from the domain $\mathbb{N}$ of natural numbers to the codomain $\mathbb{N}$ of natural numbers. This may be written $+2: \mathbb{N} \to \mathbb{N}$. Note that this notation is different from the above $n \mapsto n+2$ which specifies that for each $n$, $n$ is `mapped to' $n+2$, i.e., $+2(n)=n+2$. 
 
 In connection, one may find that some functions `cover' their codomain, in the sense that for each member of a function's codomain, there is a certain input value which outputs just that member. A function that is \textit{not} like this is the $+2$ function specified as $\mathbb{N} \to \mathbb{N}$, since neither $0$ nor $1$ is an output for any input value (since the input value would have to be either $-2$ or $-1$, which are \textit{not} natural numbers). On the other hand, we may specify a function $\times2: \mathbb{N} \to \mathbb{N}_\text{Even}$ such that $n \mapsto 2\times n$. This function covers its codomain, the even numbers, since for every even number $k$, there is a natural number $n$ such that $n \times 2=k$. Functions like $\times 2: \mathbb{N} \to \mathbb{N}_\text{Even}$ are called \textit{surjective} or \textit{onto}. Note that whether a function $f$ is surjective is relative to how its codomain is specified. Clearly, $\times 2^*: \mathbb{N} \to \mathbb{N}$ would \textit{not} be surjective, since no odd number ever gets output. 
 
 Finally, some functions are both injective and surjective, or both one-to-one and onto. These functions are called \textit{bijective} or are said to be a \textit{one-to-one correspondence} (sometimes, 1-1 correspondence.) For example, it is easy to see that the function $\times2: \mathbb{N}\to \mathbb{N}_\text{Even}$ is bijective or a one-to-one correspondence. We already know that it is surjective. But it is also injective, since there are no two distinct numbers $i, j$ such that $n\times 2=i$ and $n\times 2=j$. Thus, it is bijective. 
+
+Bijective functions are very important, since they essentially allow one to count the members of a set by pairing them with numbers. For example, if you have the set $\set{a, b, c}$, this set can be put into 1-1 correspondence with the set $\set{1, 2, 3}$ (in various ways), so it has three members. But notice that the set $\set{a, b}$ cannot be put into 1-1 correspondence with $\set{1, 2, 3}$. And the set $\set{a, b, c, d}$ cannot be put into 1-1 correspondence with $\set{1, 2, 3}$ either. Indeed, for any set $\set{a_1, a_2, ..., a_n}$, it can only be put into 1-1 correspondence with one initial segment of the (positive) natural numbers, $\set{1, 2, ..., n}$. 
 
 \begin{exc}
 	Answer the following questions. In each case, explain your reasoning. 
@@ -259,6 +263,16 @@ Finally, some functions are both injective and surjective, or both one-to-one an
 \item A function $f: S \to Q$ is \textbf{bijective} or a \textbf{one-to-one correspondence} provided it is both injective and surjective (one-to-one and onto). 
 \end{itemize}
 \end{defn}
+
+\begin{exc}
+	A 1-1 correspondence is defined as a function between a domain and a codomain that is both injective and surjective. We already noted that there can be no 1-1 correspondence between $\set{a,b}$ and $\set{1,2,3}$, or between $\set{a, b, c, d}$ and $\set{1, 2, 3}$ (or indeed, between $\set{a, b}$ and $\set{a,b,c,d}$). This means that a function between any of these two is either not injective, or not surjective. 
+	
+	\begin{enumerate}
+	\item Take the sets $A=\set{a, b}$ and $T=\set{1, 2, 3}$. Suppose $f$ is any function from $A$ to $T$. Can it be surjective? Can it be injective?
+	\item Now take the sets $B=\set{a, b, c, d}$ and $T=\set{1, 2, 3}$. Suppose $g$ is any function from $B$ to $T$. Can it be surjective? Can it be injective?
+	\item How do the answers change if we take $f'$ to be from $T$ to $A$, and $g'$ to be from $T$ to $B$?
+	\end{enumerate}
+\end{exc}
 
 \section{Set-builder notation and Russell's paradox}
 
@@ -290,7 +304,7 @@ At the inception of modern set theory, it was thought that every specifiable col
 S=\{x \mid x \text{ passes }R\}
 \]
 
-However, it was quickly discovered that this will not do, since not just any specifiable collection of things is a set. How could this be? The reason for this is usually attributed to Bertrand Russell, a philosopher-logician-mathematician, and one of the most important intellectuals of the 20$^\text{th}$ century. Hence the name `Russell's paradox'.
+However, it was quickly discovered that this will not do, since not just any specifiable collection of things is a set. How could this be? The reason for this is usually attributed to Bertrand Russell, a philosopher-logician-mathematician (yet another one!), and one of the most important intellectuals of the 20$^\text{th}$ century. Hence the name `Russell's paradox'.
 
 Let's start from the beginning. As we said, some sets can be members of other sets. For example, regarding the set $S=\set{\set{1, 4, 2}, 3, 6}$, the set $\{1, 4, 2\}$ is in $S$. But if anything specifiable is a set, we may get some pretty weird stuff. Consider a set, $S$, and ask whether $S$ is in $S$. Can a set have \textit{itself} as its own member? At first glance, there is no reason why not. We can specify:
 \[

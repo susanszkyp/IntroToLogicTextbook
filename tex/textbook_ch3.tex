@@ -58,14 +58,14 @@ As you can see, there is no limit to what a constant can designate. Thing and ob
 Let's recap. We have constants, which are symbols of our language. We have objects, in a loose sense, which are members of the domain of discourse. And we have a function, which assigns to each constant a member of the domain of discourse, as illustrated in the table above. This function is usually called an \textit{interpretation function}, since it interprets the uninterpreted symbols of a language. We can make this more precise as follows:
 
 \begin{defn}
-A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for the constants of $\mathcal{L}_0$, denoted by $\mathsf{CON}_{\mathcal{L}_0}$, (relative to $\mathbf{D}$) is a function $\mathbf{I}: \mathsf{CON}_{\mathcal{L}_0} \to \mathbf{D}$. If $c$ is a constant of $\mathcal{L}_0$, then $\mathbf{I}(c) \in \mathbf{D}$, and is what $c$ \textit{designates}, \textit{denotes} or \textit{refers to}. Alternatively, we may say $\mathbf{I}(c)$ is the \textit{value} of the symbol $c$. 
+A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for the constants of $\mathcal{L}_0$, denoted by $\mathsf{CONS}_{\mathcal{L}_0}$, (relative to $\mathbf{D}$) is a function $\mathbf{I}: \mathsf{CONS}_{\mathcal{L}_0} \to \mathbf{D}$. If $c$ is a constant of $\mathcal{L}_0$, then $\mathbf{I}(c) \in \mathbf{D}$, and is what $c$ \textit{designates}, \textit{denotes} or \textit{refers to}. Alternatively, we may say $\mathbf{I}(c)$ is the \textit{value} of the symbol $c$. 
 \end{defn}
 
-\fpboxstar{
-As you can see, interpretations are functions from the set of all constants to the domain. This means that to each constant, only one member of the domain corresponds. So unlike with real names like `Peter', which may designate many different people, a constant of $\mathcal{L}_0$ designates only one. On the other hand, the function $\mathbf{I}$ need not be one-to-one. This means that some distinct constants may designate the same thing, just like `Miley Stewart' and `Hannah Montana' designate the same person (in the hit TV show \textit{Hannah Montana}). 
-}
+As you can see, interpretations are functions from the set of all constants to the domain. This means that to each constant, only one member of the domain corresponds. So unlike with real names like `Peter', which may designate many different people, a constant of $\mathcal{L}_0$ designates only one. On the other hand, the function $\mathbf{I}$ need not be one-to-one. This means that some distinct constants may designate the same thing, just like `Miley Stewart' and `Hannah Montana' designate the same person (in the hit TV show \textit{Hannah Montana}). It also doesn't need to be onto, so that some members of the domain $\mathbf{D}$ may go nameless. Like the lack of bijectivity, this is also natural, since many things do not have names in the real world. Just think of your left sock that fell behind the machine at the laundry. 
 
 Having constants or names that refer to things is the first step towards giving meaning to our expressions, but it is not enough to get us to truth. Names, by themselves, are neither true nor false, they just refer. The other ingredient we need is giving meaning to our \textit{predicates}.
+
+\clearpage
 
 \section{Predicates} 
 
@@ -203,3 +203,49 @@ A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\math
 \end{defn}
 
 As you can see, logicians can say a lot of stuff in very few words. This may seem intimidating at first. But remember that all these terse definitions hide quite intuitive ideas. We spent a lot of time pondering these ideas so that you can read and understand the definition above, and the nuances and niceties it expresses so elegantly. This also gives you a very important skill: to go further. In more advanced logic textbooks, you won't find such long explanations as we have given. But now you won't need them either!\footnote{Indeed, this is why they don't include them...}
+
+\subsection{A brief return to our language specification}
+
+Indeed, now that we are familiar with a lot more machinery than before, we can give a definition of our language in a manner that is a lot more succint. 
+
+\begin{defn}
+Let $\mathsf{ALPH}_{\mathcal{L}_0}$ be the alphabet of $\mathcal{L}_0$, specified as before, and thought of as forming a set. In particular, let $\mathsf{PRED}_{\mathcal{L}_0} \subseteq \mathsf{ALPH}_{\mathcal{L}_0}$ and $\mathsf{CONS}_{\mathcal{L}_0} \subseteq \mathsf{ALPH}_{\mathcal{L}_0}$, and such that:
+
+\begin{enumerate}
+	\item $\mathsf{CONS}_{\mathcal{L}_0}=\set{\cons{n} \mid n \in \mathbb{N}}$, and;
+	\item $\mathsf{PRED}_{\mathcal{L}_0}=\set{\pred{n}{k} \mid n, k \in \mathbb{N}}$.
+\end{enumerate}
+
+The set of (well-formed) formulas of $\mathcal{L}_0$ is the smallest set $\mathsf{FORM}_{\mathcal{L}_0}$ such that:
+%
+\begin{enumerate}
+	\item if $P$ is a predicate of arity $n$ in $\mathsf{PRED}_{\mathcal{L}_0}$, and $c_1, c_2, ..., c_n$ are (not necessarily distinct) constants in $\mathsf{CONS}_{\mathcal{L}_0}$, then $P(c_1, ..., c_n) \in \mathsf{FORM}_{\mathcal{L}_0}$, and is an \textit{atomic} formula;
+	\item if $X$ and $Y$ are in $\mathsf{FORM}_{\mathcal{L}_0}$, then:
+		\begin{enumerate}
+		\item $\neg X \in \mathsf{FORM}_{\mathcal{L}_0}$;
+		\item $(X \wedge Y) \in \mathsf{FORM}_{\mathcal{L}_0}$;
+		\item $(X \vee Y) \in \mathsf{FORM}_{\mathcal{L}_0}$; and
+		\item $(X \rightarrow Y) \in \mathsf{FORM}_{\mathcal{L}_0}$.
+		\end{enumerate}
+\end{enumerate}
+\end{defn}
+
+Again, a few weeks ago, this may have seemed extremely cryptic and impossible to comprehend, but now you are familar with all the different ideas underlying this definition, and can understand its intended meaning. 
+
+\section{Atomic formulas}
+
+Remember that we started our discussion in this chapter by setting our aim at assigning truth values to formulas. Once we have assigned meaning to our constants and predicates, we are in the position to do just that! Again, the basic idea underlying the mathematical machinery is not very difficult to grasp, but it is a very fundamental insight in several areas of thought, including philosophy, linguistics, and mathematics, and it was only precisely formulated around the middle of the 20$^\text{th}$ century by the Polish logician Alfred Tarski.
+
+We can illustrate this basic idea algorithmically, by looking at how one may go on calculating truth-values for atomic formulas, once a structure $\mathbf{S}$ is specified. Let's take some arbitrary constants from our language $\mathcal{L}_0$, using $a$, $b$, and $c$. Let's also take some arbitrary predicates of the language, using $P$, $Q$, and $R$. We can further specify that $P$ of arity $1$, $Q$ is of arity $2$, and $R$ is of arity $3$. 
+
+Now let's take some rather arbitrary atomic formulas, let's say:
+\begin{gather}
+	P(a)\\
+	P(c)\\
+	Q(a, c)\\
+	Q(c, a)\\
+	R(a, b, c)\\
+	R(a, c, b)
+\end{gather}
+
+What if I ask you to decide whether these formulas are true or false? In that case, you should say: I cannot do that, since you haven't given me a domain $\mathbf{D}$ and an interpretation $\mathbf{I}$ that would tell me what these formulas mean! Relative to different structures, different atomic formulas may be true or false, so there is no way to answer this question without first specifying a structure $\mathbf{S}$. 
