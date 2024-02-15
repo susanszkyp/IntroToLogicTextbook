@@ -4,15 +4,15 @@ If you have already taken an introductory logic course, you may remember talk of
 
 But so far, we have only been dealing with formal languages as being made up of various sequences of meaningless symbols, according to various rules. Where does truth enter the picture? 
 
-The answer is: semantics. In some sense, syntax and semantics are two sides of the same coin. Syntax specifies the way primitive symbols may be combined to form more complex expressions. Semantics, on the other hand, specifies how the meaning of more complex expressions can be computed from the meaning of primitive symbols. As we shall see, the rules of computation for the `values' of expressions will match the rules of formulation of expressions in our syntax. 
+The answer is: semantics. In some sense, syntax and semantics are two sides of the same coin. Syntax specifies the way primitive symbols may be combined to form more complex expressions. Semantics, on the other hand, specifies how the meaning of more complex expressions can be computed from the meaning of primitive symbols. As we shall see, the rules of computation for the `values' of expressions will match the rules of formulation of expressions in our syntax. The idea underlying this is called `compositionality'. As simpler syntactic expressions compose more complex ones, so the meanings of these simpler syntactic expressions compose the meanings of more complex ones. Then, just as being a formula is precisely definable, meaning will be too. 
 
-Once we have a grasp on the rules of meaning for $\mathcal{L}_0$, we can start designating some formulas of the language as `true', and some as `false', based on their respective meaning (and some other stuff, which we shall get to in due course). We will also see how the truth values of various sets of formulas relate to the truth values of other sets of formulas. From this, it will take just one additional step to specify how sometimes, some premises being true \textit{ensures} that the conclusion \textit{must} also be true. 
+Once we have a grasp on the rules of meaning for $\mathcal{L}_0$, we can start designating some formulas of the language as `true', and some as `false', based on their respective meaning (and some other stuff, which we shall get to in due course). We will also see later on how the truth values of various sets of formulas relate to the truth values of other sets of formulas. From this, it will take just one additional step to specify how sometimes, some premises being true \textit{ensures} that the conclusion \textit{must} also be true. 
 
 \fpboxstar{
-From now on, until further notice, we will only be discussing the language $\mathcal{L}_0$, the language of zeroth-order logic. 
+From now on, until further notice, we will only be discussing the language $\mathcal{L}_0$, the language of zeroth-order logic, and simple fragments of it with only a few predicates and connectives. In the latter cases, you can always imagine that the rest of the language is also dealt with in some way or another similar to the ones presented. 
 }
 
-As noted above, semantics proceeds along the lines of syntax. In the syntax of $\mathcal{L}_0$, we have two types of base symbols: constants and predicates. As we have seen, every \textit{atomic} formula is made up of an $n$-place predicate, followed by $n$ constant symbols, in brackets, separated by commas. So in order to give meaning to our atomic formulas, we first have to specify the meaning of constants and predicates. Then, we shall be able to compute the meaning of our atomic formulas. In turn, this will allow us to specify the meaning of our more complex formulas. 
+As noted above, semantics proceeds along the lines of syntax. In the syntax of $\mathcal{L}_0$, we have two types of base symbols: constants and predicates. As we have seen, every \textit{atomic} formula is made up of an $n$-place predicate, followed by $n$ constant symbols, in brackets, separated by commas. So in order to give truth-values to our atomic formulas, we first have to specify the meaning of constants and predicates. Then, we shall be able to \textit{compute} the truth-values of our atomic formulas from this. In turn, this will allow us to \textit{compute} the truth-values of our more complex formulas. 
 
 \section{Constants}
 
@@ -193,7 +193,7 @@ A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for 
 
 In fact, we can put together our definition of an interpretation function for constants, and our definition of an interpretation function for predicates, into one definition. We can also introduce a new notion; \textit{structure}. Structure is just a shorthand for what we have been saying over and over again; that when give meaning to our expressions, we do it with an interpretation function $\mathbf{I}$ against the backdrop of a domain $\mathbf{D}$. So a structure $\mathbf{S}$ is just a pair $\oset{\mathbf{D}, \mathbf{I}}$ where $\mathbf{D}$ is the domain, and $\mathbf{I}$ is the interpretation function under consideration. With this in hand, we can say: 
 
-\begin{defn}
+\begin{defn} \label{structure}
 A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
 %
 \begin{enumerate}
@@ -204,11 +204,11 @@ A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\math
 
 As you can see, logicians can say a lot of stuff in very few words. This may seem intimidating at first. But remember that all these terse definitions hide quite intuitive ideas. We spent a lot of time pondering these ideas so that you can read and understand the definition above, and the nuances and niceties it expresses so elegantly. This also gives you a very important skill: to go further. In more advanced logic textbooks, you won't find such long explanations as we have given. But now you won't need them either!\footnote{Indeed, this is why they don't include them...}
 
-\subsection{A brief return to our language specification}
+\subsubsection{A brief return to our language specification}
 
 Indeed, now that we are familiar with a lot more machinery than before, we can give a definition of our language in a manner that is a lot more succint. 
 
-\begin{defn}
+\begin{defn} \label{language}
 Let $\mathsf{ALPH}_{\mathcal{L}_0}$ be the alphabet of $\mathcal{L}_0$, specified as before, and thought of as forming a set. In particular, let $\mathsf{PRED}_{\mathcal{L}_0} \subseteq \mathsf{ALPH}_{\mathcal{L}_0}$ and $\mathsf{CONS}_{\mathcal{L}_0} \subseteq \mathsf{ALPH}_{\mathcal{L}_0}$, and such that:
 
 \begin{enumerate}
@@ -232,20 +232,394 @@ The set of (well-formed) formulas of $\mathcal{L}_0$ is the smallest set $\maths
 
 Again, a few weeks ago, this may have seemed extremely cryptic and impossible to comprehend, but now you are familar with all the different ideas underlying this definition, and can understand its intended meaning. 
 
+\fpboxstar{
+In fact, when I was studying philosophy as an undergrad, I was reading papers from Russell, Quine, and others, and I really wanted to understand what they were saying. So I went and bought myself a book on semantics. I opened up the first page, and definitions not unlike \ref{language} and \ref{structure} greeted me. Unlike you, I did not have a textbook like this, so I had no idea what was going on. Needless to say, my foray into semantics stopped right there, and did not continue for a few years. 
+}
+
 \section{Atomic formulas}
 
 Remember that we started our discussion in this chapter by setting our aim at assigning truth values to formulas. Once we have assigned meaning to our constants and predicates, we are in the position to do just that! Again, the basic idea underlying the mathematical machinery is not very difficult to grasp, but it is a very fundamental insight in several areas of thought, including philosophy, linguistics, and mathematics, and it was only precisely formulated around the middle of the 20$^\text{th}$ century by the Polish logician Alfred Tarski.
 
-We can illustrate this basic idea algorithmically, by looking at how one may go on calculating truth-values for atomic formulas, once a structure $\mathbf{S}$ is specified. Let's take some arbitrary constants from our language $\mathcal{L}_0$, using $a$, $b$, and $c$. Let's also take some arbitrary predicates of the language, using $P$, $Q$, and $R$. We can further specify that $P$ of arity $1$, $Q$ is of arity $2$, and $R$ is of arity $3$. 
+We can illustrate this basic idea algorithmically, by looking at how one may go on calculating truth-values for atomic formulas, once a structure $\mathbf{S}$ is specified. Let's take some arbitrary constants from our language $\mathcal{L}_0$, using $a$, $b$, and $c$. Let's also take some arbitrary predicates of the language, using $P$, $Q$, and $R$. We can further specify that $P$ is of arity $1$, $Q$ is of arity $2$, and $R$ is of arity $3$. 
 
 Now let's take some rather arbitrary atomic formulas, let's say:
 \begin{gather}
-	P(a)\\
-	P(c)\\
-	Q(a, c)\\
-	Q(c, a)\\
-	R(a, b, c)\\
-	R(a, c, b)
+	P(a)\label{ex1}\\
+	P(c)\label{ex2}\\
+	Q(a, c)\label{ex3}\\
+	Q(c, a)\label{ex4}\\
+	R(a, b, c)\label{ex5}\\
+	R(a, c, b)\label{ex6}
 \end{gather}
 
-What if I ask you to decide whether these formulas are true or false? In that case, you should say: I cannot do that, since you haven't given me a domain $\mathbf{D}$ and an interpretation $\mathbf{I}$ that would tell me what these formulas mean! Relative to different structures, different atomic formulas may be true or false, so there is no way to answer this question without first specifying a structure $\mathbf{S}$. 
+What if I ask you to decide whether these formulas are true or false? In that case, you should say: I cannot do that, since you haven't given me a domain $\mathbf{D}$ and an interpretation $\mathbf{I}$ that would tell me what these formulas mean, and against what I should evaluate them! Relative to different structures, different atomic formulas may be true or false, so there is no way to answer this question without first specifying a structure $\mathbf{S}$. So let's do just that. 
+
+Take a domain $\mathbf{D}=\set{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}}$, and an interpretation function such that:
+
+\begin{enumerate}
+	\item $I(a)=\mathbf{a}$, $I(b)=\mathbf{b}$, $I(c)=\mathbf{c}$, $I(d)=\mathbf{d}$; \label{consin}
+	\item \label{predin}
+		\begin{enumerate}
+	\item $I(P)=\{\mathbf{a}, \mathbf{d}\}$;
+	\item $I(Q)=\set{\oset{\mathbf{a}, \mathbf{c}}, \oset{\mathbf{d}, \mathbf{a}}, \oset{\mathbf{a}, \mathbf{d}}}$;
+	\item $I(R)=\set{\oset{\mathbf{a}, \mathbf{b}, \mathbf{c}}, \oset{\mathbf{b}, \mathbf{c}, \mathbf{b}}, \oset{\mathbf{b}, \mathbf{b}, \mathbf{b}}}$.
+		\end{enumerate} 
+\end{enumerate}
+
+Call this the structure $\mathbf{S}$. Now we can ask: which of the formulas are true \textit{relative to} the structure $\mathbf{D}$? To answer this question, again, we need to do some very simple calculations. 
+
+The basic idea is this. To each constant of the language, the interpretation function $I$ assigns a member of the domain (see \ref{consin} above). And to each predicate (of arity $n$), the interpretation function assigns a set of $n$-tuples (see \ref{predin} above).
+
+Next, all you have to do is check the \textit{value} of a constant (or list of constants) under $I$, and compare it against the value of the relevant predicate under $I$. If the value of the constant (or sequence of constants) is in the value of the predicate under $I$, the atomic formula is true, otherwise, it is false. 
+
+Take the formula $P(a)$ (the formula (\ref{ex1}) above). Is it true in $\mathbf{D}$? Well, we see that $I(a)=\mathbf{a}$. And we also see that $I(P)=\{\mathbf{a}, \mathbf{d}\}$. Since $I(a)$ (which is just $\mathbf{a}$) is \textit{in} the set $I(P)$, the atomic formula $P(a)$ is true. On the other hand, if we take $P(c)$ (the formula (\ref{ex2}) above), we see that $I(c)=\mathbf{c}$, and $\mathbf{c} \notin I(P)$, so $I(c) \notin I(P)$. So $P(c)$ is false in $\mathbf{D}$. 
+
+This may seem a bit elaborate, but really, all you are doing is checking if the value of the constant under $I$ is in the set that is the value of the predicate $P$. 
+
+There is a special way of representing the relation `the formula $X$ is true in the structure $\mathbf{S}$'. It is written like this: $\mathbf{S} \models X$. You can also read it as: $\mathbf{S}$ \textit{models} $X$. This is simply because $\mathbf{S}$ `models' a world in which $X$ would be true. So again, $\mathbf{S}\models P(a)$ ($\mathbf{S}$ models $P(a)$), but $\mathbf{S}\not\models P(c)$ ($\mathbf{S}$ does \textit{not} model $P(c)$).
+
+Predicates with more than $1$ arity aren't more elaborate than this. The only difference is that now you have to check that the values of the constants under $I$ are in the value of the predicate \textit{as an $n$-tuple}, and of course, in the right order. 
+
+Take $Q(a, c)$ (formula (\ref{ex3}) above). Again, $I(a)=\mathbf{a}$, and $I(c)=\mathbf{c}$, so the question is whether $\oset{\mathbf{a}, \mathbf{c}} \in I(Q)$. By definition, $I(Q)=\set{\oset{\mathbf{a}, \mathbf{c}}, \oset{\mathbf{d}, \mathbf{a}}, \oset{\mathbf{a}, \mathbf{d}}}$. So $\oset{\mathbf{a}, \mathbf{c}} \in I(Q)$. So $\mathbf{S} \models Q(a, c)$, or $Q(a,c)$ is true in $\mathbf{S}$. On the other hand, $Q(c, a)$ would make us consider wether $\oset{\mathbf{c}, \mathbf{a}} \in I(Q)$, which as you can see it is not. So $\mathbf{S}\not\models Q(c, a)$ (formula (\ref{ex4})), or $Q(c, a)$ is false in $\mathbf{S}$.
+
+\begin{exc}
+Determine whether the formulas $R(a, b, c)$ (\ref{ex5}) and $R(a, c, b)$ (\ref{ex6}) are true in $\mathbf{S}$. In each case, give a proof just like the ones above for (\ref{ex1}, \ref{ex2}, \ref{ex3}, and \ref{ex4}). 
+\end{exc} 
+
+\begin{exc}
+One of the members of the domain does not have a name! That means that unfortunately, we cannot talk about, even if the object itself shows up in our properties and relations. Which member is this?
+\end{exc}
+
+Note that we can also take the reverse of this question. Namely, instead of considering whether a given formula is true in $\mathbf{S}$, we can start with $\mathbf{S}$ and consider which formulas are true in it. This is really just the reverse reasoning. For example, you can inspect $I(R)$, and see that $I(R)=\set{\oset{\mathbf{a}, \mathbf{b}, \mathbf{c}}, \oset{\mathbf{b}, \mathbf{c}, \mathbf{b}}, \oset{\mathbf{b}, \mathbf{b}, \mathbf{b}}}$. You can also see that $I(b)=\mathbf{b}$. Now, since $\oset{\mathbf{b}, \mathbf{b}, \mathbf{b}} \in I(R)$, that means $R(b, b, b)$ is true in $\mathbf{S}$, or $\mathbf{S} \models R(b, b, b)$. 
+
+\begin{exc}
+Find an atomic formula $X$ distinct from all the above such that $\mathbf{S} \not\models X$. Don't forget to give an appropriate proof as to why that is the case. 
+\end{exc}
+
+Note that the structure above was rather trivial and intuitive. But we can give a completely different structure $\mathbf{N}$ and ask again whether the above formulas are true or false in that structure. Let $\mathbf{N}=\oset{\mathbb{N}^+, I'}$. In other words, the structure $S$ is such that its domain $\mathbf{D}=\mathbb{N}^+$, the set of all positive natural numbers. 
+
+We now specify a new interpretation $I'$, that interprets our formulas in $\mathbf{N}$. 
+
+\begin{enumerate}
+	\item $I'(a)=1$, $I'(b)=2$, $I'(3)=c$;
+	\item 
+		\begin{enumerate}
+		\item $I'(P)=\{n \mid n\text{ is even}\}$;
+		\item $I'(Q)=\set{\oset{n, k} \mid n < k}$;
+		\item $I'(R)=\set{\oset{n, k, i} \mid n+k=i}$. 
+		\end{enumerate}
+\end{enumerate}
+
+In other words, under $I'$, $P(x)$ means `$x$ is even', $Q(x, y)$ means `$x$ is less than $y$', and $R(x, y, z)$ means `$x+y=z$. And $a$ under $I'$ means $1$, $b$ means $2$, and so on.
+
+Then, we can consider $P(a)$ and $P(c)$ again. Well, doing the calculations, neither $1$ nor $3$ are even numbers, so $P(a)$ and $P(c)$ are both false. 
+
+On the other hand, one of $Q(a, c)$ and $Q(c, a)$ must be true, since $a$ and $c$ mean distinct numbers. In particular, $Q(a, c)$ means $1$ is smaller than $3$, and $Q(c, a)$ means $3$ is smaller than $1$ under $I'$. So $\mathbf{N}\models Q(a, c)$, but not $Q(c, a)$. 
+
+And incidentally, $R(a, b, c)$ is true in $\mathbf{N}$, since $1+2=3$. But $1+3\neq 2$, so $R(a, c, b)$ is false in $\mathbb{N}$. 
+
+\begin{exc}
+The above proofs are sketchy, referring to `doing the calculations' and `meanings'. Write them down in a precise manner, following the style of the proofs for $\mathbf{S}$. 
+\end{exc}
+
+\subsubsection{Putting it all together}
+
+Now we are in the position to further extend our definition to include assigning truth values to atomic formulas. It goes like this: 
+
+\begin{defn} \label{atomicin}
+A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
+	%
+\begin{enumerate}
+	\item if $c$ is any constant of $\mathcal{L}_0$, $\mathbf{I}(c) \in \mathbf{D}$, and;
+	\item if $P^n$ is any predicate  of arity $n$ ($n$-place predicate) of $\mathcal{L}_0$, $\mathbf{I}(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
+\end{enumerate}
+%
+For each atomic formula $P^n(c_1, ..., c_n)$ of the language $\mathcal{L}_0$, we have:
+\[
+\mathbf{S} \models P(c_1, ..., c_n)\text{ if, and only if, }\oset{I(c_1), ..., I(c_n)} \in I(P^n).
+\]
+If $\mathbf{S} \models P(c_1, ..., c_n)$, we say $\mathbf{S}$ \textit{models} $P(c_1, ..., c_n)$, or \textit{is a model of} $P(c_1, ..., c_n)$. Alternatively, we say $P(c_1, ..., c_n)$ is \textit{true in} $\mathbf{S}$. 
+\end{defn}
+
+\section{Complex formulas}
+
+We are now in the position to give truth-values to our more complex formulas, based on the values of the atomic formulas. Again, everything is relativized to a certain structure, since that is how we can assign truth-values to the atomic ones.
+
+This is done by invoking the concept of a truth-function. A truth-function is just a function that takes one or more truth-values, and outputs a single truth-value. The meaning of our connectives are truth-functions in this sense. They operate on the values of their constituent formulas, and output another truth-value. 
+
+There are several ways to formula this idea. First, one may specify these truth-values in terms of truth ($T$) and falsity ($F$), and a function $v: \mathsf{FORM}_{\mathcal{L}_0} \to \set{T, F}$, like this:
+
+\begin{enumerate}
+	\item $v(\neg X)=T$ if, and only if, $v(X)=f$;
+	\item $v(X \wedge Y)=T$ if, and only if, $v(X)=T$ and $v(Y)=T$;
+	\item $v(X \vee Y)=T$ if, and only if, $v(X)=T$ or $v(Y)=T$ (or both);
+	\item $v(X \rightarrow Y)=T$ if, and only if, if $v(X)=T$, then $v(Y)=T$. 
+\end{enumerate}
+
+Now usually, these are represented in truth-tables, which are really just tables representing the above truth-function, $v$, by listing all its input-output pairs one by one. In particular:
+
+\begin{figure}[h]
+\begin{center}
+\begin{minipage}{0.25\textwidth}
+\begin{tabular}{|c|c|c|}
+	\hline
+	$X$ & $Y$ & $X \wedge Y$\\ \hline
+	$T$ & $T$ & $T$\\
+	$T$ & $F$ & $F$\\
+	$F$ & $T$ & $F$\\
+	$F$ & $F$ & $F$\\ \hline
+\end{tabular}
+\end{minipage}
+%
+\begin{minipage}{0.25\textwidth}
+\begin{tabular}{|c|c|c|}
+	\hline
+	$X$ & $Y$ & $X \vee Y$\\ \hline
+	$T$ & $T$ & $T$\\
+	$T$ & $F$ & $T$\\
+	$F$ & $T$ & $T$\\
+	$F$ & $F$ & $F$\\\hline
+\end{tabular}
+\end{minipage}
+%
+\begin{minipage}{0.25\textwidth}
+\begin{tabular}{|c|c|c|}
+	\hline
+	$X$ & $Y$ & $X \rightarrow Y$\\ \hline
+	$T$ & $T$ & $T$\\
+	$T$ & $F$ & $F$\\
+	$F$ & $T$ & $T$\\
+	$F$ & $F$ & $T$\\ \hline
+\end{tabular}
+\end{minipage}
+%
+\begin{minipage}{0.20\textwidth}
+\begin{tabular}{|c|c|}
+	\hline
+	$X$ & $\neg X$\\ \hline
+	$T$ & $F$\\
+	$F$ & $T$\\ \hline
+\end{tabular}
+\end{minipage}
+\end{center}
+\caption{Truth tables}
+\label{tto}
+\end{figure}
+
+There are other ways to specify these same truth-functions. One is to arithmetize the relation between the input(s) and the output using $1$ for true and $0$ for false. This looks nice for some connectives, but less nice for others. Thus: 
+
+\begin{enumerate}
+	\item $v'(\neg X)=1-v'(X)$;
+	\item $v'(X \wedge Y)=v'(X)\times v'(Y)=\text{MAX}(v'(X),v'(Y))$;
+	\item $v'(X \vee Y)=1-((1-v'(X)) \times (1-v'(Y)))=\text{MIN}(v'(X), v'(Y))$;
+	\item $v'(X \rightarrow Y)=1 - (v'(X) \times (1-v'(Y))$. 
+\end{enumerate}
+
+\begin{remark}
+In the above, $\text{MIN}$ means the function that outputs the minimum value of two values, and $\text{MAX}$ is the function that outputs the maximum value of two values. In terms of this, the meaning of our connectives is simple, since the value of $\wedge$ is just the maximum function on $1$ and $0$, and the value of $\vee$ the minimum. However, as demonstrated, you do not need to invoke these functions to define $v'$. 
+\end{remark}
+
+We can check if the four tables in Figure \ref{ttt} match our tables in Figure \ref{tto} by computing the right side with our equations. And indeed, they do match! 
+
+\begin{figure}[h]
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			$X$ & $Y$ & $X \wedge Y$\\ \hline
+			$1$ & $1$ & $1\times 1=1$\\
+			$1$ & $0$ & $1 \times 0=0$\\
+			$0$ & $1$ & $0 \times 1=0$\\
+			$0$ & $0$ & $0\times 0=0$\\ \hline
+		\end{tabular}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			$X$ & $Y$ & $X \vee Y$\\ \hline
+			$1$ & $1$ & $1-((1-1) \times (1-1))=1$\\
+			$1$ & $0$ & $1-((1-1) \times (1-0))=1$\\
+			$0$ & $1$ & $1-((1-0) \times (1-1))=1$\\
+			$0$ & $0$ & $1-((1-0) \times (1-0))=0$\\\hline
+		\end{tabular}
+\end{minipage}
+
+\vspace{\baselineskip}
+\begin{minipage}{0.45\textwidth}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			$X$ & $Y$ & $X \rightarrow Y$\\ \hline
+			$1$ & $1$ & $1-(1 \times (1-1))=1$\\
+			$1$ & $0$ & $1-(1 \times (1-0))=0$\\
+			$0$ & $1$ & $1-(0 \times (1-1))=1$\\
+			$0$ & $0$ & $1-(0 \times (1-0))=1$\\ \hline
+		\end{tabular}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+		\begin{tabular}{|c|c|}
+			\hline
+			$X$ & $\neg X$\\ \hline
+			$1$ & $1-1=0$\\
+			$0$ & $1-0=1$\\ \hline
+		\end{tabular}
+\end{minipage}
+\end{center}
+\caption{Truth tables a different way}
+\label{ttt}
+\end{figure}
+
+Finally, we can put the above ideas in line with our previous results, and specify it as such:
+
+\begin{enumerate}
+	\item $\mathbf{S} \models \neg X$ if, and only if, $\mathbf{S} \not\models X$;
+	\item $\mathbf{S} \models (X \wedge Y)$ if, and only if, $\mathbf{S} \models X$ and $\mathbf{S}\models Y$;
+	\item $\mathbf{S} \models (X \vee Y)$ if, and only if, $\mathbf{S} \models X$ or $\mathbf{S}\models Y$ (or both);
+	\item $\mathbf{S} \models (X \rightarrow Y)$ if, and only if, if $\mathbf{S} \models X$, then $\mathbf{S} \models Y$. 
+\end{enumerate}
+
+It might not be apparent at first, but we can now compute the value of \textit{any} formula of our language (or fragment of it)!
+
+\subsubsection{Computing with complex formulas}
+
+Let's turn back the wheel of time to the beginning of this book, where we specified the language of arithmetic expressions $\mathcal{L}_{AE}$. You may remember how we emphasized that the syntactic trees for those expressions give you an order of computation, based on how the parentheses are configured in the formula. If you forgot, go back to page \pageref{syntrcom} to refresh your memory. In fact, the situation is the same with the expressions of $\mathcal{L}_0$, except instead of $+$, $-$ and $\times$, we have our connectives, and instead of numbers, we have atomic formulas which themselves require computation. 
+
+Once again, take a structure $\mathbf{S}=\oset{\mathbf{D}, I}$ with the domain $\mathbf{D}=\set{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}}$, and an interpretation function $I$ such that:
+
+\begin{enumerate}
+	\item $I(a)=\mathbf{a}$, $I(b)=\mathbf{b}$, $I(c)=\mathbf{c}$, $I(d)=\mathbf{d}$; 
+	\item 
+	\begin{enumerate}
+		\item $I(P)=\{\mathbf{a}, \mathbf{d}\}$;
+		\item $I(Q)=\set{\oset{\mathbf{a}, \mathbf{c}}, \oset{\mathbf{d}, \mathbf{a}}, \oset{\mathbf{a}, \mathbf{d}}}$;
+		\item $I(R)=\set{\oset{\mathbf{a}, \mathbf{b}, \mathbf{c}}, \oset{\mathbf{b}, \mathbf{c}, \mathbf{b}}, \oset{\mathbf{b}, \mathbf{b}, \mathbf{b}}}$.
+	\end{enumerate} 
+\end{enumerate}
+
+We already know a bunch about what truth values various formulas get in the structure $\mathbf{S}$. Now, we can go on to talk about the values of more complex formulas, built out of our connectives. 
+
+Suppose you want to find out whether $(P(a) \vee P(c)) \wedge Q(a, c)$ is true in $\mathbf{S}$. Let's quickly draw up a syntax tree for this formula:
+
+\begin{center}
+\begin{forest}
+[{$(P(a) \vee P(c)) \wedge Q(a, c)$}
+	[{$P(a) \vee P(c)$}
+		[{$P(a)$}
+		]
+		[{$P(c)$}
+		]
+	]
+	[${Q(a, c)}$
+	]
+]
+\end{forest}
+\end{center}
+
+As with the example regarding $\mathcal{L}_{AE}$, we start from the leaves of our tree (remember that it is upside down). Now in general, you would first have to compute whether $P(a)$, $P(c)$, and $Q(a, c)$ are true in $\mathbf{S}$, but we will not revisit this issue, since this was already done above. 
+
+We had the following facts:
+
+\begin{enumerate}
+	\item $\mathbf{S} \models P(a)$;
+	\item $\mathbf{S} \not\models P(c)$;
+	\item $\mathbf{S} \models Q(a, c)$.
+\end{enumerate}
+
+We can substitute these values for the relevant formulas in our tree. Thus: 
+
+\begin{center}
+	\begin{forest}
+[{$(P(a) \vee P(c)) \wedge Q(a, c)$}
+	[{$P(a) \vee P(c)$}
+		[{$T$}
+		]
+		[{$F$}
+		]
+	]
+		[${T}$
+	]
+]
+	\end{forest}
+\end{center}
+
+Then, we need to proceed on the left side first, so we substitute the relevant values one level up:
+
+\begin{center}
+\begin{forest}
+[{$(P(a) \vee P(c)) \wedge Q(a, c)$}
+	[{$T \vee F$}
+	]
+	[${T}$
+	]
+]
+\end{forest}
+\end{center}
+
+Now given how the connective $\vee$ was defined above, we can compute from $T \vee F$ the value $T$, since $\mathbf{S} \models X \vee Y$ if $\mathbf{S} \models X$, even if $\mathbf{S} \not\models P(c)$. So we have:
+
+\begin{center}
+\begin{forest}
+[{$(P(a) \vee P(c)) \wedge Q(a, c)$}
+	[{$T$}
+	]
+	[${T}$
+	]
+]
+	\end{forest}
+\end{center}
+
+Substituting again, we have:
+%
+\[
+T \wedge T
+\]
+%
+Invoking the rule for the connective $\wedge$, we get $T$ as the final value, so 
+%
+\[
+\mathbf{S} \models (P(a) \vee P(c)) \wedge Q(a, c).
+\]
+
+\fpboxstar{
+Note that this is a handy way to compute the values of formulas, but you should not confuse things like $T \vee F$ for formulas of the language, since they are not. In general, what we are doing in this computation is systematically replacing our formulas with their \textit{values in} $\mathbf{S}$. In other words, it is just a compact representation of something more verbose (see immediately below).
+}
+
+There are several ways of going about computing the values of formulas. In presentation, it may look something like this: 
+
+\begin{quote}
+	Take the formula $(P(a) \vee P(c)) \wedge Q(a, c)$. By our previous results, $\mathbf{S} \models P(a)$, $\mathbf{S} \not\models P(c)$, and $\mathbf{S}\models Q(a, c)$. By definition of $\vee$, $\mathbf{S} \models P(a) \vee P(c)$. Then, by definition of $\wedge$, $\mathbf{S} \models (P(a) \vee P(c)) \wedge Q(a, c)$, which is what we wanted to show. 
+\end{quote}
+
+In fact, if you really want to go crazy, you can use the equations above, and produce something like this: 
+\[
+(1 -((1-1) \times (1-0))) \times 1
+\]
+Now $1-1=0$, $1-0=1$, so we get $0 \times 1$, which is $0$, which we subtract from $1$, which gets us $1$, which we multiply by $1$ to get $1$. Or true. This is not a thing we will be doing going further. 
+
+\subsubsection{Putting it all together}
+
+We are now in the position to formulate our whole semantics in one fell swoop. This is usually done in more advanced works at the very beginning (or not at all). You shall now be able to read those definitions with confidence. 
+
+\begin{defn} \label{models}
+	A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
+	%
+	\begin{enumerate}
+		\item if $c$ is any constant of $\mathcal{L}_0$, $\mathbf{I}(c) \in \mathbf{D}$, and;
+		\item if $P^n$ is any predicate  of arity $n$ of $\mathcal{L}_0$, $\mathbf{I}(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
+	\end{enumerate}
+	%
+	For any formulas $X, Y, Z$ of $\mathcal{L}_0$:
+	
+	\begin{enumerate}
+	\item if $X$ is of form $P^n(c_1, ..., c_n)$, $\mathbf{S} \models P^n(c_1, ..., c_n)$ if, and only if, $\oset{c_1, ..., c_n} \in I(P^n)$;
+	\item if $X$ is of form $\neg Y$, $\mathbf{S} \models \neg Y$ if, and only if, $\mathbf{S} \not\models Y$;
+	\item if $X$ is of form $Y \wedge Z$, $\mathbf{S} \models Y \wedge Z$ if, and only if, $\mathbf{S} \models Y$ and $\mathbf{S}\models Z$;
+	\item if $X$ is of form $Y \vee Z$,  $\mathbf{S} \models Y \vee Z$ if, and only if, $\mathbf{S} \models Z$ or $\mathbf{S}\models Y$ (or both);
+	\item if $X$ is of form $Y \rightarrow Z$, if $\mathbf{S} \models Y$, then $\mathbf{S} \models Z$. 
+	\end{enumerate}
+	
+	If $\mathbf{S} \models P(c_1, ..., c_n)$, we say $\mathbf{S}$ \textit{models} $P(c_1, ..., c_n)$, or \textit{is a model of} $P(c_1, ..., c_n)$. Alternatively, we say $P(c_1, ..., c_n)$ is \textit{true in} $\mathbf{S}$.
+\end{defn}
+
+Congratulations, this concludes the semantics of $\mathcal{L}_0$.
+
+\section{Logic, semantically speaking}

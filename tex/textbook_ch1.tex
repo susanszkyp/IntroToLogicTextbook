@@ -550,7 +550,7 @@ When you are drawing a syntactic tree, it is useful to start with the formula yo
 Construct syntax trees for each of the six formulas in Exercise \ref{lae}. Observe the difference between the last three formulas, which only differ in their structure (the way the parentheses are distributed). 
 \end{exc}
 
-As discussed above, parentheses determine the order of computation for each arithmetic expression. And in fact, when you look at syntax trees for these expressions, you can read off the order of computation from their structure. In order to compute any arithmetic expression, you need to start from the leaves, which are integers. Then, the next thing you have to compute is the expression immediately above. Once computed, you can move to the next level, substituting the result of the computation for the occurrence of the expression in the more complex formula above, then computing again. Repeating these steps until you get to the top will give you the final result. 
+As discussed above, parentheses determine the order of computation for each arithmetic expression. And in fact, when you look at syntax trees for these expressions, you can read off the order of computation from their structure. In order to compute any arithmetic expression, you need to start from the leaves, which are integers. Then, the next thing you have to compute is the expression immediately above. Once computed, you can move to the next level, substituting the result of the computation for the occurrence of the expression in the more complex formula above, then computing again. Repeating these steps until you get to the top will give you the final result. \label{syntrcom}
 
 This description is probably a bit confusing on first read, so here is a simple example with $(3+5) \times (6-2)$. The starting point is the whole tree: 
 
@@ -791,12 +791,12 @@ As before, we can also ask about the \textit{main operator} for each formula. Th
 Derive the following formulas using either the linear method or the tree method. In each case, determine what the main operator of the formulas is. 
 
 \begin{enumerate}
-	\item $((\pred{2}{2}(\cons{3}, \cons{5})\vee \neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \vee \pred{1}{1}(\cons{1}))$
+	\item $((\pred{2}{2}(\cons{3}, \cons{5})\vee \neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1})) \vee \pred{1}{1}(\cons{1}))$
 	\item $(\pred{2}{2}(\cons{3}, \cons{5})\vee \neg(\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \vee \pred{1}{1}(\cons{1})))$
 	\item $(\pred{2}{2}(\cons{3}, \cons{5})\rightarrow (\neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \rightarrow \pred{1}{1}(\cons{1})))$
-	\item $(\neg\pred{2}{2}(\cons{3}, \cons{5})\leftrightarrow (\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \wedge \neg \pred{1}{1}(\cons{1})))$
-	\item $(\neg\neg(\pred{2}{2}(\cons{3}, \cons{5})\leftrightarrow \neg (\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \wedge \neg \pred{1}{1}(\cons{1})))$
-	\item $\neg(\neg(\neg\pred{2}{2}(\cons{3}, \cons{5})\leftrightarrow \neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1})) \vee \neg \pred{1}{1}(\cons{1}))$
+	\item $(\neg\pred{2}{2}(\cons{3}, \cons{5})\rightarrow (\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \wedge \neg \pred{1}{1}(\cons{1})))$
+	\item $(\neg\neg\pred{2}{2}(\cons{3}, \cons{5})\rightarrow \neg (\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1}) \wedge \neg \pred{1}{1}(\cons{1})))$
+	\item $\neg(\neg(\neg\pred{2}{2}(\cons{3}, \cons{5})\rightarrow \neg\pred{4}{2}(\cons{4}, \cons{3}, \cons{3}, \cons{1})) \vee \neg \pred{1}{1}(\cons{1}))$
 \end{enumerate}
 \end{exc}
 

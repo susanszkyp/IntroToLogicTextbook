@@ -76,7 +76,11 @@ Now that we know what sets are, how they are represented, and which sets are the
 If $S$ and $Q$ are sets, and every member of $S$ is also a member of $Q$, then $S$ is a \textit{subset} of $Q$ ($Q$ is a \textit{superset} of $S$). In such cases, we write $S \subseteq Q$ (or $Q \supseteq S$). 
 \end{defn}
 
-One thing that is important to note with the subset relation is that it does not exclude the possibility that two sets are the same. Indeed, there is a general fact concerning this matter. Namely, if $S$ and $Q$ are sets, and $S \subseteq Q$ and $Q \subseteq S$, then $S=Q$. In other words, if $S$ is a subset of $Q$, and $Q$ is a subset of $S$, and $S$ and $Q$ are identical. 
+One thing that is important to note with the subset relation is that it does not exclude the possibility that two sets are the same. Indeed, there is a general fact concerning this matter. Namely, if $S$ and $Q$ are sets, and $S \subseteq Q$ and $Q \subseteq S$, then $S=Q$. In other words, if $S$ is a subset of $Q$, and $Q$ is a subset of $S$, then $S$ and $Q$ are identical. 
+
+\begin{exc}
+Explain why it is the case that if $S$ and $Q$ are sets, and $S \subseteq Q$ and $Q \subseteq S$, then $S=Q$.
+\end{exc}
 
 Now if we wanted to specify explicitly that one set is a subset \textit{and} not equal to another set, we can use the symbol $\subset$, which stands for `proper subset'. Proper subsets are just like subsets, except they come with the additional caveat that the two sets are not the same. In other words, $S \subset Q$ is just a short way to say that $S \subseteq Q$ and $S \neq Q$ (it is not the case that $S = Q$). 
 
@@ -103,7 +107,7 @@ Finally, we must mention the case of $\emptyset$. Though it may sound a bit stra
 
 Since our semantics will be formulated in set theory, sets will play a central role in it. One of these roles will be to represent \textit{properties}. Some properties are `is red', `is a mammal', `is 6 feet tall', `is the friend of Honghui', and so on. These properties are either `had' by certain things or not. The technical term is `exemplify'. So for example, every human has or exemplifies the property `being a mammal', since every human is a mammal, but not every human is exactly 6 feet tall, so some have or exemplify the property `is 6 feet tall', and some do not. 
 
-The simplest way to formally represent these properties is just to have a set of all those things that examplify that property. So for example, one may form the set $H$ of all (and only) those things that are human (exemplify `is a human'), and thus the set $H$ will represent the \textit{property} `is a human'. Similarly, one can represent the property `is a mammal' by a set $M$ consisting of all (and only) the things that are mammals. 
+The simplest way to formally represent these properties is just to have a set of all those things that exemplify that property. So for example, one may form the set $H$ of all (and only) those things that are human (exemplify `is a human'), and thus the set $H$ will represent the \textit{property} `is a human'. Similarly, one can represent the property `is a mammal' by a set $M$ consisting of all (and only) the things that are mammals. 
 
 Now let's look at some examples. Taylor Swift will be in the set $H$ and the set $M$, since she is a human and a mammal (exemplifies the property `is a human' and `is a mammal'). However, if $S$ represents the property `is 6 feet tall', she will not be in $S$, since she is not 6 feet tall (apparently, she's 5'11''). The same goes for Jay-Z, since he is also a human and a mammal, and also not 6 feet tall (apparently, he is 6'2''). On the other hand, if we take Jay-Z's Corvette C-1, it is neither in $H$, nor $M$, nor $S$, since it is a car that does not have any of these properties. 
 
@@ -186,6 +190,20 @@ If $R$ is a two-place relation with field $S$, then:
 \end{enumerate}
 \end{defn}
 
+\begin{exc}
+Determine for each claim wether it is true or false. Don't forget to explain your reasoning, using the above definitions!
+
+\begin{enumerate}
+	\item the relation `$x$ is related to $y$ by blood' is transitive;
+	\item the relation `$x$ is an ancestor of $y$' is transitive;
+	\item the relation `$x$ is right of $y$' is transitive on a 2 dimensional plane;
+	\item the relation `$x$ is right of $y$' is transitive on a 3 dimensional plane;
+	\item the relation `$x$ is a brother of $y$' is symmetric;
+	\item the relation `$x$ is a sibling of $y$' is symmetric;
+	\item the identity relation `$=$' is reflexive, symmetric, and transitive. 
+\end{enumerate}
+\end{exc}
+
 \section{Functions as sets of ordered pairs}
 
 Another thing that you will need to know as we move forward is a bit about \textit{functions}. Functions may seem like mysterious entities, but set theoretically speaking, they are really quite simple. After all, what a function does is it takes an \textit{input}, and provides a single \textit{output}. For example, if we take the function $+2$, and apply it to the number $3$, we get $5$. There are various ways of specifying the $+2$ function, like $f(n)=n+2$, or $f: n \mapsto n+2$, but the only thing that is important is that there are a bunch of inputs, and for each input, there is just one output. So if $f$ is the $+2$ function, then $f(3)=5$.
@@ -252,7 +270,7 @@ Bijective functions are very important, since they essentially allow one to coun
 	\item No human has more than 1 million hairs on their body. There are more than 8 million residents of New York City. Must there be two New York residents with exactly the same number of hairs on their body? Explain why, or why not. 
 	\item Let $A$ be the set of all natural numbers $n$ such that there is a New York City resident with exactly $n$ hairs. Let $B$ be the set of all New York City residents. Let $S$ be the set of all \textit{actual} pairs $\langle x, y \rangle$ where $x \in A$ and $y \in B$, representing ``hair number - person with that number of hairs" pairs. Is $S$ a function?  
 	\item Let $Q$ be like $S$ except consisting of all pairs $\langle y, x \rangle$ provided $\langle x, y \rangle \in S$. What does $Q$ represent intuitively? Is $Q$ a function? 
-	\item Let $f: B \to A$ just like in $Q$. Is $f$ surjective and/or injective? Is $f$ one-to-one? 
+	\item Is $Q$ surjective and/or injective? Is $Q$ one-to-one? 
 \end{enumerate}
 \end{exc}
 
@@ -273,6 +291,12 @@ Bijective functions are very important, since they essentially allow one to coun
 	\item How do the answers change if we take $f'$ to be from $T$ to $A$, and $g'$ to be from $T$ to $B$?
 	\end{enumerate}
 \end{exc}
+
+Finally, here is a definition that will be useful later on. 
+
+\begin{defn}
+Let $f$ be any function with the domain of formulas of $\mathcal{L}_0$, and let $\set{\text{True}, \text{False}}$ be its condomain. Then, $f$ is called a truth-function. 
+\end{defn}
 
 \section{Set-builder notation and Russell's paradox}
 
@@ -297,7 +321,7 @@ In fact, you can consider more extreme circumstances, like sheep. Take, for exam
 	According to the above definition, is $0 \in Even$? If it is, give a definition of a set in set-builder notation in which $0$ is not a member. If it is not, give a definition of a set in set-builder notation in which $0$ is a member. 
 \end{exc} 
 
-\subsection{Russell's paradox}
+\subsubsection{Russell's paradox}
 
 At the inception of modern set theory, it was thought that every specifiable collection of things constitutes a set. That is, given \textit{any} rule $R$, the following always gave you a set:
 \[
