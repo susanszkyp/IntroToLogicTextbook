@@ -283,7 +283,7 @@ Predicates with more than $1$ arity aren't more elaborate than this. The only di
 Take $Q(a, c)$ (formula (\ref{ex3}) above). Again, $I(a)=\mathbf{a}$, and $I(c)=\mathbf{c}$, so the question is whether $\oset{\mathbf{a}, \mathbf{c}} \in I(Q)$. By definition, $I(Q)=\set{\oset{\mathbf{a}, \mathbf{c}}, \oset{\mathbf{d}, \mathbf{a}}, \oset{\mathbf{a}, \mathbf{d}}}$. So $\oset{\mathbf{a}, \mathbf{c}} \in I(Q)$. So $\mathbf{S} \models Q(a, c)$, or $Q(a,c)$ is true in $\mathbf{S}$. On the other hand, $Q(c, a)$ would make us consider wether $\oset{\mathbf{c}, \mathbf{a}} \in I(Q)$, which as you can see it is not. So $\mathbf{S}\not\models Q(c, a)$ (formula (\ref{ex4})), or $Q(c, a)$ is false in $\mathbf{S}$.
 
 \begin{exc}
-Determine whether the formulas $R(a, b, c)$ (\ref{ex5}) and $R(a, c, b)$ (\ref{ex6}) are true in $\mathbf{S}$. In each case, give a proof just like the ones above for (\ref{ex1}, \ref{ex2}, \ref{ex3}, and \ref{ex4}). 
+Determine whether the formulas $R(a, b, c)$ (\ref{ex5}) and $R(a, c, b)$ (\ref{ex6}) are true in $\mathbf{S}$. In each case, give a proof just like the ones above for (\ref{ex1}, \ref{ex2}, \ref{ex3}, and \ref{ex4}). \label{atomicvalue}
 \end{exc} 
 
 \begin{exc}
@@ -347,7 +347,7 @@ We are now in the position to give truth-values to our more complex formulas, ba
 
 This is done by invoking the concept of a truth-function. A truth-function is just a function that takes one or more truth-values, and outputs a single truth-value. The meaning of our connectives are truth-functions in this sense. They operate on the values of their constituent formulas, and output another truth-value. 
 
-There are several ways to formula this idea. First, one may specify these truth-values in terms of truth ($T$) and falsity ($F$), and a function $v: \mathsf{FORM}_{\mathcal{L}_0} \to \set{T, F}$, like this:
+There are several ways to formula this idea. First, one may specify these truth-values in terms of truth ($T$) and falsity ($F$), and a function $v: \mathsf{FORM}_{\mathcal{L}_0} \to \set{T, F}$ for any formula $X$, $Y$, like this:
 
 \begin{enumerate}
 	\item $v(\neg X)=T$ if, and only if, $v(X)=f$;
@@ -405,6 +405,8 @@ Now usually, these are represented in truth-tables, which are really just tables
 \caption{Truth tables}
 \label{tto}
 \end{figure}
+
+You should read these as follows: in any structure $\mathbf{S}$, if $X$ is true in $\mathbf{S}$ and $Y$ is true in $\mathbf{S}$, then $X \wedge Y$ is true in $\mathbf{S}$. If $X$ is true in $\mathbf{S}$ and $Y$ is false in $\mathbf{S}$, then $X \wedge Y$ is is false in $\mathbf{S}$, and so on, for each line of each truth-table. 
 
 There are other ways to specify these same truth-functions. One is to arithmetize the relation between the input(s) and the output using $1$ for true and $0$ for false. This looks nice for some connectives, but less nice for others. Thus: 
 
@@ -477,11 +479,35 @@ Finally, we can put the above ideas in line with our previous results, and speci
 	\item $\mathbf{S} \models (X \rightarrow Y)$ if, and only if, if $\mathbf{S} \models X$, then $\mathbf{S} \models Y$. 
 \end{enumerate}
 
-It might not be apparent at first, but we can now compute the value of \textit{any} formula of our language (or fragment of it)!
+Here is some helpful information as to how to read the above specifications. On the left hand side of the `if, and only if' connective, you always find more complex formulas, while on the right hand side, you always find less complex formulas. Reading from left to right, you can determine when the more complex formula must be true in a structure. For example, $\neg X$ must be true in a structure provided $X$ is false in that structure. Reading from right to left, you can determine the value of the more complex formula if the conditions on the right side hold for less complex ones. So if $X$ and $Y$ are both true in $\mathbf{S}$, $X \wedge Y$ will also be true. 
+
+It is important that these specifications allow one to determine both truth \textit{and} falsity for any complex formula depending on the truth \textit{or} falsity of some simpler formulas, and vice versa. But this may not be apparent at first. 
+
+Suppose $\mathbf{S} \not\models X \vee Y$, i.e., it is false in $\mathbf{S}$. Now it is specified what simpler formulas need to be true in order for $X \vee Y$ to be true. So how do we determine what needs to happen for it to be false in $\mathbf{S}$? Well, all we have to do is negate the right hand side, and see what's left. In particular:
+%
+\begin{quote}
+	$\mathbf{S} \not\models X \vee Y$ if, and only if, it is not the case that [$\mathbf{S} \models X$ or $\mathbf{S}\models Y$ (or both)].
+\end{quote}
+%
+Now this states that $\mathbf{S} \not\models X \vee Y$ if neither $X$ nor $Y$ is true in $\mathbf{S}$, since all three other possibilities \textit{would} make it true. And indeed, this is just what the truth-table says!
+
+Similarly, but from the other way around, suppose $\mathbf{S} \not\models X$ and $\mathbf{S} \models Y$. Well, since $\mathbf{S} \models X \wedge Y$ if, and only if, $\mathbf{S} \models X$ and $\mathbf{S} \models Y$, we have:
+
+\begin{quote}
+	$\mathbf{S} \not\models X \wedge Y$ if, and only if, it is not the case that [$\mathbf{S} \models X$ and $\mathbf{S} \models Y$]. 
+\end{quote}
+
+If it is not the case that [$\mathbf{S} \models X$ and $\mathbf{S} \models Y$], then either $X$ or $Y$ or both are false in $\mathbf{S}$. So in particular, if $\mathbf{S} \not\models X$ and $\mathbf{S} \models Y$, then $\mathbf{S} \not\models X \wedge Y$. 
+
+\fpboxstar{
+One way to think about this is by simply noting that $\not\models$ is just the negation of $\models$. So if the definition specifies when something is modeled, then it will \textit{not} be modeled precisely when that specification is \textit{not} met. That is, once the left side of the biconditional is negated, the right side needs to be too. It is very much akin to multiplying by $-1$ in an equation. This is a very fundamental fact that goes for every biconditional; if you negate both sides of a true biconditional, you get a true biconditional.
+}
+
+From now on, we will be using this type of specification to talk about the values of complex formulas. At times, we may refer back to truth-tables as a helpful reference for those who already know how truth-tables work. Don't worry if you are not familar with truth-tables. They do not give any more information than what can already be found in our style of specification. 
 
 \subsubsection{Computing with complex formulas}
 
-Let's turn back the wheel of time to the beginning of this book, where we specified the language of arithmetic expressions $\mathcal{L}_{AE}$. You may remember how we emphasized that the syntactic trees for those expressions give you an order of computation, based on how the parentheses are configured in the formula. If you forgot, go back to page \pageref{syntrcom} to refresh your memory. In fact, the situation is the same with the expressions of $\mathcal{L}_0$, except instead of $+$, $-$ and $\times$, we have our connectives, and instead of numbers, we have atomic formulas which themselves require computation. 
+Let's turn back the wheel of time to the beginning of this book, where we specified the language of arithmetic expressions $\mathcal{L}_{AE}$. You may remember how we emphasized that the syntactic trees for those expressions give you an order of computation, based on how the parentheses are configured in the formula. If you forgot, go back to page \pageref{syntrcom} to refresh your memory. In fact, the situation is the same with the expressions of $\mathcal{L}_0$, except instead of $+$, $-$ and $\times$, we have our connectives, and instead of numbers, we have atomic formulas which themselves require computation. And formulas are either true or false. But it's the same. 
 
 Once again, take a structure $\mathbf{S}=\oset{\mathbf{D}, I}$ with the domain $\mathbf{D}=\set{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}}$, and an interpretation function $I$ such that:
 
@@ -495,7 +521,7 @@ Once again, take a structure $\mathbf{S}=\oset{\mathbf{D}, I}$ with the domain $
 	\end{enumerate} 
 \end{enumerate}
 
-We already know a bunch about what truth values various formulas get in the structure $\mathbf{S}$. Now, we can go on to talk about the values of more complex formulas, built out of our connectives. 
+We already know a bunch about what truth-values various formulas get in the structure $\mathbf{S}$. Now, we can go on to talk about the values of more complex formulas, built out of our connectives. 
 
 Suppose you want to find out whether $(P(a) \vee P(c)) \wedge Q(a, c)$ is true in $\mathbf{S}$. Let's quickly draw up a syntax tree for this formula:
 
@@ -554,7 +580,7 @@ Then, we need to proceed on the left side first, so we substitute the relevant v
 \end{forest}
 \end{center}
 
-Now given how the connective $\vee$ was defined above, we can compute from $T \vee F$ the value $T$, since $\mathbf{S} \models X \vee Y$ if $\mathbf{S} \models X$, even if $\mathbf{S} \not\models P(c)$. So we have:
+Now given how the connective $\vee$ was defined above, we can compute from $T \vee F$ the value $T$, since $\mathbf{S} \models X \vee Y$ if $\mathbf{S} \models X$, even if $\mathbf{S} \not\models Y$. So we have:
 
 \begin{center}
 \begin{forest}
@@ -586,14 +612,72 @@ Note that this is a handy way to compute the values of formulas, but you should 
 There are several ways of going about computing the values of formulas. In presentation, it may look something like this: 
 
 \begin{quote}
-	Take the formula $(P(a) \vee P(c)) \wedge Q(a, c)$. By our previous results, $\mathbf{S} \models P(a)$, $\mathbf{S} \not\models P(c)$, and $\mathbf{S}\models Q(a, c)$. By definition of $\vee$, $\mathbf{S} \models P(a) \vee P(c)$. Then, by definition of $\wedge$, $\mathbf{S} \models (P(a) \vee P(c)) \wedge Q(a, c)$, which is what we wanted to show. 
+	Take the formula $(P(a) \vee P(c)) \wedge Q(a, c)$. By our previous results, $\mathbf{S} \models P(a)$, $\mathbf{S} \not\models P(c)$, and $\mathbf{S}\models Q(a, c)$. By definition of $\vee$, $\mathbf{S} \models P(a) \vee P(c)$, since $\mathbf{S} \models P(a)$. Then, by definition of $\wedge$, $\mathbf{S} \models (P(a) \vee P(c)) \wedge Q(a, c)$, since $\mathbf{S} \models P(a) \vee P(c)$, and $\mathbf{S} \models Q(a,c)$. This is what we wanted to show. \label{expref}
 \end{quote}
 
 In fact, if you really want to go crazy, you can use the equations above, and produce something like this: 
+%
 \[
-(1 -((1-1) \times (1-0))) \times 1
+(1 -((1-1) \times (1-0))) \times 1=1
 \]
-Now $1-1=0$, $1-0=1$, so we get $0 \times 1$, which is $0$, which we subtract from $1$, which gets us $1$, which we multiply by $1$ to get $1$. Or true. This is not a thing we will be doing going further. 
+%
+\begin{quote}%
+Now $1-1=0$, $1-0=1$, so we get $0 \times 1$, which is $0$, which we subtract from $1$, which gets us $1$, which we multiply by $1$ to get $1$. Or true. 
+\end{quote}
+
+This is not a thing we will be doing going further. 
+
+\begin{exc}
+Take the structure $\mathbf{S}=\langle \mathbf{D}, I\rangle$ exactly as specified above. Determine the truth-value of the following formula, giving a detailed explanation, \textit{including} how the atomic formulas get their truth-value. 
+
+\[
+(Q(a, c) \vee \neg R(a, b, c)) \rightarrow \neg R(a, c, b)
+\]
+\end{exc}
+
+\begin{remark}
+	In this exercise, you are essentially asked to combine two types of explanations, from the values of predicates and constants to the values of atomic formulas, and then from values of formulas to values of formulas. The latter was just demonstrated. For the former, some proofs were already provided, and some make up Exercise \ref{atomicvalue}.
+\end{remark}
+
+
+\subsubsection{Computing from formulas up}
+
+We do not always have to consider how exactly the atomic formulas are specified in each case. Instead, we can talk more abstractly about assigning some truth-value to some specific formula $X$ of the language, and some other truth-value to some specific formula $Y$ of the language (and so on), and then see what truth-values one gets in a structure if we combine them in various ways. Indeed, doing this is equivalent to doing \textit{propositional} or \textit{sentential} logic, and specifically, drawing up more general truth-tables. Again, this you may already be familiar with. 
+
+For example, suppose $X$ is any formula, and $Y$ is any formula, and consider the formula $X \wedge \neg Y$. We do not know what these variables stand for (other than that they are formulas), so we cannot specify an exact structure for them, in which they may be true or false. But what we can do is \textit{assume} that there is a certain structure in which, say $X$ is true and $Y$ is false, and then consider whether $X \wedge \neg Y$ is true or false \textit{as a result} in a structure. 
+
+\fpboxstar{
+Actually, what we are considering here is not just one structure but many; all those in which $X$ is true and $Y$ is false (for each possible choice of formula for the variables $X$ and $Y$). But by abstracting away from the specifics, we do not need to worry about this. 
+}
+
+Now the question is: is $X \wedge \neg Y$ true if $X$ is true and $Y$ is false in a structure? You might already see that in such a case, $X \wedge \neg Y$ is, in fact, true. Here is how it would go:
+
+\begin{quote}
+Suppose there is a structure $\mathbf{S}$ such that $\mathbf{S} \models X$ but $\mathbf{S} \not\models Y$. By the above definition, $\mathbf{S} \models \neg Y$ provided $\mathbf{S} \not\models Y$, so $\mathbf{S} \models \neg Y$. Then, again, by definition, $\mathbf{S} \models X \wedge \neg Y$, provided $\mathbf{S} \models X$ and $\mathbf{S} \models \neg Y$, which we already know, so $\mathbf{S} \models X \wedge \neg Y$
+\end{quote}
+
+This reasoning is the exact same as the following vertical fragment of a generalized truth-table:
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$X$ & $Y$ & $\neg Y$ & $X \wedge \neg Y$ \\\hline
+$T$ & $F$ & $T$ & $T$
+\end{tabular}
+\end{center}
+
+\begin{exc}
+Determine the truth-value and construct detailed explanations (as opposed to truth-tables) for the following formulas, assuming $\mathbf{S} \models X$, $\mathbf{S} \not\models Y$, and $\mathbf{S} \models Z$:
+
+\begin{enumerate}
+	\item $\neg (X \vee Y) \rightarrow Z$;
+	\item $(\neg X \wedge Y) \vee \neg Z$;
+	\item $Z \rightarrow (X \wedge \neg X)$;
+	\item $Y \rightarrow (Z \vee \neg Z)$;
+	\item $\neg (X \wedge Z) \rightarrow (\neg X \vee \neg Z)$;
+	\item $(Z \rightarrow Y) \rightarrow (\neg Z \vee Y)$.
+\end{enumerate}
+\end{exc}
+
 
 \subsubsection{Putting it all together}
 
@@ -622,4 +706,4 @@ We are now in the position to formulate our whole semantics in one fell swoop. T
 
 Congratulations, this concludes the semantics of $\mathcal{L}_0$.
 
-\section{Logic, semantically speaking}
+\fpboxstar{From now on, we will omit writing out `if, and only if' each and every time. Instead, we will opt for the abbreviation `\textit{iff}' (in italics).}

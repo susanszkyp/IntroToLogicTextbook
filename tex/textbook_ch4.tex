@@ -1,0 +1,760 @@
+\chapter{Doing zeroth-order logic}
+
+We now have a cursory acquaintance with the semantics of $\mathcal{L}_0$, so we know how the meaning of formulas get evaluated, and in particular, how truth-values are assigned to formulas, both atomic and complex. Thus, we are in the position to start talking about \textit{logic}. Now what logic is exactly is hard to say, since by now, the field is vast and intertwined with many other disciplines. At any rate, one of the fundamental aspects of logic is examining how the truth-values of certain sentences relate to the truth-values of certain other sentences. This sounds like a semantic question, since in this formulation, it is about truth-values. On the other hand, over the years, logicians have come up with a myriad of ways to examine these relations without talking about truth-values, or anything else in semantics. To do this, they introduced syntactic deductive systems, which rely purely on some syntactic rules of transformation to tell you whether certain sentences \textit{entailed} other sentences, or in other words, whether those sentences were \textit{logical consequences} of the initial set (among other things). Now since this book likes to be unorthodox, we will be using a deductive system that is technically syntactic in its nature, since it relies on purely syntactic rules for transforming the formulas of the language into other formulas of the language, but it is also highly tied to the semantics we previously examined. The approach is variously called \textit{analytic tableau}, \textit{semantic tableau}, or the \textit{truth tree method}. In fact, in its modern form, it was invented by the logician-mathematician-philosopher-magician-pianist Raymond Smullyan, who was once a CUNY professor! 
+
+\section{Some fundamental concepts of logic}
+
+If you encountered propositional logic before, you may know that there are three large classes of formulas one may distinguish. Usually, these are called \textit{contingent}, \textit{tautology}, and \textit{contradiction}. In our semantics, all this means is the following:
+
+\begin{defn}
+A formula $X$ of $\mathcal{L}_0$ is a \textit{tautology} \textit{iff} for \textit{every} structure $\mathbf{S}$, $\mathbf{S} \models X$. A formula $X$ is a \textit{contradiction} \textit{iff} there is \textit{no} structure $\mathbf{S}$ such that $\mathbf{S} \models X$. Finally, a formula $X$ is \textit{contingent} if it is neither a tautology, nor a contradiction. 
+\end{defn}
+
+\begin{remark}
+Since tautologies are true in every structure, and contradictions are true in no structure, contingent formulas are those that are true in some structures, false in others. 
+\end{remark}
+
+Now one thing to note at the beginning is that atomic formulas are all contingent. That is, for each atomic formula $P$, there is a structure $\mathbf{S}$ such that $\mathbf{S} \models P$, and there is a structure $\mathbf{S}'$ such that $\mathbf{S}' \not\models P$. On the other hand, some complex formulas are contingent, some are tautologies, and some are contradictions. 
+
+What makes a formula a tautology or a contradiction? It is the way the connectives work. Notice that by definition, each connective must obey some specific rules in any structure regarding the truth-values of the formulas on which it operates. For example, $X \wedge Y$ is true in any $\mathbf{S}$ \textit{iff} $X$ and $Y$ are both true individually in $\mathbf{S}$. However, some formulas may say things that go against these rules. This means that they won't be true in any structure $\mathsf{S}$, since again, every structure must abide by these rules, while the formula says otherwise. 
+
+Let's take the simplest example: $X \wedge \neg X$. In fact, this is not a formula of the language, but a \textit{class} of formulas of form $X \wedge \neg X$. That is, it is the set of all formulas of this form where $X$ is any formula. But as it turns out, no matter what formula you take for $X$, it will always be the case that for any structure, $\mathbf{S} \not\models X \wedge \neg X$. In other words, this formula schema cannot have a true instance. 
+
+Now again, the reason for this is the way structures are defined. In particular, in every structure $\mathbf{S}$, either $\mathbf{S} \models X$, or $\mathbf{S} \not\models X$. This is sometimes called the \textit{Law of Excluded Middle}, and it falls out of our definition of a structure. What this means is that every formula $X$ is either true in a structure, or false in a structure, and not a third thing (the `excluded middle'). 
+
+We also have that it is never the case that $\mathbf{S} \models X$ and $\mathbf{S} \not\models X$. This is sometimes called the \textit{Law of Non-contradiction}. Again, this falls out of our definition of what it means for something to be a structure. Now adding these two laws together, you simply get that every formula $X$ is either true or false, \textit{and} not both \textit{or} neither in a structure.
+
+So take $X \wedge \neg X$. By the above, either $\mathbf{S} \models X$, or $\mathbf{S} \models \neg X$. Those are the only two options we have. We can consider each of them in turn:
+
+\begin{enumerate}
+	\item Suppose $\mathbf{S} \models X$. Then, by definition of $\neg$, $\mathbf{S} \not\models X$. But $\mathbf{S} \models X \wedge \neg X$ \textit{iff} $\mathbf{S} \models X$, \textit{and} $\mathbf{S} \models \neg X$, by definition of $\wedge$. So since the latter half fails, $\mathbf{S} \not\models X \wedge \neg X$. 
+	\item Suppose $\mathbf{S} \not\models X$. Then, by definition of $\neg$, $\mathbf{S} \models \neg X$ in this case. But again, $\mathbf{S} \models X \wedge \neg X$ \textit{iff} $\mathbf{S} \models X$, \textit{and} $\mathbf{S} \models \neg X$, by definition of $\wedge$. Moreover, in this case, we already assumed that $\mathbf{S} \not\models X$. So once again, $\mathbf{S} \not\models X \wedge \neg X$. 
+\end{enumerate}
+
+This means that there is no structure $\mathbf{S}$ in which $X \wedge \neg X$ is true. So every instance of $X \wedge \neg X$ is false in every structure, no matter what you take $X$ to be. 
+
+At first, this type of talk might be confusing, but all we did was precisely represent what is usually illustrated by the following truth table:
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		$X$ & $\neg X$ & $X \wedge \neg X$\\ \hline
+		$T$ & $F$ & $F$\\
+		$F$ & $T$ & $F$
+	\end{tabular}
+\end{center}
+
+In particular, a formula is contradictory, as represented in a truth table, if all values in the column underneath the formula are false. Again, the truth table rows just represent two large (jointly exhaustive) classes of structures, one in which $X$ is true, the other in which $X$ is false, and then show that neither of these classes make $X \wedge \neg X$ true. 
+
+\fpbox{It will be important in what's to come that every contradictory formula hides a claim of the form $X \wedge \neg X$ for some formula $X$. In fact, every contradictory formula hides a claim of the form $P \wedge \neg P$, for some \textit{atomic} formula $P$. In other words, the only contradictory formulas are those that try to say that something both is and is not the case (though not necessarily in exactly those words).}
+
+On the other hand, we may find formulas of the form $X \vee \neg X$, which are not contradictory, but the exact opposite, \textit{tautological}. Again, the reason is because of how the connectives are defined in a structure. Again, in every structure, we have that either $\mathbf{S} \models X$, or $\mathbf{S} \not\models X$. So:
+
+\begin{enumerate}
+	\item If $\mathbf{S} \models X$, then $\mathbf{S} \models X \vee \neg X$, since by definition of $\vee$, $S \models X \vee \neg X$ \textit{iff} it models either $X$ or $\neg X$.
+	\item If $\mathbf{S} \not \models X$, then by definition of $\neg$, $\mathbf{S} \models \neg X$, so by definition of $\vee$, $\mathbf{S} \models X \vee \neg X$ (because of the latter half of the disjunction now). 
+\end{enumerate}
+
+Thus, $X \vee \neg X$ must be true in \textit{every} structure $\mathbf{S}$, no matter which formula we take for the variable $X$. And again, this is just an explanation of the following truth-table:
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		$X$ & $\neg X$ & $X \vee \neg X$\\ \hline
+		$T$ & $F$ & $T$\\
+		$F$ & $T$ & $T$
+	\end{tabular}
+\end{center}
+
+As you can see, unlike with contradictions, tautologies have all values as true in the column underneath them. 
+
+Now we can formulate one of the most significant connections between tautologies and contradictions. As such, we will give it the proper form of a theorem. 
+
+\begin{prop}
+A formula $X$ of $\mathcal{L}_0$ is a tautology \textit{iff} its negation $\neg X$ is a contradiction. \label{tautcon}
+\end{prop}
+
+\begin{proof}
+From left to right, suppose $X$ is a tautology. Then, for every $\mathbf{S}$, $\mathbf{S} \models X$. By definition, $\mathbf{S} \models X$ \textit{iff} $\mathbf{S} \not\models \neg X$. So since \textit{every} $\mathbf{S} \models X$, \textit{no} $\mathbf{S} \models \neg X$. By definition, $\neg X$ is then a contradiction. 
+
+From right to left, suppose $\neg X$ is a contradiction. Then, there is no $\mathbf{S}$ such that $\mathbf{S} \models \neg X$. So \textit{every} $\mathbf{S}$ is such that $\mathbf{S} \not\models \neg X$. But any $\mathbf{S} \not\models \neg X$ just in case $\mathbf{S} \models X$. So every $\mathbf{S} \models X$, and thus $X$ is a tautology. 
+\end{proof}
+
+\begin{remark}
+Notice the form of this proof. Since we proving a biconditional (an \textit{iff} statement), we need to prove that the left hand side entails the right hand side, and the right hand side entails the left hand side. In order to prove that one side entails the other, we have to \textit{assume} that one side holds, and \textit{derive} that the other side then must also hold. Thus, we assumed the left hand side and derived the right, then assumed the right hand side, and derived the left. 
+\end{remark}
+
+As before, inverting this biconditional by negating both sides also gets us a true biconditional. Thus:
+
+\begin{prop}
+A formula $X$ of $\mathcal{L}_0$ is \emph{not} a tautology \textit{iff} its negation $\neg X$ is \emph{not} a contradiction. 
+\end{prop}
+
+Here is an additional proposition that may help here:
+
+\begin{prop}
+A formula $X$ of $\mathcal{L}_0$ is contingent \textit{iff} $\neg X$ is contingent. \label{contiff}
+\end{prop}
+
+\begin{proof}
+From left to right, if $X$ is contingent, it is true in some structure $\mathbf{S}$, and false in some structure $\mathbf{S}'$. Now if $\mathbf{S} \models X$, then $\mathbf{S} \not\models \neg X$, so $\neg X$ is false in $\mathbf{S}$. On the other hand, if $\mathbf{S}' \not\models X$, then $\mathbf{S}' \models \neg X$, so $\neg X$ is true in $\mathbf{S}$. So $\neg X$ is also contingent. 
+
+From right to left, the reasoning is almost exactly the same. 
+\end{proof}
+
+\begin{exc}
+Finish the proof for Proposition \ref{contiff}. 
+\end{exc}
+
+Now given the above two propositions, we can see that if a formula $X$ of $\mathcal{L}_0$ is \textit{not} a tautology, then $\neg X$ is not a contradiction, because if $X$ is not a tautology, it is either a contradiction or contingent, so $\neg X$ will either be a tautology (hence not a contradiction), or a tautology (hence not a contradiction). And similarly the other way around. 
+
+In fact, the following also follows:
+
+\begin{prop}
+$\neg X$ is a tautology \textit{iff} $X$ is a contradiction. 
+\end{prop}
+
+\begin{proof}
+By Proposition \ref{tautcon}, $Y$ is a tautology \textit{iff} $\neg Y$ is a contradiction. Here is the trick. Since $Y$ can be \textit{any formula}, we substitute $\neg X$ for $Y$. Thus, $\neg X$ is a tautology \textit{iff} $\neg \neg X$ is a contradiction. But $\neg \neg X$ is a contradiction \textit{iff} $X$ is also a contradiction. This is because for any $\mathbf{S}$, if $\mathbf{S} \models \neg \neg X$, then $\mathbf{S} \not\models \neg X$, then $\mathbf{S} \models X$ (and similarly the other way around). So $\neg X$ is a tautology \textit{iff} $X$ is a contradiction. Which is what we wanted to show. 
+\end{proof}
+
+Some of what the above propositions tell us is the following:
+
+\begin{center}
+\begin{tabular}{lcl}
+	If ..., &  & then ...\\ \hline
+	$X$ is tautology& $\Rightarrow$ & $\neg X$ is contradiction\\
+	$X$ is contradiction& $\Rightarrow$ & $\neg X$ is tautology\\
+	$X$ is contingent& $\Rightarrow$ & $\neg X$ is contingent
+\end{tabular}
+\end{center}
+
+
+Here is another thing that will be relevant presently. Suppose you have a formula $X$, and it is \textit{not} a tautology (so it is either a contradiction or contingent). Then, its negation $\neg X$ will \textit{not} be a contradiction (it will either be a tautology or contingent). Thus, if $X$ is not a tautology, there is at least one structure $\mathbf{S}$ such that $\mathbf{S} \models \neg X$. This is usually what is called a \textit{counterexample}. 
+
+\begin{exc}
+Using the above reasoning, show for each of the following formulas that they are \textit{not} tautologies. 
+
+\begin{enumerate}
+	\item $(\neg Y \wedge \neg X) \wedge \neg X$
+	\item $(X \rightarrow Y) \rightarrow X$
+	\item $(X \rightarrow Y) \rightarrow Y$
+	\item $(X \vee Y) \rightarrow X$
+\end{enumerate}
+\end{exc}
+
+
+\section{The basic idea behind tableau systems}
+
+Here is the basic idea behind tableau systems. Imagine that your goal is to show that certain formulas of the language $\mathcal{L}_0$ are tautologies, or that in every structure $\mathbf{S}$, they are true. Now clearly, given a formula $X$, you cannot just consider every structure $\mathbf{S}$ individually to see whether that particular structure models $X$ or not. That would take an infinite amount of time. What you \textit{can} do is employ some of the proofs we have given above to show that, e.g., $X \vee \neg X$ is a tautology. The problem with this is that as the formulas get more complex, the proofs get longer and longer, to the point where it is just not feasible to carry them out. Moreover, these solutions are not very systematic as they stand. If you are ingenious, you may be able to do them (up to a point), but we don't want to rely on ingenuity to solve these problems. We need a method.  
+
+In the tableau method, the whole approach is based on the following facts, discussed above:
+
+\begin{enumerate}
+	\item if $X$ is a tautology, $\neg X$ is a contradiction;
+	\item if something is a contradiction, then it hides an explicit contradictory claim of form $Y \wedge \neg Y$ (and indeed, for some atomic formula $P$, $P \wedge \neg P$).
+\end{enumerate}
+
+If we put together these two facts, we get a strategy. We take the candidate tautology $X$. If it is \textit{really} a tautology, then its negation $\neg X$ is a contradiction. If it is a contradiction, then with the help of some appropriate rules, we can hopefully show in what way it is a contradictory statement. In other words, we show which is the formula $Y$ it claims is both true and false. 
+
+On the other hand, if $X$ is not a tautology, then it is either a contradiction or contingent, so its negation $\neg X$ will be either valid contingent (as described above). In such cases, we will find no contradiction. 
+
+To continue our example, take $X \vee \neg X$ again. We already know this is a tautology, but what if we want to show in our tableau system that it is? Well, since we want to show $X \vee \neg X$, what we put at the beginning of our proof is \textit{its negation} $\neg (X \vee \neg X)$. Then come the rules, which will tease out where exactly is the contradictory statement hidden in the formula. 
+
+\section{The rules of the system}
+
+Each rule in our tableau system codifies some simple facts about our semantics. This is a general feature of deductive systems in logic. What is less so is the fact that tableau systems are not linear, but take a tree form. In fact, our tableau deductions will look something like the syntax trees we covered before. However, despite the similarities, do not confuse the two. They are entirely different systems with a different purpose. Tableau tree deductions are used to show whether $X$ is a \textit{tautologous} formula, syntax tree derivations are used to show whether $X$ is a formula at all.  
+
+Just as syntax trees, tableau trees are also \textit{binary}. This means that at any one point, the tree may branch to at most two separate points. But sometimes, there is no branching, and only one additional point is connected. Because of this, we may classify our rules as those which branch, and those which do not. 
+
+The basic idea behind the rules is that given a complex formula $X$ of the language assumed to be true, we can infer what other, less complex formulas must also be true as a consequence. For this, we need to know what formulas we may encounter in our language, and what we can do with them. 
+
+First, we have the basic case, where everything is either an atomic formula $P$, a conjunction $Y \wedge Z$, a disjunction $Y \vee Z$, a conditional $Y \rightarrow Z$, or a negation $\neg Y$. Now as it turns out, it is a good idea to take the negation of each of these formulas separately. So we have the negation of an atomic formula $\neg P$, the negation of a conjunction $\neg (Y \wedge Z)$, the negation of a disjunction $\neg(Y \vee Z)$, the negation of a conditional $\neg (Y \rightarrow Z)$, the negation of a negation $\neg \neg Y$, or the negation of an atomic formula $\neg P$. This covers every possible negated formula form, and the two sets cover every possible formula form. Here is a diagram of this:
+
+\begin{forest}
+	[Formula of $\mathcal{L}_0$
+		[Atomic: $P$]
+		[Complex: $X$
+			[Non-negated
+				[$Y \wedge Z$]
+				[$Y \vee Z$]
+				[$Y \rightarrow Z$]
+			]
+			[Negated
+				[$\neg (Y \wedge Z)$]
+				[$\neg (Y \vee Z)$]
+				[$\neg (Y \rightarrow Z)$]
+				[$\neg \neg Y$]
+				[$\neg P$]
+			]
+		]
+	]
+\end{forest}
+
+\begin{remark}
+	It might seem like there is a problem here, since $\neg Y$ does not appear in the diagram, only $\neg \neg Y$. But this is not the case, since if we consider $\neg Y$, and what $Y$ could be, it could either be a negated formula or a non-negated one. If it is negated, then it is a double negation, which is covered by $\neg \neg Y$. If it is a simple negation, then $Y$ is either a complex or an atomic formula, which is also covered by the diagram. So there is nothing missing. 
+\end{remark}
+
+Now, as far as our rules are concerned, we will not have rules for $P$ and $\neg P$, but we will have rules for every other form. The principles behind these rules will familiar if you have ever taken a logic course before. 
+
+\subsection{Non-branching rules}
+
+First, we will consider non-branching rules, since they are simpler. And we shall start with the simplest of them all. 
+
+\subsubsection{Double negation}
+
+The double negation rule is extremely simple. If you have a formula of form $\neg \neg X$ occurring on a branch of the tree, you can extend that branch with $X$. In practice, this simply looks like this:
+
+\begin{figure}[h]
+\centering
+\begin{prooftree}{}
+	[{\neg\neg X}
+	[{X}, just=$\neg\neg$:!u]
+	]
+\end{prooftree}
+\caption{Double negation rule}
+\end{figure}
+
+Why does this rule work? Simply because of the way structures are defined. In particular, if you have a structure $\mathbf{S}$, and $\mathbf{S} \models \neg \neg X$, then by definition of $\neg$, $\mathbf{S} \not\models \neg X$, and so by the same definition, $\mathbf{S} \models X$. This works the other way around too, but we are always moving from more complex to simpler formulas in tableau systems, so we do not need to consider the reverse. 
+
+Here is a representation of the above in a truth table:
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		$X$ & $\neg X$ & $\neg \neg X$\\ \hline \rowcolor{lightgray}
+		$\mathbf{T}$ & $F$ & $\mathbf{T}$\\
+		$F$ & $T$ & $F$
+	\end{tabular}
+\end{center}
+
+\subsubsection{Conjunction}
+
+The conjunction rule is another one of these really simple rules. It says that if you have a formula of form $X \wedge Y$ on a branch, then you can extend that branch with either $X$ or $Y$, i.e., the left or the right side. Like this:
+
+\begin{figure}[h]
+	\begin{minipage}{0.5\textwidth}\centering
+		\begin{prooftree}{}
+			[{X\wedge Y}
+			[{X}, just=$\wedge$:!u]
+			]
+		\end{prooftree}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}\centering
+		\begin{prooftree}{}
+			[{X\wedge Y}
+			[{Y}, just=$\wedge$:!u]
+			]
+		\end{prooftree}
+	\end{minipage}
+	\caption{Conjunction rule}
+\end{figure}
+
+Clearly, by two successive applications of the rule on $X \wedge Y$, you can also get the following:
+
+\begin{center}
+\begin{prooftree}{}
+	[{X\wedge Y}
+		[{X}, just=$\wedge$:!u
+			[{Y}, just=$\wedge$:!uu]
+		]
+	]
+\end{prooftree}
+\end{center}
+
+Now why does this rule work? Again, it is a simple matter of checking that whenever $\mathbf{S} \models X \wedge Y$, $\mathbf{S} \models X$, and $\mathbf{S} \models Y$. In fact, this is literally just the definition of how $\wedge$ behaves in any structure, so we don't have to show anything. Of course, we can represent this in a truth table, the exact one that was given above for $\wedge$:
+
+\begin{center}
+\begin{tabular}{c|c|c} 
+	$X$ & $Y$ & $X \wedge Y$\\ \hline \rowcolor{lightgray}
+	$\mathbf{T}$ & $\mathbf{T}$ & $\mathbf{T}$\\
+	$T$ & $F$ & $F$\\
+	$F$ & $T$ & $F$\\
+	$F$ & $F$ & $F$
+\end{tabular}
+\end{center}
+
+\subsubsection{Negated disjunction}
+
+The next type of non-branching rule that we cover is a bit more elaborate than the previous ones. It is of the following form, similar to the simple $\wedge$ rule above. 
+
+\begin{figure}[h]
+	\begin{minipage}{0.5\textwidth}\centering
+		\begin{prooftree}{}
+			[{\neg (X\vee Y)}
+			[{\neg X}, just=$\neg\vee$:!u]
+			]
+		\end{prooftree}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}\centering
+		\begin{prooftree}{}
+			[{\neg(X\vee Y)}
+			[{\neg Y}, just=$\neg\vee$:!u]
+			]
+		\end{prooftree}
+	\end{minipage}
+	\caption{Negated disjunction rule}
+\end{figure}
+
+Now why does \textit{this} work? The above is an instance of what may be called DeMorgan's laws. The relevant instance is the following (usually formulated in the second part as $\neg X \wedge \neg Y$): 
+
+\begin{prop}
+If $\mathbf{S} \models \neg (X \vee Y)$, then $\mathbf{S} \models \neg X$ and $\mathbf{S} \models \neg Y$. 
+\end{prop}
+
+\begin{proof}
+Suppose $\mathbf{S} \models \neg (X \vee Y)$. Then, $\mathbf{S} \not\models X \vee Y$. Now $\mathbf{S} \models X \vee Y$ just in case either $\mathbf{S} \models X$, $\mathbf{S} \models Y$, or both. Thus if $\mathbf{S} \not\models X \vee Y$, that means none of these cases hold. So that leaves us with $\mathbf{S} \not\models X$ and $\mathbf{S} \not\models Y$. Thus, $\mathbf{S} \models \neg X$ and $\mathbf{S} \models \neg Y$. 
+\end{proof}
+
+As you can see, our rule just codifies the above instance of DeMorgan's law. And once again, with two successive application of the rule, you can get the negation of either formula $X$ or formula $Y$, if needed. Compare the following table:
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c}
+$X$ & $Y$ & $\neg X$ & $\neg Y$ & $X \wedge Y$ & $\neg (X \wedge Y)$\\ \hline
+$T$ & $T$ & $F$ & $F$&$T$& $F$\\
+$T$ & $F$ & $F$ & $T$& $F$& $F$\\
+$F$ & $T$ & $T$ & $F$ & $F$ & $F$\\ \rowcolor{lightgray}
+$F$ & $F$ & $\mathbf{T}$ & $\mathbf{T}$& $F$& $\mathbf{T}$
+\end{tabular}
+\end{center}
+
+\medskip
+\hrule
+\medskip
+
+We can stop now for a second and look at our initial question, that of proving that $X \vee \neg X$ is a tautology. As mentioned, in order to do this, we need to put its \textit{negation} at the top of our tree. Then, we have to apply our rules until we get to an explicit contradiction of form $Y \wedge \neg Y$ (for some $Y$). Thus:
+
+\begin{center}
+\begin{prooftree}{}
+	[{\neg (X \vee \neg X)}, just=Start
+		[{\neg X}, just=$\neg\vee$:!u
+		[{\neg \neg X}, just=$\neg\vee$:!uu
+		[{X}, just=$\neg \neg$:!u, close={:!uu, !c}]
+		]
+		]
+	]
+\end{prooftree}
+\end{center}
+
+The above is a complete proof of $X \vee \neg X$ being a tautology. You might be asking what the symbol $\otimes$ stands for at the end. It represents that the branch (the only one of the tree) is `closed', because both a formula and its negation occurs on it. Where? Well, that is given by the numbers below $\otimes$, namely line 2 and 4. Line 2 has the formula $\neg X$, while line 4 has the formula $X$ on it, so we have both $X$ and $\neg X$. Thus, we have our desired explicit contradiction derived from the negation of the tautology candidate. This means that $X \vee \neg X$ \textit{is} a tautology according to our system. Nice!
+
+\medskip\hrule\medskip
+
+Let's get back to our other rules before we go further into examples. 
+
+\subsubsection{Negated conditional}
+
+The negated conditional is another one of those non-branching rules that is not immediately obvious. It is specified as follows: 
+
+\begin{figure}[h]
+	\begin{minipage}{0.5\textwidth}\centering
+		\begin{prooftree}{}
+			[{\neg (X\rightarrow Y)}
+			[{X}, just=$\neg\rightarrow$:!u]
+			]
+		\end{prooftree}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}\centering
+		\begin{prooftree}{}
+			[{\neg(X\rightarrow Y)}
+			[{\neg Y}, just=$\neg\rightarrow$:!u]
+			]
+		\end{prooftree}
+	\end{minipage}
+	\caption{Negated conditional rule}
+\end{figure}
+
+Why does this work? Again, it just codifies a fact, the following fact, from our semantics:
+
+\begin{prop}
+	If $\mathbf{S} \models \neg (X \rightarrow Y)$, then $\mathbf{S} \models X$ and $\mathbf{S} \models \neg Y$. 
+\end{prop}
+
+\begin{proof}
+Suppose $\mathbf{S} \models \neg (X \rightarrow Y)$. Then, $\mathbf{S} \not\models X \rightarrow Y$. But $\mathbf{S} \models X \rightarrow Y$ \textit{iff} whenever $\mathbf{S} \models X$, $\mathbf{S} \models Y$. So again, by negating both sides of the biconditional, $\mathbf{S} \not\models X \rightarrow Y$ \textit{iff} it is not the case that if $\mathbf{S} \models X$, then $\mathbf{S} \models Y$. So $\mathbf{S} \not\models X \rightarrow Y$ \textit{iff} $\mathbf{S} \models X$ but $\mathbf{S} \not\models Y$. Or in other words, \textit{iff} $\mathbf{S} \models X$ and $\mathbf{S} \models \neg Y$. Which is what we wanted to show. 
+\end{proof}
+
+Here is the truth-table fragment to compare:
+
+\begin{center}
+	\begin{tabular}{c|c|c|c|c}
+	$X$ & $Y$ & $\neg Y$ & $X \rightarrow Y$ & $\neg (X \rightarrow Y)$\\ \hline
+	$T$ & $T$ & $F$& $T$& $F$ \\\rowcolor{lightgray}
+	$\mathbf{T}$ & $F$ & $\mathbf{T}$& $F$& $\mathbf{T}$ \\
+	$F$ & $T$ & $F$& $T$& $F$\\
+	$F$ & $F$ & $T$ & $T$ & $F$
+	\end{tabular}
+\end{center}
+
+This concludes our non-branching rules. Now we turn to our branching ones. 
+
+\subsection{Branching rules}
+
+As mentioned above, our tree only ever branches to two separate branches from any one point. Thus, our branching rules are all of the form:
+
+\begin{center}
+\begin{forest}
+	[$X$
+		[$Y$]
+		[$Z$]
+	]
+\end{forest}
+\end{center}
+
+Why do we need branching rules? Note that in all of the above examples, the assumption that a certain complex formula is true determined exactly the truth values of some simpler formulas. In the truth table illustrations, this just means that for each complex formula, they were only true in one, and only one, row (the one in gray), so we just had to check what truth values the simpler formulas received in that row (put in bold). However, many formulas are true in several rows in a truth-table. In that case, we need to consider the possibilities that afford the complex formula to be true separately. And this gets compounded if we go further and encounter another such formula, and another one, and so on. 
+
+\subsubsection{Disjunction}
+
+The disjunction rule is the simplest rule of the branching ones. In many ways, it is like the conjunction rule. It looks like this:
+
+\begin{figure}[h]
+	\centering
+	\begin{prooftree}{}
+		[{X\vee Y}
+		[{X}, just=$\vee$:!u]
+		[{Y}]
+		]
+	\end{prooftree}
+	\caption{Disjunction rule}
+\end{figure}
+
+Here is the reasoning behind this rule. As we know, $\mathbf{S} \models X \vee Y$ \textit{iff} $\mathbf{S} \models X$ or $\mathbf{S} \models Y$ (or both). The problem is that just the fact that $\mathbf{S} \models X \vee Y$ does not tell us whether $\mathbf{S} \models X$ or $\mathbf{S} \models Y$ or both. It only tells us that \textit{it is at least one of these}. Given this lack of information, we need to consider the consequences separately. Interestingly, we need not consider the case where \textit{both} $X$ and $Y$ is true separately. But we also don't make any explicit assumptions about what the truth-value of the \textit{other} formula is on either branch. So all we do is consider the case where $X$ is true, whatever truth value $Y$ may have ($T$ or $F$), and consider the case where $Y$ is true, whatever truth value $X$ may have $T$ or $F$. Here is the table representation:
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		$X$ & $Y$ & $X \vee Y$\\ \hline \rowcolor{lightgray}
+		$\mathbf{T}$ & $\mathbf{T}$ & $\mathbf{T}$\\ \rowcolor{lightgray}
+		$\mathbf{T}$ & $F$ & $\mathbf{T}$\\ \rowcolor{lightgray}
+		$F$ & $\mathbf{T}$ & $\mathbf{T}$\\
+		$F$ & $F$ & $F$
+	\end{tabular}
+\end{center}
+
+As described above, when we branch to $X$, we are considering \textit{either} line 1 or line 2 of the truth table. When we branch to $Y$, we are considering \textit{either} line 1 or line 3 of the truth table. 
+
+
+\subsubsection{Negated conjunction}
+
+Negated conjunction is also an instance of DeMorgan's laws. It is as follows:
+
+\begin{figure}[h]
+	\centering
+	\begin{prooftree}{}
+		[{\neg (X\wedge Y)}
+		[{\neg X}, just=$\neg\wedge$:!u]
+		[{\neg Y}]
+		]
+	\end{prooftree}
+	\caption{Negated conjunction rule}
+\end{figure}
+
+
+
+Again, we can show the following:
+
+\begin{prop}
+If $\mathbf{S} \models \neg (X \wedge Y)$, then $\mathbf{S} \models \neg X$ or $\mathbf{S} \models \neg Y$ (or both). 
+\end{prop}
+
+\begin{proof}
+Suppose $\mathbf{S} \models \neg (X \wedge Y)$. Then, $\mathbf{S} \not\models X \wedge Y$. But $\mathbf{S} \models X \wedge Y$ \textit{iff} $\mathbf{S} \models X$ and $\mathbf{S} \models Y$, so $\mathbf{S} \not\models X \wedge Y$ \textit{iff} either $\mathbf{S} \not\models X$ or $\mathbf{S} \not\models Y$, or both. So $\mathbf{S} \models \neg X$, or $\mathbf{S} \models \neg Y$, or both. 
+\end{proof}
+
+Again, on either branch, we do not make assumptions about the truth value of the formula on the other branch. Thus, on the left branch, we assume $\neg X$ is true, but nothing about $\neg Y$ being true or false, and conversely for the right branch. In table representation:
+
+\begin{center}
+	\begin{tabular}{c|c|c|c|c|c}
+		$X$ & $Y$ & $\neg X$ & $\neg Y$ & $X \wedge Y$ & $\neg (X \wedge Y)$\\ \hline
+		$T$ & $T$ & $F$ & $F$ & $T$ & $F$ \\ \rowcolor{lightgray}
+		$T$ & $F$ & $F$ & $\mathbf{T}$ & $F$ & $\mathbf{T}$ \\ \rowcolor{lightgray}
+		$F$ & $T$ & $\mathbf{T}$& $F$ & $F$ & $\mathbf{T}$ \\ \rowcolor{lightgray}
+		$F$ & $F$ & $\mathbf{T}$ & $\mathbf{T}$ & $F$ & $\mathbf{T}$
+	\end{tabular}
+\end{center}
+
+\subsubsection{Conditional}
+
+The rule for conditionals is our last rule for the system. It also has a form that may make you stop and think why it is formulated as such. Here it is:
+
+\begin{figure}[h]
+	\centering
+	\begin{prooftree}{}
+		[{X \rightarrow Y}
+		[{\neg X}, just=$\rightarrow$:!u]
+		[{Y}]
+		]
+	\end{prooftree}
+	\caption{Negated conjunction rule}
+\end{figure}
+
+The reasoning behind it is as follows:
+
+\begin{prop}
+If $\mathbf{S} \models X \rightarrow Y$, then $\mathbf{S} \models \neg X$ or $\mathbf{S} \models Y$ (or both). 
+\end{prop}
+
+\begin{proof}
+The proof follows the usual lines. Suppose $\mathbf{S} \models X \rightarrow Y$. Then, whenever $\mathbf{S} \models X$, $\mathbf{S} \models Y$. We have already seen that this is \textit{false} when $\mathbf{S} \models X$ but $\mathbf{S} \not\models Y$. This leaves 3 other options left for it to be \textit{true}.
+
+\begin{enumerate}
+	\item First, if $\mathbf{S} \models X$ and $\mathbf{S}\models Y$, clearly, $\mathbf{S} \models X \rightarrow Y$. Note that $\mathbf{S} \models X$ only if $\mathbf{S} \not\models \neg X$, but $\mathbf{S} \models Y$.
+	\item Second, if $\mathbf{S} \not\models X$ but $\mathbf{S} \models Y$, then $\mathbf{S}\models X \rightarrow Y$ again. This is the case where both $\mathbf{S} \models \neg X$ (because $\mathbf{S} \not\models X$) \textit{and} $\mathbf{S} \models Y$. 
+	\item Third, if $\mathbf{S} \not\models X$ and $\mathbf{S} \not\models Y$, then still, $\mathbf{S} \models X \rightarrow Y$. Again, this means that $\mathbf{S} \models \neg X$, but $\mathbf{S} \not\models Y$ in this case. 
+\end{enumerate} 
+
+As you can see, in all three cases where $\mathbf{S} \models X \rightarrow Y$, it is true that either $\mathbf{S} \models \neg X$ or $\mathbf{S} \models Y$ or both. Indeed, those are exactly the three options we have for $X \rightarrow Y$ to be true in $\mathbf{S}$. 
+\end{proof}
+
+Or in truth table form:
+
+\begin{center}
+\begin{tabular}{c|c|c|c} 
+	$X$ & $Y$ & $\neg X$ & $X \rightarrow Y$\\ \hline \rowcolor{lightgray}
+	$T$ & $\mathbf{T}$ & $\mathbf{F}$ & $\mathbf{T}$\\
+	$T$ & $F$ & $F$ & $F$\\\rowcolor{lightgray}
+	$F$ & $\mathbf{T}$ & $\mathbf{T}$ & $\mathbf{T}$\\\rowcolor{lightgray}
+	$F$ & $\mathbf{F}$ & $\mathbf{T}$ & $\mathbf{T}$
+\end{tabular}
+\end{center}
+
+As usual, the rule form only explicitly represents the possibility where $\neg X$ is true, and the possibility where $Y$ is true, leaving open whether $Y$ is true or false on the left branch (and similarly for $\neg X$ on the right one). 
+
+\subsubsection{The strategy}
+
+Here is the strategy again, now with all our rules in hand. Suppose you have a formula $X$ that is a candidate for being a tautology. In order for us to show this in our system, we first have to take $\neg X$, and put that at the \textit{root} of our tree. Then, we have to apply our rules until we have an explicit contradiction of form $Y$ and $\neg Y$ on \textit{each} branch of the tree. 
+
+Suppose we want to show something quite elaborate, like the following: 
+\[(X \rightarrow Y) \rightarrow (\neg X \vee Y)\]
+\begin{remark}
+You may note the similarity between this \textit{formula schema} and the \textit{rule} for conditionals. Of course, this is no accident. In fact, every one of our rules can be turned into a tautology in our system, with the use of $\rightarrow$.  
+\end{remark}
+
+Since the formula is $(X \rightarrow Y) \rightarrow (\neg X \vee Y)$, again, we put its negation at the root, thus:
+
+\begin{center}
+\begin{prooftree}{}
+	[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start]
+\end{prooftree}
+\end{center}
+
+The next step is to apply one of the rules. For this, you need to identify whether the formula is negated or not, and what the main connective of the formula is, or in the negated case, what the main connective \textit{after} the negation sign is. Here, the answer is: it is a negated conditional. Obviously, you then apply the negated conditional rule. In fact, we don't quite see where we are going yet, so we can apply it twice to get both possibilities. Thus:
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start
+		[{X \rightarrow Y}, just=$\neg\rightarrow$:!u
+		[{\neg(\neg X \vee Y)}, just=$\neg\rightarrow$:!uu]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+Now that we have two formulas, we have a choice how we want to proceed. On the other hand, unlike with other systems, we do not have a choice about which rules to apply. Each formula admits of one, and only, one rule, depending on its form. 
+
+In general, it is usually better to apply first all the rules that do not branch, and \textit{then} apply any branching rules. If you think about it, this makes sense, since each branching rule doubles the work we have to carry out. At any rate, the non-branching rule is the one for $\neg \vee$, so we can start with that, and apply it twice: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start
+		[{X \rightarrow Y}, just=$\neg\rightarrow$:!u
+		[{\neg(\neg X \vee Y)}, just=$\neg\rightarrow$:!uu
+		[{\neg\neg X}, just=$\neg\vee$:!u
+		[{\neg Y}, just=$\neg\vee$:!uu]
+		]
+		]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+So far, we only have a single branch, and that branch is open. On the other hand, we still have formulas on which to apply rules. So we are certainly not done. One trivial step is to get rid of the double negation in line 4. This will not help us much, but it will simplify things a bit. Thus:
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start
+		[{X \rightarrow Y}, just=$\neg\rightarrow$:!u
+		[{\neg(\neg X \vee Y)}, just=$\neg\rightarrow$:!uu
+		[{\neg\neg X}, just=$\neg\vee$:!u
+		[{\neg Y}, just=$\neg\vee$:!uu
+		[{X}, just=$\neg\neg$:!uu]
+		]
+		]
+		]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+Now most of the formulas in the proof are `exhausted'. There is no rule for $\neg Y$ or $X$ to apply, and for all the other formulas (except one), we have applied the appropriate rules as many times as possible. So we are left with $X \rightarrow Y$. This is a branching rule, so now we branch. 
+
+\begin{center}
+	\begin{prooftree}{}
+	[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start
+	[{X \rightarrow Y}, just=$\neg\rightarrow$:!u
+	[{\neg(\neg X \vee Y)}, just=$\neg\rightarrow$:!uu
+	[{\neg\neg X}, just=$\neg\vee$:!u
+	[{\neg Y}, just=$\neg\vee$:!uu
+	[{X}, just=$\neg\neg$:!uu
+		[{\neg X}, just=$\rightarrow$:!uuuuu]
+		[{Y}, just=$\rightarrow$:!uuuuu]
+	]
+	]
+	]
+	]
+	]
+	]
+	\end{prooftree}
+\end{center}
+
+Our tree is now complete, there are no more rules to apply. Now comes the crucial part. You have to see if each of the branches are \textit{closed}. Again, this means that you have a formula of form $Z$ and a formula of form $\neg Z$ on each branch. Note that each branch is the sequence of formulas from the root to one of the leaves. Thus, the first branch here from $\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))$ to $\neg X$, the second branch is from $\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))$ to $Y$, through all the other formulas. 
+
+Let's take the first branch. Can you see a contradiction? I can, since line 6 has $X$ on it, and line 7 (left) has $\neg X$ on it. So the first branch is closed. Thus: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start
+		[{X \rightarrow Y}, just=$\neg\rightarrow$:!u
+		[{\neg(\neg X \vee Y)}, just=$\neg\rightarrow$:!uu
+		[{\neg\neg X}, just=$\neg\vee$:!u
+		[{\neg Y}, just=$\neg\vee$:!uu
+		[{X}, just=$\neg\neg$:!uu
+		[{\neg X}, just=$\rightarrow$:!uuuuu, close={:!u,!c}]
+		[{Y}, just=$\rightarrow$:!uuuuu]
+		]
+		]
+		]
+		]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+What about the second branch? Again, there is a contradiction, since line 5 has $\neg Y$, while line 7 (right) has $Y$. Thus: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))}, just=Start
+		[{X \rightarrow Y}, just=$\neg\rightarrow$:!u
+		[{\neg(\neg X \vee Y)}, just=$\neg\rightarrow$:!uu
+		[{\neg\neg X}, just=$\neg\vee$:!u
+		[{\neg Y}, just=$\neg\vee$:!uu
+		[{X}, just=$\neg\neg$:!uu
+		[{\neg X}, just=$\rightarrow$:!uuuuu, close={:!u,!c}]
+		[{Y}, just=$\rightarrow$:!uuuuu,, close={:!uu,!c}]
+		]
+		]
+		]
+		]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+This completes the proof. Once you have a complete proof of a formula in the system, you can say that that formula is a \textit{theorem} of zeroth-order logic. Thus, $(X \rightarrow Y) \rightarrow (\neg X \vee Y)$ is a theorem of zeroth order logic. We represent this as follows: 
+\[
+\vdash(X \rightarrow Y) \rightarrow (\neg X \vee Y)
+\]
+The symbol $\vdash$ means something like `\textit{syntactically provable}'. It is the syntactic equivalent to being a tautology in the semantics. In fact, being a tautology (in the semantics) can be represented as follows:
+\[
+\models(X \rightarrow Y) \rightarrow (\neg X \vee Y)
+\]
+This makes sense, as it is just like writing $\mathbf{S} \models (X \rightarrow Y) \rightarrow (\neg X \vee Y)$, except we omit a specific structure designation $\mathbf{S}$, since it is modeled by \textit{all} structures, not just a specific one. 
+
+\subsection{On soundness and completeness}
+
+A fundamental goal for every logical system is to show that the semantics and the syntactic system agree on every formula. That is, if $X$ is a tautology according to the semantics, it can be proved in the system that $X$ is a theorem, and if $X$ is a theorem in the system, it really is a tautology in the semantics. This can be represented as follows: 
+\[\models X \textit{ iff } \vdash X\]
+
+Or again, $X$ is a theorem \textit{iff} it is a tautology. I have been using these two terms somewhat interchangeably above, since as it stands, in the system I just introduced, they really do come down to the same thing. Usually, this is characterized two ways:
+
+\begin{enumerate}
+	\item if whenever $\mathbf{S} \vdash X$, then $\mathbf{S} \models X$, the system relative to the semantics is \textit{sound};
+	\item if whenever $\mathbf{S} \models X$, then $\mathbf{S} \vdash X$, the system relative to the semantics is \textit{complete}. 
+\end{enumerate}
+
+Of course, if you put together these two conditionals, you get the biconditional above. In general, it is important to keep in mind that our semantics and our deductive system are two distinct things, and that they coincide on their judgments using two distinct methods is not a trivial feat (in fact, large classes of logics \textit{cannot} have a sound and complete deductive system). On the other hand, \textit{proving} soundness and completeness is rather involved and takes more machinery than we currently possess (or will possess by the end of this book). Thus, for now, you will have to trust the process. 
+
+The process, our tableau method, is in many ways better than other approaches you may have seen before, like natural deduction. The reason is because the tableau method does not require you to be creative in your proofs at all. In fact, it is provable that given a formula $X$, if $X$ is a tautology, then applying the relevant rule as many times as possible to $X$ and each resulting formula completely mindlessly will result in a tree all of whose branches \textit{will} close, and if $X$ is not a tautology, there will be at least one open branch left in the end. So in general, all you have to do is recognize for each formula which rules can be applied, and apply them. Of course, if you are an expert in using the system, you will be able to do shorter proofs by using your brain (e.g., by using non-branching rules only once, deriving the relevant side only). 
+
+\medskip\hrule\medskip
+
+Here is another proof to inspect, with more branching, before it is your turn:
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg (((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y)))}, just=Start
+		[{(Y \vee \neg Y) \rightarrow X}, just=$\neg\rightarrow$:!u
+		[{\neg (X \wedge (Y \vee \neg Y))}, just=$\neg\rightarrow$:!uu
+			[{\neg(Y \vee \neg Y)}, just=$\rightarrow$:!uu
+				[{Y}, just=$\neg\vee$:!u
+				[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
+				]
+			]
+			[{X}
+				[{\neg X}, just=$\neg\wedge$:!uu, close={:!u, !c}]
+				[{\neg (Y \vee \neg Y)}
+					[{Y}, just=$\neg\vee$:!u
+					[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
+					]
+				]
+			]
+		]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+Note that we could have made this derivation even longer, but we opted to apply $\neg\wedge$ to line 3 to extend only the right-side branch of the tree (to line 5). This is because it would not have made any difference on the left-hand side, given that it closed by $\neg (Y \vee \neg Y)$ alone (line 4, then 8 and 9). In any derivation, you are looking to close every branch and nothing more. Thus, you can make derivations significantly shorter if you cut out the steps that are not necessary to close a branch. 
+
+\fpboxstar{Here is an intuitive understanding of why $((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y))$ is a tautology. If you look at the first half of the formula, it says that $(Y \vee \neg Y) \rightarrow X$. I.e., if $Y \vee \neg Y$, then $X$. But since $Y \vee \neg Y$ is known to be a tautology that holds in all structures, \textit{if} it entails $X$, then $X$ would also be a tautology (since again, $Y \vee \neg Y$ holds in every structure, and so if in every structure, it entails $X$, $X$ holds in every structure). But \textit{if} that is the case, then both $Y \vee \neg Y$ and $X$ must hold (both being tautologies).}
+
+\begin{exc}
+Prove that the following formulas are all theorems of the tableau system: 
+
+\begin{enumerate}
+	\item $Y \rightarrow (X \rightarrow Y)$;
+	\item $(\neg X \wedge \neg Y) \rightarrow \neg(X \vee Y)$;
+	\item $(\neg X \vee \neg Y) \rightarrow \neg(X \wedge Y)$;
+	\item $\neg (X \wedge Y) \rightarrow (\neg X \vee \neg Y)$;
+	\item $\neg (X \vee Y) \rightarrow (\neg X \wedge \neg Y)$;
+	\item $(\neg X \vee Y) \rightarrow (X \rightarrow Y)$;
+	\item $(X \rightarrow Y) \rightarrow (\neg Y \rightarrow \neg X)$.
+\end{enumerate}
+\end{exc}
+
+\section{Extending our approach to sets of formulas}
+
+Students of logic are usually taught at first about tautologies, contradictions, and contingent propositions. However, these are not the notions you will encounter in more advanced, and more modern, works. This is at least partly because these notions are usually used for individual formulas, while a lot of the times, we want to talk about sets of formulas instead. 
+
+One thing that we can immediately extend to sets of formulas is contingency. Sometimes, it is not just one formula that has a model, but a whole set of them. Indeed, perhaps an infinitely large set of them! In these cases, we sometimes say that the set $S$ of formulas is (zeroth-order) \textit{satisfiable} or \textit{semantically consistent}. This can be captured in a precise manner as follows:
+
+\begin{defn}
+A set $S$ of formulas of $\mathcal{L}_0$ is (zeroth-order) \textit{satisfiable} or \textit{semantically consistent} \textit{iff} there is a structure $\mathbf{S}$ such that $\mathbf{S} \models X$ for each $X \in S$. We say $S$ is (zeroth-order) \textit{unsatisfiable} or \textit{semantically inconsistent} provided it is not semantically consistent. 
+\end{defn}
+
+\begin{remark}
+Note that the above definition is \textit{not} the same as claiming that for each $X \in S$, there is a structure $\mathbf{S}$ such that $\mathbf{S} \models X$. This would not make \textit{the set} consistent, it would make the formulas contingent individually. For example, if $X$ is contingent, then $\neg X$ is also contingent, so both $X$ and $\neg X$ have a model. But clearly, $\set{X, \neg X}$ is not consistent, since there is no structure in which both of these could be true.  
+\end{remark}
+
+Here is a useful way to think about consistency and contingency:
+
+\begin{prop}
+The formula $X$ is contingent \textit{iff} the singleton set $\set{X}$ is semantically consistent. \label{contcons}
+\end{prop}
+
+\begin{exc}
+Prove Proposition \ref{contcons}. Hint: show from left to right that if $X$ is contingent, $\set{X}$ is consistent, and from right to left that if $\set{X}$ is consistent, $X$ is contingent. To do this, use the definitions for these notions. 
+\end{exc}
+
+Here is an interesting fact about consistency and contradictions:
+
+\begin{prop}
+If $S=\set{X_1, ..., X_n}$, and some $X \in S$ is a contradiction, then $S$ cannot be semantically consistent. 
+\end{prop}
+
+\begin{proof}
+In other words, a single contradiction can make a set of formulas inconsistent. This is easy to see since semantic consistency demands that there be at least one structure $\mathbf{S}$ in which each member of $S$ is true. Now if $X$ is a contradiction, there is no structure in which it is true, and $X \in S$ by assumption. 
+\end{proof}
+
+On the other hand, we have:
+
+\begin{prop}
+If $S$ is a set of tautologies, $S$ is semantically consistent. 
+\end{prop}
