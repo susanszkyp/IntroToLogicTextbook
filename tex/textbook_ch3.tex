@@ -4,21 +4,21 @@ If you have already taken an introductory logic course, you may remember talk of
 
 But so far, we have only been dealing with formal languages as being made up of various sequences of meaningless symbols, according to various rules. Where does truth enter the picture? 
 
-The answer is: semantics. In some sense, syntax and semantics are two sides of the same coin. Syntax specifies the way primitive symbols may be combined to form more complex expressions. Semantics, on the other hand, specifies how the meaning of more complex expressions can be computed from the meaning of primitive symbols. As we shall see, the rules of computation for the `values' of expressions will match the rules of formulation of expressions in our syntax. The idea underlying this is called `compositionality'. As simpler syntactic expressions compose more complex ones, so the meanings of these simpler syntactic expressions compose the meanings of more complex ones. Then, just as being a formula is precisely definable, meaning will be too. 
+The answer is: semantics. In some sense, syntax and semantics are two sides of the same coin. Syntax specifies the way primitive symbols may be combined to form more complex expressions. Semantics, on the other hand, specifies how the meaning of more complex expressions can be computed from the meaning of primitive symbols. As we shall see, the rules of computation for the `values' of expressions will match the rules of formation of expressions in our syntax. The idea underlying this is called `compositionality'. As simpler syntactic expressions compose more complex ones, so the meanings of these simpler syntactic expressions compose the meanings of more complex ones. Then, just as being a formula is precisely definable, meaning will be too. 
 
 Once we have a grasp on the rules of meaning for $\mathcal{L}_0$, we can start designating some formulas of the language as `true', and some as `false', based on their respective meaning (and some other stuff, which we shall get to in due course). We will also see later on how the truth values of various sets of formulas relate to the truth values of other sets of formulas. From this, it will take just one additional step to specify how sometimes, some premises being true \textit{ensures} that the conclusion \textit{must} also be true. 
 
 \fpboxstar{
-From now on, until further notice, we will only be discussing the language $\mathcal{L}_0$, the language of zeroth-order logic, and simple fragments of it with only a few predicates and connectives. In the latter cases, you can always imagine that the rest of the language is also dealt with in some way or another similar to the ones presented. 
+From now on, until further notice, we will only be discussing the language $\mathcal{L}_0$, the language of zeroth-order logic, and simple fragments of it with only a few predicates and connectives. In the latter cases, you can always imagine that the rest of the language is also dealt with in some way or another similar to the ones presented. We shall also drop outer parentheses in formulas where it would be annoying to have them out. 
 }
 
 As noted above, semantics proceeds along the lines of syntax. In the syntax of $\mathcal{L}_0$, we have two types of base symbols: constants and predicates. As we have seen, every \textit{atomic} formula is made up of an $n$-place predicate, followed by $n$ constant symbols, in brackets, separated by commas. So in order to give truth-values to our atomic formulas, we first have to specify the meaning of constants and predicates. Then, we shall be able to \textit{compute} the truth-values of our atomic formulas from this. In turn, this will allow us to \textit{compute} the truth-values of our more complex formulas. 
 
 \section{Constants}
 
-Let's start with the simplest case; constants. Constants in our language $\mathcal{L}_0$ function like names. In particular, their meaning is just what they designate, or refer to. 
+Let's start with the simplest case; constants. Constants in our language $\mathcal{L}_0$ function like names. In particular, their meaning is just the thing they designate, or refer to. 
 
-Note that we are talking about two distinct `planes' here. On the side of syntax, we have symbols without meaning. On the side of semantics, we have things assigned to them. Giving a semantics to our language is then bridging a gap, assigning things to our constants. These things are not symbols, they are the things themselves. You may have heard of the phrase `domain of discourse'. The domain of discourse, or simply domain, is just the \textit{set} of things we may talk about using a language.
+Note that we are talking about two distinct `planes' here. On the side of syntax, we have symbols without meaning. On the other side, we have things assigned to them. Giving a semantics to our language is then bridging a gap, assigning things to our constants. These things are not symbols, they are the things themselves. You may have heard of the phrase `domain of discourse'. The domain of discourse, or simply domain, is just the \textit{set} of things we may talk about using a language.
 
 \begin{exc}
 How does this notion of a domain relate to the notions of domain and codomain regarding functions?
@@ -61,11 +61,10 @@ Let's recap. We have constants, which are symbols of our language. We have objec
 A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for the constants of $\mathcal{L}_0$, denoted by $\mathsf{CONS}_{\mathcal{L}_0}$, (relative to $\mathbf{D}$) is a function $\mathbf{I}: \mathsf{CONS}_{\mathcal{L}_0} \to \mathbf{D}$. If $c$ is a constant of $\mathcal{L}_0$, then $\mathbf{I}(c) \in \mathbf{D}$, and is what $c$ \textit{designates}, \textit{denotes} or \textit{refers to}. Alternatively, we may say $\mathbf{I}(c)$ is the \textit{value} of the symbol $c$. 
 \end{defn}
 
-As you can see, interpretations are functions from the set of all constants to the domain. This means that to each constant, only one member of the domain corresponds. So unlike with real names like `Peter', which may designate many different people, a constant of $\mathcal{L}_0$ designates only one. On the other hand, the function $\mathbf{I}$ need not be one-to-one. This means that some distinct constants may designate the same thing, just like `Miley Stewart' and `Hannah Montana' designate the same person (in the hit TV show \textit{Hannah Montana}). It also doesn't need to be onto, so that some members of the domain $\mathbf{D}$ may go nameless. Like the lack of bijectivity, this is also natural, since many things do not have names in the real world. Just think of your left sock that fell behind the machine at the laundry. 
+As you can see, interpretations are functions from the set of all constants to the domain. This means that to each constant, only one member of the domain corresponds. So unlike with real names like `Peter', which may designate many different people, a constant of $\mathcal{L}_0$ designates only one. On the other hand, the function $\mathbf{I}$ need not be one-to-one. This means that some distinct constants may designate the same thing, just like `Miley Stewart' and `Hannah Montana' designate the same person (in the hit TV show \textit{Hannah Montana}). It also doesn't need to be onto, so that some members of the domain $\mathbf{D}$ may go nameless. Like the lack of injectivity, this is also natural, since many things do not have names in the real world. Just think of your left sock that fell behind the machine at the laundry. 
 
 Having constants or names that refer to things is the first step towards giving meaning to our expressions, but it is not enough to get us to truth. Names, by themselves, are neither true nor false, they just refer. The other ingredient we need is giving meaning to our \textit{predicates}.
 
-\clearpage
 
 \section{Predicates} 
 
@@ -191,7 +190,7 @@ We can then extend our interpretation function $\mathbf{I}$ to cover now not onl
 A domain (of discourse) is any set $\mathbf{D}$. An interpretation function for the predicates of $\mathcal{L}_0$, denoted by $\mathsf{PRED}_{\mathcal{L}_0}$, (relative to $\mathbf{D}$) is a function $\mathbf{I}$ such that for each predicate $\pred{n}{k}$, $\mathbf{I}(\pred{n}{k})=\mathbf{R}$ for some $\mathbf{R} \subseteq \mathbf{D}^n$ (the Cartesian product of $\mathbf{D}$ taken $n$-times with itself). 
 \end{defn}
 
-In fact, we can put together our definition of an interpretation function for constants, and our definition of an interpretation function for predicates, into one definition. We can also introduce a new notion; \textit{structure}. Structure is just a shorthand for what we have been saying over and over again; that when give meaning to our expressions, we do it with an interpretation function $\mathbf{I}$ against the backdrop of a domain $\mathbf{D}$. So a structure $\mathbf{S}$ is just a pair $\oset{\mathbf{D}, \mathbf{I}}$ where $\mathbf{D}$ is the domain, and $\mathbf{I}$ is the interpretation function under consideration. With this in hand, we can say: 
+In fact, we can put together our definition of an interpretation function for constants, and our definition of an interpretation function for predicates, into one definition. We can also introduce a new notion; \textit{structure}. Structure is just a shorthand for what we have been saying over and over again; that when giving meaning to our expressions, we do it with an interpretation function $\mathbf{I}$ against the backdrop of a domain $\mathbf{D}$. So a structure $\mathbf{S}$ is just a pair $\oset{\mathbf{D}, \mathbf{I}}$ where $\mathbf{D}$ is the domain, and $\mathbf{I}$ is the interpretation function under consideration. With this in hand, we can say: 
 
 \begin{defn} \label{structure}
 A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
@@ -202,7 +201,7 @@ A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\math
 \end{enumerate}
 \end{defn}
 
-As you can see, logicians can say a lot of stuff in very few words. This may seem intimidating at first. But remember that all these terse definitions hide quite intuitive ideas. We spent a lot of time pondering these ideas so that you can read and understand the definition above, and the nuances and niceties it expresses so elegantly. This also gives you a very important skill: to go further. In more advanced logic textbooks, you won't find such long explanations as we have given. But now you won't need them either!\footnote{Indeed, this is why they don't include them...}
+As you can see, logicians can say a lot of stuff in very few words. This may seem intimidating at first. But remember that all these terse definitions hide quite intuitive ideas. We spent some time pondering these ideas so that you can read and understand the definition above, and the nuances and niceties it expresses so elegantly. This also gives you a very important skill: to go further. In more advanced logic textbooks, you won't find such long explanations as we have given. But now you won't need them either!\footnote{Indeed, this is why they don't include them...}
 
 \subsubsection{A brief return to our language specification}
 
@@ -257,7 +256,7 @@ What if I ask you to decide whether these formulas are true or false? In that ca
 Take a domain $\mathbf{D}=\set{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}}$, and an interpretation function such that:
 
 \begin{enumerate}
-	\item $I(a)=\mathbf{a}$, $I(b)=\mathbf{b}$, $I(c)=\mathbf{c}$, $I(d)=\mathbf{d}$; \label{consin}
+	\item $I(a)=\mathbf{a}$, $I(b)=\mathbf{b}$, $I(c)=\mathbf{c}$; \label{consin}
 	\item \label{predin}
 		\begin{enumerate}
 	\item $I(P)=\{\mathbf{a}, \mathbf{d}\}$;
@@ -266,13 +265,13 @@ Take a domain $\mathbf{D}=\set{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}}$,
 		\end{enumerate} 
 \end{enumerate}
 
-Call this the structure $\mathbf{S}$. Now we can ask: which of the formulas are true \textit{relative to} the structure $\mathbf{D}$? To answer this question, again, we need to do some very simple calculations. 
+Call this the structure $\mathbf{S}$. Now we can ask: which of the formulas are true \textit{relative to} the structure $\mathbf{S}$? To answer this question, again, we need to do some very simple calculations. 
 
 The basic idea is this. To each constant of the language, the interpretation function $I$ assigns a member of the domain (see \ref{consin} above). And to each predicate (of arity $n$), the interpretation function assigns a set of $n$-tuples (see \ref{predin} above).
 
 Next, all you have to do is check the \textit{value} of a constant (or list of constants) under $I$, and compare it against the value of the relevant predicate under $I$. If the value of the constant (or sequence of constants) is in the value of the predicate under $I$, the atomic formula is true, otherwise, it is false. 
 
-Take the formula $P(a)$ (the formula (\ref{ex1}) above). Is it true in $\mathbf{D}$? Well, we see that $I(a)=\mathbf{a}$. And we also see that $I(P)=\{\mathbf{a}, \mathbf{d}\}$. Since $I(a)$ (which is just $\mathbf{a}$) is \textit{in} the set $I(P)$, the atomic formula $P(a)$ is true. On the other hand, if we take $P(c)$ (the formula (\ref{ex2}) above), we see that $I(c)=\mathbf{c}$, and $\mathbf{c} \notin I(P)$, so $I(c) \notin I(P)$. So $P(c)$ is false in $\mathbf{D}$. 
+Take the formula $P(a)$ (the formula (\ref{ex1}) above). Is it true in $\mathbf{S}$? Well, we see that $I(a)=\mathbf{a}$. And we also see that $I(P)=\{\mathbf{a}, \mathbf{d}\}$. Since $I(a)$ (which is just $\mathbf{a}$) is \textit{in} the set $I(P)$, the atomic formula $P(a)$ is true. On the other hand, if we take $P(c)$ (the formula (\ref{ex2}) above), we see that $I(c)=\mathbf{c}$, and $\mathbf{c} \notin I(P)$, so $I(c) \notin I(P)$. So $P(c)$ is false in $\mathbf{S}$. 
 
 This may seem a bit elaborate, but really, all you are doing is checking if the value of the constant under $I$ is in the set that is the value of the predicate $P$. 
 
@@ -283,17 +282,17 @@ Predicates with more than $1$ arity aren't more elaborate than this. The only di
 Take $Q(a, c)$ (formula (\ref{ex3}) above). Again, $I(a)=\mathbf{a}$, and $I(c)=\mathbf{c}$, so the question is whether $\oset{\mathbf{a}, \mathbf{c}} \in I(Q)$. By definition, $I(Q)=\set{\oset{\mathbf{a}, \mathbf{c}}, \oset{\mathbf{d}, \mathbf{a}}, \oset{\mathbf{a}, \mathbf{d}}}$. So $\oset{\mathbf{a}, \mathbf{c}} \in I(Q)$. So $\mathbf{S} \models Q(a, c)$, or $Q(a,c)$ is true in $\mathbf{S}$. On the other hand, $Q(c, a)$ would make us consider wether $\oset{\mathbf{c}, \mathbf{a}} \in I(Q)$, which as you can see it is not. So $\mathbf{S}\not\models Q(c, a)$ (formula (\ref{ex4})), or $Q(c, a)$ is false in $\mathbf{S}$.
 
 \begin{exc}
-Determine whether the formulas $R(a, b, c)$ (\ref{ex5}) and $R(a, c, b)$ (\ref{ex6}) are true in $\mathbf{S}$. In each case, give a proof just like the ones above for (\ref{ex1}, \ref{ex2}, \ref{ex3}, and \ref{ex4}). \label{atomicvalue}
+Determine whether the formulas $R(a, b, c)$ (\ref{ex5}) and $R(a, c, b)$ (\ref{ex6}) are true in $\mathbf{S}$. In each case, give a proof just like the ones above for (\ref{ex1}), (\ref{ex2}), (\ref{ex3}), and (\ref{ex4}). \label{atomicvalue}
 \end{exc} 
 
 \begin{exc}
-One of the members of the domain does not have a name! That means that unfortunately, we cannot talk about, even if the object itself shows up in our properties and relations. Which member is this?
+One of the members of the domain does not have a name! That means that unfortunately, we cannot talk about it, even if the object itself shows up in our properties and relations. Which member is this?
 \end{exc}
 
 Note that we can also take the reverse of this question. Namely, instead of considering whether a given formula is true in $\mathbf{S}$, we can start with $\mathbf{S}$ and consider which formulas are true in it. This is really just the reverse reasoning. For example, you can inspect $I(R)$, and see that $I(R)=\set{\oset{\mathbf{a}, \mathbf{b}, \mathbf{c}}, \oset{\mathbf{b}, \mathbf{c}, \mathbf{b}}, \oset{\mathbf{b}, \mathbf{b}, \mathbf{b}}}$. You can also see that $I(b)=\mathbf{b}$. Now, since $\oset{\mathbf{b}, \mathbf{b}, \mathbf{b}} \in I(R)$, that means $R(b, b, b)$ is true in $\mathbf{S}$, or $\mathbf{S} \models R(b, b, b)$. 
 
 \begin{exc}
-Find an atomic formula $X$ distinct from all the above such that $\mathbf{S} \not\models X$. Don't forget to give an appropriate proof as to why that is the case. 
+Find an atomic formula $X$ distinct from all the above such that $\mathbf{S} \not\models X$, and an atomic formula $Y$ distinct from all the above such that $\mathbf{S} \models Y$. Don't forget to give an appropriate proof as to why that is the case. 
 \end{exc}
 
 Note that the structure above was rather trivial and intuitive. But we can give a completely different structure $\mathbf{N}$ and ask again whether the above formulas are true or false in that structure. Let $\mathbf{N}=\oset{\mathbb{N}^+, I'}$. In other words, the structure $S$ is such that its domain $\mathbf{D}=\mathbb{N}^+$, the set of all positive natural numbers. 
@@ -310,7 +309,7 @@ We now specify a new interpretation $I'$, that interprets our formulas in $\math
 		\end{enumerate}
 \end{enumerate}
 
-In other words, under $I'$, $P(x)$ means `$x$ is even', $Q(x, y)$ means `$x$ is less than $y$', and $R(x, y, z)$ means `$x+y=z$. And $a$ under $I'$ means $1$, $b$ means $2$, and so on.
+In other words, under $I'$, $P(x)$ means `$x$ is even', $Q(x, y)$ means `$x$ is less than $y$', and $R(x, y, z)$ means `$x+y=z$'. And $a$ under $I'$ means $1$, $b$ means $2$, and so on.
 
 Then, we can consider $P(a)$ and $P(c)$ again. Well, doing the calculations, neither $1$ nor $3$ are even numbers, so $P(a)$ and $P(c)$ are both false. 
 
@@ -327,11 +326,11 @@ The above proofs are sketchy, referring to `doing the calculations' and `meaning
 Now we are in the position to further extend our definition to include assigning truth values to atomic formulas. It goes like this: 
 
 \begin{defn} \label{atomicin}
-A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
+A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, I}$, where $\mathbf{D}$ is any set, and $I$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
 	%
 \begin{enumerate}
-	\item if $c$ is any constant of $\mathcal{L}_0$, $\mathbf{I}(c) \in \mathbf{D}$, and;
-	\item if $P^n$ is any predicate  of arity $n$ ($n$-place predicate) of $\mathcal{L}_0$, $\mathbf{I}(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
+	\item if $c$ is any constant of $\mathcal{L}_0$, $I(c) \in \mathbf{D}$, and;
+	\item if $P^n$ is any predicate  of arity $n$ ($n$-place predicate) of $\mathcal{L}_0$, $I(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
 \end{enumerate}
 %
 For each atomic formula $P^n(c_1, ..., c_n)$ of the language $\mathcal{L}_0$, we have:
@@ -341,16 +340,17 @@ For each atomic formula $P^n(c_1, ..., c_n)$ of the language $\mathcal{L}_0$, we
 If $\mathbf{S} \models P(c_1, ..., c_n)$, we say $\mathbf{S}$ \textit{models} $P(c_1, ..., c_n)$, or \textit{is a model of} $P(c_1, ..., c_n)$. Alternatively, we say $P(c_1, ..., c_n)$ is \textit{true in} $\mathbf{S}$. 
 \end{defn}
 
+
 \section{Complex formulas}
 
 We are now in the position to give truth-values to our more complex formulas, based on the values of the atomic formulas. Again, everything is relativized to a certain structure, since that is how we can assign truth-values to the atomic ones.
 
-This is done by invoking the concept of a truth-function. A truth-function is just a function that takes one or more truth-values, and outputs a single truth-value. The meaning of our connectives are truth-functions in this sense. They operate on the values of their constituent formulas, and output another truth-value. 
+In particular, this is done by invoking the concept of a truth-function. A truth-function is just a function that takes one or more truth-values, and outputs a single truth-value. The meaning of our connectives are truth-functions in this sense. They operate on the values of their constituent formulas, and output another truth-value. 
 
-There are several ways to formula this idea. First, one may specify these truth-values in terms of truth ($T$) and falsity ($F$), and a function $v: \mathsf{FORM}_{\mathcal{L}_0} \to \set{T, F}$ for any formula $X$, $Y$, like this:
+There are several ways to formulate this idea. First, one may specify these truth-values in terms of truth ($T$) and falsity ($F$), and a function $v: \mathsf{FORM}_{\mathcal{L}_0} \to \set{T, F}$ for any formula $X$, $Y$, like this:
 
 \begin{enumerate}
-	\item $v(\neg X)=T$ if, and only if, $v(X)=f$;
+	\item $v(\neg X)=T$ if, and only if, $v(X)=F$;
 	\item $v(X \wedge Y)=T$ if, and only if, $v(X)=T$ and $v(Y)=T$;
 	\item $v(X \vee Y)=T$ if, and only if, $v(X)=T$ or $v(Y)=T$ (or both);
 	\item $v(X \rightarrow Y)=T$ if, and only if, if $v(X)=T$, then $v(Y)=T$. 
@@ -479,9 +479,9 @@ Finally, we can put the above ideas in line with our previous results, and speci
 	\item $\mathbf{S} \models (X \rightarrow Y)$ if, and only if, if $\mathbf{S} \models X$, then $\mathbf{S} \models Y$. 
 \end{enumerate}
 
-Here is some helpful information as to how to read the above specifications. On the left hand side of the `if, and only if' connective, you always find more complex formulas, while on the right hand side, you always find less complex formulas. Reading from left to right, you can determine when the more complex formula must be true in a structure. For example, $\neg X$ must be true in a structure provided $X$ is false in that structure. Reading from right to left, you can determine the value of the more complex formula if the conditions on the right side hold for less complex ones. So if $X$ and $Y$ are both true in $\mathbf{S}$, $X \wedge Y$ will also be true. 
+Here is some helpful information as to how to read the above specifications. On the left hand side of the `if, and only if' connective, you always find more complex formulas, while on the right hand side, you always find less complex formulas. Reading from left to right, you can determine what the truth-value of the less complex formula must be if the more complex formula is true. For example, $X$ must be false in a structure if $\neg X$ is true in that structure. Reading from right to left, you can determine the value of the more complex formula if the conditions on the right side hold for less complex ones. So if $X$ and $Y$ are both true in $\mathbf{S}$, $X \wedge Y$ will also be true. 
 
-It is important that these specifications allow one to determine both truth \textit{and} falsity for any complex formula depending on the truth \textit{or} falsity of some simpler formulas, and vice versa. But this may not be apparent at first. 
+It is important that these specifications allow one to determine both truth \textit{and} falsity for any complex formula depending on the truth \textit{or} falsity of some simpler formulas, and vice versa, though this may not be apparent at first. 
 
 Suppose $\mathbf{S} \not\models X \vee Y$, i.e., it is false in $\mathbf{S}$. Now it is specified what simpler formulas need to be true in order for $X \vee Y$ to be true. So how do we determine what needs to happen for it to be false in $\mathbf{S}$? Well, all we have to do is negate the right hand side, and see what's left. In particular:
 %
@@ -500,7 +500,7 @@ Similarly, but from the other way around, suppose $\mathbf{S} \not\models X$ and
 If it is not the case that [$\mathbf{S} \models X$ and $\mathbf{S} \models Y$], then either $X$ or $Y$ or both are false in $\mathbf{S}$. So in particular, if $\mathbf{S} \not\models X$ and $\mathbf{S} \models Y$, then $\mathbf{S} \not\models X \wedge Y$. 
 
 \fpboxstar{
-One way to think about this is by simply noting that $\not\models$ is just the negation of $\models$. So if the definition specifies when something is modeled, then it will \textit{not} be modeled precisely when that specification is \textit{not} met. That is, once the left side of the biconditional is negated, the right side needs to be too. It is very much akin to multiplying by $-1$ in an equation. This is a very fundamental fact that goes for every biconditional; if you negate both sides of a true biconditional, you get a true biconditional.
+One way to think about this is by simply noting that $\not\models$ is just the negation of $\models$. So if the definition specifies when something is modeled, then it will \textit{not} be modeled precisely when that specification is \textit{not} met. That is, once the left side of the biconditional is negated, the right side needs to be too. This is very much akin to multiplying by $-1$ in an equation. It is a very fundamental fact that goes for every biconditional; if you negate both sides of a true biconditional, you get a true biconditional.
 }
 
 From now on, we will be using this type of specification to talk about the values of complex formulas. At times, we may refer back to truth-tables as a helpful reference for those who already know how truth-tables work. Don't worry if you are not familar with truth-tables. They do not give any more information than what can already be found in our style of specification. 
@@ -512,7 +512,7 @@ Let's turn back the wheel of time to the beginning of this book, where we specif
 Once again, take a structure $\mathbf{S}=\oset{\mathbf{D}, I}$ with the domain $\mathbf{D}=\set{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}}$, and an interpretation function $I$ such that:
 
 \begin{enumerate}
-	\item $I(a)=\mathbf{a}$, $I(b)=\mathbf{b}$, $I(c)=\mathbf{c}$, $I(d)=\mathbf{d}$; 
+	\item $I(a)=\mathbf{a}$, $I(b)=\mathbf{b}$, $I(c)=\mathbf{c}$; 
 	\item 
 	\begin{enumerate}
 		\item $I(P)=\{\mathbf{a}, \mathbf{d}\}$;
@@ -684,11 +684,11 @@ Determine the truth-value and construct detailed explanations (as opposed to tru
 We are now in the position to formulate our whole semantics in one fell swoop. This is usually done in more advanced works at the very beginning (or not at all). You shall now be able to read those definitions with confidence. 
 
 \begin{defn} \label{models}
-	A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, \mathbf{I}}$, where $\mathbf{D}$ is any set, and $\mathbf{I}$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
+	A structure $\mathbf{S}$ is a pair $\oset{\mathbf{D}, I}$, where $\mathbf{D}$ is any set, and $I$ is a function from the constants and predicates of $\mathcal{L}_0$ (i.e., $\mathsf{CON}_{\mathcal{L}_0} \cup \mathsf{PRED}_{\mathcal{L}_0}$) such that:
 	%
 	\begin{enumerate}
-		\item if $c$ is any constant of $\mathcal{L}_0$, $\mathbf{I}(c) \in \mathbf{D}$, and;
-		\item if $P^n$ is any predicate  of arity $n$ of $\mathcal{L}_0$, $\mathbf{I}(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
+		\item if $c$ is any constant of $\mathcal{L}_0$, $I(c) \in \mathbf{D}$, and;
+		\item if $P^n$ is any predicate  of arity $n$ of $\mathcal{L}_0$, $I(P^n)=\mathbf{R}$, where $\mathbf{R} \subseteq \mathbf{D}^n$. 
 	\end{enumerate}
 	%
 	For any formulas $X, Y, Z$ of $\mathcal{L}_0$:

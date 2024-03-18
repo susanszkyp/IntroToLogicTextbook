@@ -1,6 +1,6 @@
 \chapter{Doing zeroth-order logic}
 
-We now have a cursory acquaintance with the semantics of $\mathcal{L}_0$, so we know how the meaning of formulas get evaluated, and in particular, how truth-values are assigned to formulas, both atomic and complex. Thus, we are in the position to start talking about \textit{logic}. Now what logic is exactly is hard to say, since by now, the field is vast and intertwined with many other disciplines. At any rate, one of the fundamental aspects of logic is examining how the truth-values of certain sentences relate to the truth-values of certain other sentences. This sounds like a semantic question, since in this formulation, it is about truth-values. On the other hand, over the years, logicians have come up with a myriad of ways to examine these relations without talking about truth-values, or anything else in semantics. To do this, they introduced syntactic deductive systems, which rely purely on some syntactic rules of transformation to tell you whether certain sentences \textit{entailed} other sentences, or in other words, whether those sentences were \textit{logical consequences} of the initial set (among other things). Now since this book likes to be unorthodox, we will be using a deductive system that is technically syntactic in its nature, since it relies on purely syntactic rules for transforming the formulas of the language into other formulas of the language, but it is also highly tied to the semantics we previously examined. The approach is variously called \textit{analytic tableau}, \textit{semantic tableau}, or the \textit{truth tree method}. In fact, in its modern form, it was invented by the logician-mathematician-philosopher-magician-pianist Raymond Smullyan, who was once a CUNY professor! 
+We now have a cursory acquaintance with the semantics of $\mathcal{L}_0$, so we know how the meaning of formulas are specified, and in particular, how truth-values are assigned to formulas, both atomic and complex. Thus, we are in the position to start talking about \textit{logic}. Now what logic is exactly is hard to say, since by now, the field is vast and intertwined with many other disciplines. At any rate, one of the fundamental aspects of logic is examining how the truth-values of certain sentences relate to the truth-values of certain other sentences. This sounds like a semantic question, since in this formulation, it is about truth-values. On the other hand, over the years, logicians have come up with a myriad of ways to examine these relations without talking about truth-values, or anything else in semantics. To do this, they introduced syntactic deductive systems, which rely purely on some syntactic rules of transformation to tell you whether certain sentences \textit{entailed} other sentences, or in other words, whether those sentences were \textit{logical consequences} of the initial set (among other things). Now since this book likes to be unorthodox, we will be using a deductive system that is technically syntactic in its nature, since it relies on purely syntactic rules for transforming the formulas of the language into other formulas of the language, but it is also highly tied to the semantics we previously examined. The approach is variously called \textit{analytic tableau}, \textit{semantic tableau}, or the \textit{truth tree method}. In fact, in its modern form, it was invented by the logician-mathematician-philosopher-magician-pianist Raymond Smullyan, who was once a CUNY professor! 
 
 \section{Some fundamental concepts of logic}
 
@@ -18,7 +18,7 @@ Now one thing to note at the beginning is that atomic formulas are all contingen
 
 What makes a formula a tautology or a contradiction? It is the way the connectives work. Notice that by definition, each connective must obey some specific rules in any structure regarding the truth-values of the formulas on which it operates. For example, $X \wedge Y$ is true in any $\mathbf{S}$ \textit{iff} $X$ and $Y$ are both true individually in $\mathbf{S}$. However, some formulas may say things that go against these rules. This means that they won't be true in any structure $\mathsf{S}$, since again, every structure must abide by these rules, while the formula says otherwise. 
 
-Let's take the simplest example: $X \wedge \neg X$. In fact, this is not a formula of the language, but a \textit{class} of formulas of form $X \wedge \neg X$. That is, it is the set of all formulas of this form where $X$ is any formula. But as it turns out, no matter what formula you take for $X$, it will always be the case that for any structure, $\mathbf{S} \not\models X \wedge \neg X$. In other words, this formula schema cannot have a true instance. 
+Let's take the simplest example: $X \wedge \neg X$. In fact, this is not a formula of the language, but a \textit{class} of formulas of form $X \wedge \neg X$. But as it turns out, no matter what formula you take for $X$, it will always be the case that for any structure $\mathbf{S}$, $\mathbf{S} \not\models X \wedge \neg X$. In other words, this formula schema cannot have a true instance. 
 
 Now again, the reason for this is the way structures are defined. In particular, in every structure $\mathbf{S}$, either $\mathbf{S} \models X$, or $\mathbf{S} \not\models X$. This is sometimes called the \textit{Law of Excluded Middle}, and it falls out of our definition of a structure. What this means is that every formula $X$ is either true in a structure, or false in a structure, and not a third thing (the `excluded middle'). 
 
@@ -104,7 +104,7 @@ From right to left, the reasoning is almost exactly the same.
 Finish the proof for Proposition \ref{contiff}. 
 \end{exc}
 
-Now given the above two propositions, we can see that if a formula $X$ of $\mathcal{L}_0$ is \textit{not} a tautology, then $\neg X$ is not a contradiction, because if $X$ is not a tautology, it is either a contradiction or contingent, so $\neg X$ will either be a tautology (hence not a contradiction), or a tautology (hence not a contradiction). And similarly the other way around. 
+Now given the above two propositions, we can see that if a formula $X$ of $\mathcal{L}_0$ is \textit{not} a tautology, then $\neg X$ is not a contradiction, because if $X$ is not a tautology, it is either a contradiction or contingent, so $\neg X$ will either be a tautology (hence not a contradiction), or contingent (hence not a contradiction). And similarly the other way around. 
 
 In fact, the following also follows:
 
@@ -116,22 +116,29 @@ $\neg X$ is a tautology \textit{iff} $X$ is a contradiction.
 By Proposition \ref{tautcon}, $Y$ is a tautology \textit{iff} $\neg Y$ is a contradiction. Here is the trick. Since $Y$ can be \textit{any formula}, we substitute $\neg X$ for $Y$. Thus, $\neg X$ is a tautology \textit{iff} $\neg \neg X$ is a contradiction. But $\neg \neg X$ is a contradiction \textit{iff} $X$ is also a contradiction. This is because for any $\mathbf{S}$, if $\mathbf{S} \models \neg \neg X$, then $\mathbf{S} \not\models \neg X$, then $\mathbf{S} \models X$ (and similarly the other way around). So $\neg X$ is a tautology \textit{iff} $X$ is a contradiction. Which is what we wanted to show. 
 \end{proof}
 
-Some of what the above propositions tell us is the following:
+Some of what the above propositions tell us is summarized in Table \ref{interrel}.
 
+\begin{table}[h!]
 \begin{center}
 \begin{tabular}{lcl}
-	If ..., &  & then ...\\ \hline
-	$X$ is tautology& $\Rightarrow$ & $\neg X$ is contradiction\\
-	$X$ is contradiction& $\Rightarrow$ & $\neg X$ is tautology\\
-	$X$ is contingent& $\Rightarrow$ & $\neg X$ is contingent
+	& if, and only if & \\ \hline
+	$X$ is tautology& $\Leftrightarrow$ & $\neg X$ is contradiction\\
+	$X$ is contradiction& $\Leftrightarrow$ & $\neg X$ is tautology\\
+	$X$ is contingent& $\Leftrightarrow$ & $\neg X$ is contingent
 \end{tabular}
 \end{center}
+\label{interrel}
+\caption{Relations between tautologies, contradictions and contingencies}
+\end{table}
 
+Here is another thing that will be relevant presently. Suppose you have a formula $X$, and it is \textit{not} a tautology (so it is either a contradiction or contingent). Then, its negation $\neg X$ will \textit{not} be a contradiction (it will either be a tautology or contingent). Thus, if $X$ is not a tautology, there is at least one structure $\mathbf{S}$ such that $\mathbf{S} \models \neg X$, and \textit{vice versa}. This is usually what is called a \textit{counterexample}. In other words:
 
-Here is another thing that will be relevant presently. Suppose you have a formula $X$, and it is \textit{not} a tautology (so it is either a contradiction or contingent). Then, its negation $\neg X$ will \textit{not} be a contradiction (it will either be a tautology or contingent). Thus, if $X$ is not a tautology, there is at least one structure $\mathbf{S}$ such that $\mathbf{S} \models \neg X$. This is usually what is called a \textit{counterexample}. 
+\begin{prop}
+$X$ is not a tautology \textit{iff} there is a structure $\mathbf{S}$ such that $\mathbf{S} \models \neg X$. 
+\end{prop}
 
 \begin{exc}
-Using the above reasoning, show for each of the following formulas that they are \textit{not} tautologies. 
+Using the reasoning with \textit{counterexamples} sketched above, show for each of the following formulas that they are \textit{not} tautologies. 
 
 \begin{enumerate}
 	\item $(\neg Y \wedge \neg X) \wedge \neg X$
@@ -144,7 +151,7 @@ Using the above reasoning, show for each of the following formulas that they are
 
 \section{The basic idea behind tableau systems}
 
-Here is the basic idea behind tableau systems. Imagine that your goal is to show that certain formulas of the language $\mathcal{L}_0$ are tautologies, or that in every structure $\mathbf{S}$, they are true. Now clearly, given a formula $X$, you cannot just consider every structure $\mathbf{S}$ individually to see whether that particular structure models $X$ or not. That would take an infinite amount of time. What you \textit{can} do is employ some of the proofs we have given above to show that, e.g., $X \vee \neg X$ is a tautology. The problem with this is that as the formulas get more complex, the proofs get longer and longer, to the point where it is just not feasible to carry them out. Moreover, these solutions are not very systematic as they stand. If you are ingenious, you may be able to do them (up to a point), but we don't want to rely on ingenuity to solve these problems. We need a method.  
+Here is the basic idea behind tableau systems. Imagine that your goal is to show that certain formulas of the language $\mathcal{L}_0$ are tautologies, or that in every structure $\mathbf{S}$, they are true. Now clearly, given a formula $X$, you cannot just consider every structure $\mathbf{S}$ individually to see whether that particular structure models $X$ or not. That would take an infinite amount of time. What you \textit{can} do is employ some of the proofs we have given above to show that, e.g., $X \vee \neg X$ is a tautology. The problem with this is that as the formulas get more complex, the proofs get longer and longer, to the point where it is just not feasible to carry them out in natural language. Moreover, these solutions are not very systematic as they stand. If you are ingenious, you may be able to do them (up to a point), but we don't want to rely on ingenuity to solve these problems. We need a method.  
 
 In the tableau method, the whole approach is based on the following facts, discussed above:
 
@@ -153,11 +160,12 @@ In the tableau method, the whole approach is based on the following facts, discu
 	\item if something is a contradiction, then it hides an explicit contradictory claim of form $Y \wedge \neg Y$ (and indeed, for some atomic formula $P$, $P \wedge \neg P$).
 \end{enumerate}
 
-If we put together these two facts, we get a strategy. We take the candidate tautology $X$. If it is \textit{really} a tautology, then its negation $\neg X$ is a contradiction. If it is a contradiction, then with the help of some appropriate rules, we can hopefully show in what way it is a contradictory statement. In other words, we show which is the formula $Y$ it claims is both true and false. 
+If we put together these two facts, we get a strategy. We take the candidate tautology $X$. If it \textit{really} is a tautology, then its negation $\neg X$ is a contradiction. If it is a contradiction, then with the help of some appropriate rules, we can hopefully show in what way it is a contradictory statement. In other words, we show which is the formula $Y$ it claims is both true and false. 
 
-On the other hand, if $X$ is not a tautology, then it is either a contradiction or contingent, so its negation $\neg X$ will be either valid contingent (as described above). In such cases, we will find no contradiction. 
+On the other hand, if $X$ is not a tautology, then it is either a contradiction or contingent, so its negation $\neg X$ will either be a tautology or contingent (as described above). In such cases, we will find no contradiction. 
 
 To continue our example, take $X \vee \neg X$ again. We already know this is a tautology, but what if we want to show in our tableau system that it is? Well, since we want to show $X \vee \neg X$, what we put at the beginning of our proof is \textit{its negation} $\neg (X \vee \neg X)$. Then come the rules, which will tease out where exactly is the contradictory statement hidden in the formula. 
+
 
 \section{The rules of the system}
 
@@ -169,6 +177,7 @@ The basic idea behind the rules is that given a complex formula $X$ of the langu
 
 First, we have the basic case, where everything is either an atomic formula $P$, a conjunction $Y \wedge Z$, a disjunction $Y \vee Z$, a conditional $Y \rightarrow Z$, or a negation $\neg Y$. Now as it turns out, it is a good idea to take the negation of each of these formulas separately. So we have the negation of an atomic formula $\neg P$, the negation of a conjunction $\neg (Y \wedge Z)$, the negation of a disjunction $\neg(Y \vee Z)$, the negation of a conditional $\neg (Y \rightarrow Z)$, the negation of a negation $\neg \neg Y$, or the negation of an atomic formula $\neg P$. This covers every possible negated formula form, and the two sets cover every possible formula form. Here is a diagram of this:
 
+\begin{center}
 \begin{forest}
 	[Formula of $\mathcal{L}_0$
 		[Atomic: $P$]
@@ -188,6 +197,7 @@ First, we have the basic case, where everything is either an atomic formula $P$,
 		]
 	]
 \end{forest}
+\end{center}
 
 \begin{remark}
 	It might seem like there is a problem here, since $\neg Y$ does not appear in the diagram, only $\neg \neg Y$. But this is not the case, since if we consider $\neg Y$, and what $Y$ could be, it could either be a negated formula or a non-negated one. If it is negated, then it is a double negation, which is covered by $\neg \neg Y$. If it is a simple negation, then $Y$ is either a complex or an atomic formula, which is also covered by the diagram. So there is nothing missing. 
@@ -603,7 +613,7 @@ Now most of the formulas in the proof are `exhausted'. There is no rule for $\ne
 	\end{prooftree}
 \end{center}
 
-Our tree is now complete, there are no more rules to apply. Now comes the crucial part. You have to see if each of the branches are \textit{closed}. Again, this means that you have a formula of form $Z$ and a formula of form $\neg Z$ on each branch. Note that each branch is the sequence of formulas from the root to one of the leaves. Thus, the first branch here from $\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))$ to $\neg X$, the second branch is from $\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))$ to $Y$, through all the other formulas. 
+Our tree is now complete, there are no more rules to apply. Now comes the crucial part. You have to see if each of the branches are \textit{closed}. Again, this means that you have a formula of form $Z$ and a formula of form $\neg Z$ on each branch. Note that each branch is the sequence of formulas from the root to one of the leaves. Thus, the first branch here is from $\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))$ to $\neg X$, the second branch is from $\neg((X \rightarrow Y) \rightarrow (\neg X \vee Y))$ to $Y$, through all the other formulas. 
 
 Let's take the first branch. Can you see a contradiction? I can, since line 6 has $X$ on it, and line 7 (left) has $\neg X$ on it. So the first branch is closed. Thus: 
 
@@ -657,6 +667,52 @@ The symbol $\vdash$ means something like `\textit{syntactically provable}'. It i
 \]
 This makes sense, as it is just like writing $\mathbf{S} \models (X \rightarrow Y) \rightarrow (\neg X \vee Y)$, except we omit a specific structure designation $\mathbf{S}$, since it is modeled by \textit{all} structures, not just a specific one. 
 
+\medskip\hrule\medskip
+
+Here is another proof to inspect, with more branching, before it is your turn:
+
+\begin{center}
+	\begin{prooftree}{}
+[{\neg (((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y)))}, just=Start
+		[{(Y \vee \neg Y) \rightarrow X}, just=$\neg\rightarrow$:!u
+		[{\neg (X \wedge (Y \vee \neg Y))}, just=$\neg\rightarrow$:!uu
+		[{\neg(Y \vee \neg Y)}, just=$\rightarrow$:!uu
+		[{Y}, just=$\neg\vee$:!u
+		[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
+		]
+		]
+		[{X}
+		[{\neg X}, just=$\neg\wedge$:!uu, close={:!u, !c}]
+		[{\neg (Y \vee \neg Y)}
+		[{Y}, just=$\neg\vee$:!u
+		[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
+		]
+		]
+		]
+		]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+Note that we could have made this derivation even longer, but we opted to apply $\neg\wedge$ to line 3 to extend only the right-side branch of the tree (to line 5). This is because it would not have made any difference on the left-hand side, given that it closed by $\neg (Y \vee \neg Y)$ alone (line 4, then 8 and 9). In any derivation, you are looking to close every branch and nothing more. Thus, you can make derivations significantly shorter if you cut out the steps that are not necessary to close a branch. 
+
+\fpboxstar{Here is an intuitive understanding of why $((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y))$ is a tautology. If you look at the first half of the formula, it says that $(Y \vee \neg Y) \rightarrow X$. I.e., if $Y \vee \neg Y$, then $X$. But since $Y \vee \neg Y$ is known to be a tautology that holds in all structures, \textit{if} it entails $X$, then $X$ would also be a tautology (since again, $Y \vee \neg Y$ holds in every structure, and so if in every structure, it entails $X$, $X$ holds in every structure). But \textit{if} that is the case, then both $Y \vee \neg Y$ and $X$ must hold (both being tautologies).}
+
+\begin{exc}
+	Prove that the following formulas are all theorems of the tableau system: 
+	
+	\begin{enumerate}
+		\item $Y \rightarrow (X \rightarrow Y)$;
+		\item $(\neg X \wedge \neg Y) \rightarrow \neg(X \vee Y)$;
+		\item $(\neg X \vee \neg Y) \rightarrow \neg(X \wedge Y)$;
+		\item $\neg (X \wedge Y) \rightarrow (\neg X \vee \neg Y)$;
+		\item $\neg (X \vee Y) \rightarrow (\neg X \wedge \neg Y)$;
+		\item $(\neg X \vee Y) \rightarrow (X \rightarrow Y)$;
+		\item $(X \rightarrow Y) \rightarrow (\neg Y \rightarrow \neg X)$.
+	\end{enumerate}
+\end{exc}
+
 \subsection{On soundness and completeness}
 
 A fundamental goal for every logical system is to show that the semantics and the syntactic system agree on every formula. That is, if $X$ is a tautology according to the semantics, it can be proved in the system that $X$ is a theorem, and if $X$ is a theorem in the system, it really is a tautology in the semantics. This can be represented as follows: 
@@ -671,53 +727,27 @@ Or again, $X$ is a theorem \textit{iff} it is a tautology. I have been using the
 
 Of course, if you put together these two conditionals, you get the biconditional above. In general, it is important to keep in mind that our semantics and our deductive system are two distinct things, and that they coincide on their judgments using two distinct methods is not a trivial feat (in fact, large classes of logics \textit{cannot} have a sound and complete deductive system). On the other hand, \textit{proving} soundness and completeness is rather involved and takes more machinery than we currently possess (or will possess by the end of this book). Thus, for now, you will have to trust the process. 
 
-The process, our tableau method, is in many ways better than other approaches you may have seen before, like natural deduction. The reason is because the tableau method does not require you to be creative in your proofs at all. In fact, it is provable that given a formula $X$, if $X$ is a tautology, then applying the relevant rule as many times as possible to $X$ and each resulting formula completely mindlessly will result in a tree all of whose branches \textit{will} close, and if $X$ is not a tautology, there will be at least one open branch left in the end. So in general, all you have to do is recognize for each formula which rules can be applied, and apply them. Of course, if you are an expert in using the system, you will be able to do shorter proofs by using your brain (e.g., by using non-branching rules only once, deriving the relevant side only). 
+The process, our tableau method, is in many ways better than other approaches you may have seen before, like natural deduction. The reason is because the tableau method does not require you to be creative in your proofs at all. In fact, it is provable that given a formula $X$, if $X$ is a tautology, then applying the relevant rule as many times as possible to $ \neg X$ and each resulting formula completely mindlessly will result in a tree all of whose branches \textit{will} close, and if $X$ is not a tautology, there will be at least one open branch left in the end. So in general, all you have to do is recognize for each formula which rules can be applied, and apply them. Of course, if you are an expert in using the system, you will be able to do shorter proofs by using your brain (e.g., by using non-branching rules only once, deriving the relevant side only). 
 
-\medskip\hrule\medskip
+\subsection{Open tableaus and their uses}
 
-Here is another proof to inspect, with more branching, before it is your turn:
+In fact, here is another way in which tableaus are better than natural deduction. Consider again the above crucial fact about our syntax and deductive system:
 
-\begin{center}
-	\begin{prooftree}{}
-		[{\neg (((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y)))}, just=Start
-		[{(Y \vee \neg Y) \rightarrow X}, just=$\neg\rightarrow$:!u
-		[{\neg (X \wedge (Y \vee \neg Y))}, just=$\neg\rightarrow$:!uu
-			[{\neg(Y \vee \neg Y)}, just=$\rightarrow$:!uu
-				[{Y}, just=$\neg\vee$:!u
-				[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
-				]
-			]
-			[{X}
-				[{\neg X}, just=$\neg\wedge$:!uu, close={:!u, !c}]
-				[{\neg (Y \vee \neg Y)}
-					[{Y}, just=$\neg\vee$:!u
-					[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
-					]
-				]
-			]
-		]
-		]
-		]
-	\end{prooftree}
-\end{center}
+\[\models X \textit{ iff } \vdash X\]
 
-Note that we could have made this derivation even longer, but we opted to apply $\neg\wedge$ to line 3 to extend only the right-side branch of the tree (to line 5). This is because it would not have made any difference on the left-hand side, given that it closed by $\neg (Y \vee \neg Y)$ alone (line 4, then 8 and 9). In any derivation, you are looking to close every branch and nothing more. Thus, you can make derivations significantly shorter if you cut out the steps that are not necessary to close a branch. 
+Now using the usual technique on the biconditional, negate both sides. Thus: 
 
-\fpboxstar{Here is an intuitive understanding of why $((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y))$ is a tautology. If you look at the first half of the formula, it says that $(Y \vee \neg Y) \rightarrow X$. I.e., if $Y \vee \neg Y$, then $X$. But since $Y \vee \neg Y$ is known to be a tautology that holds in all structures, \textit{if} it entails $X$, then $X$ would also be a tautology (since again, $Y \vee \neg Y$ holds in every structure, and so if in every structure, it entails $X$, $X$ holds in every structure). But \textit{if} that is the case, then both $Y \vee \neg Y$ and $X$ must hold (both being tautologies).}
+\[\not\models X \textit{ iff } \nvdash X\]
 
-\begin{exc}
-Prove that the following formulas are all theorems of the tableau system: 
+Now we can think about what \textit{this} means. First, $\not\models X$ means that $X$ is not a tautology. Second, $\nvdash X$ means that $X$ is not a theorem of the system. The latter in turn just means that $\neg X$ (!)  does not (cannot) have a closed tableau. So it can only have open tableaus. So $X$ is not a tautology provided $\neg X$ only has open tableaus. So far so good. Let's continue. 
 
-\begin{enumerate}
-	\item $Y \rightarrow (X \rightarrow Y)$;
-	\item $(\neg X \wedge \neg Y) \rightarrow \neg(X \vee Y)$;
-	\item $(\neg X \vee \neg Y) \rightarrow \neg(X \wedge Y)$;
-	\item $\neg (X \wedge Y) \rightarrow (\neg X \vee \neg Y)$;
-	\item $\neg (X \vee Y) \rightarrow (\neg X \wedge \neg Y)$;
-	\item $(\neg X \vee Y) \rightarrow (X \rightarrow Y)$;
-	\item $(X \rightarrow Y) \rightarrow (\neg Y \rightarrow \neg X)$.
-\end{enumerate}
-\end{exc}
+What does it mean for $X$ to not be a tautology? Well, by definition, it means that $X$ is either a contradiction or contingent. And in turn, if $X$ is either a contradiction or contingent, then $\neg X$ is either a tautology or contingent. So injecting this back to our previous line of reasoning, we get:
+
+\begin{prop}
+$\neg X$ is either a tautology or contingent \textit{iff} $\neg X$ does not have a closed tableau. 
+\end{prop} 
+
+We can chase these facts a bit further. In particular, if $\neg X$ is either a tautology or contingent, that means that in either case, there is at least one structure $\mathbf{S}$ such that $\mathbf{S} \models \neg X$. In other words, if $\neg X$ does not have a closed tableau, we can immediately answer that it has a model! (And of course, the same goes for $X$.)
 
 \section{Extending our approach to sets of formulas}
 
@@ -758,3 +788,43 @@ On the other hand, we have:
 \begin{prop}
 If $S$ is a set of tautologies, $S$ is semantically consistent. 
 \end{prop}
+
+\begin{exc}
+The proof is left as an exercise. 
+\end{exc}
+ 
+\section{Validity}
+
+Here comes something magical. So far, we talked about certain sets of formulas that are satisfiable, and certain sets of formulas that are unsatisfiable. And this boiled down to whether the set of formulas have a common model, or they do not. Now as it turns out, satisfiability and unsatisfiability are sufficient to define the central notion of logic: validity. 
+
+This may not be apparent at first. Take the usual definition of validity:
+
+\begin{quote}
+(A1) An argument is valid \textit{iff} whenever the premises are true, the conclusion must also be. 
+\end{quote}
+
+It seems like this has absolutely nothing to do with whether sets of formulas are satisfiable. Not so fast!
+
+What is an argument? We can define it as such:
+
+\begin{defn}
+An argument is a set of formulas, of which one is designated the conclusion, and the rest are designated the premises. 
+\end{defn}
+
+This could be formalized with more structure, using ordered sets and whatnot, but what I want to emphasize here is that arguments are just sets of formulas with some designated members. 
+
+Let's return to validity. Validity says that if an argument is valid, then whenever its premises are true, its conclusion must also be true. You may ask yourself: is it possible for a \textit{valid} argument's premises to be \textit{true}, but its conclusion to be \textit{false}? It seems not, since that is exactly what validity excludes. It says that \textit{if} a valid argument's premises happen to be true, then whatever else is the case, the conclusion \textit{must} also be true. Thus, we can also characterize validity as follows:
+
+\begin{quote}
+(A2) An argument is valid \textit{iff} it is \textit{impossible} for its premises to be true, but its conclusion to be false. 
+\end{quote}
+
+Note the word `impossible' in italics. What does it mean that it is impossible for the premises to be true and the conclusion to be false? Well, it just means: there cannot be a structure $\mathbf{S}$ such that $\mathbf{S}$ models the premises, but $\mathbf{S}$ does not model the conclusion. Let's use some specific variables to make this more precise. 
+
+Suppose you have an argument with (possibly infinite) premises $P=\set{X_1, X_2, ...}$, and conclusion $Y$. Then, by the above, if this argument is \textit{valid}, that means there is no structure $\mathbf{S}$ such that $\mathbf{S} \models X$ for all $X \in P$, but $\mathbf{S} \not\models Y$ (the conclusion). We also know that $\mathbf{S} \not\models Y$ \textit{iff} $\mathbf{S} \models \neg Y$, so we can say: if an argument is \textit{valid}, that means there is no structure $\mathbf{S}$ such that $\mathbf{S} \models X$ for all $X \in P$, and $\mathbf{S} \models \neg Y$. Again, this is just a formal way of saying it is impossible for the premises to be true but the conclusion to be false (or equivalently, it is impossible for the premises to be true, and the negation of the conclusion to also be true). 
+
+But note that now we really are talking about unsatisfiability! For what we just described may simply be put: the set $\{X_1, X_2, ..., \neg Y\}$ is unsatisfiable. And this is, indeed, what validity boils down to. In particular, an argument is valid \textit{if, and only if} its premises, together with the negation of its conclusion, are unsatisfiable. And again, all this just means that it is impossible for a valid argument to have true premises and a false conclusion. Thus:
+
+\begin{defn}
+Let $A=\{X_1, X_2, ...\}$ be any set of formulas and let $Y$ be any formula of $\mathcal{L}_0$. Then, the argument from \textit{premises} $A$ to the \textit{conclusion} $Y$ is \textit{valid} \textit{iff} the set $\set{X_1, X_2, ..., \neg Y}$ is not satisfiable. If an argument from $A$ to $Y$ is \textit{valid}, we write $A \models Y$, or say that $Y$ is a \textit{semantic consequence} of, or \textit{semantically entailed} by $A$.  
+\end{defn}
