@@ -203,7 +203,7 @@ First, we have the basic case, where everything is either an atomic formula $P$,
 	It might seem like there is a problem here, since $\neg Y$ does not appear in the diagram, only $\neg \neg Y$. But this is not the case, since if we consider $\neg Y$, and what $Y$ could be, it could either be a negated formula or a non-negated one. If it is negated, then it is a double negation, which is covered by $\neg \neg Y$. If it is a simple negation, then $Y$ is either a complex or an atomic formula, which is also covered by the diagram. So there is nothing missing. 
 \end{remark}
 
-Now, as far as our rules are concerned, we will not have rules for $P$ and $\neg P$, but we will have rules for every other form. The principles behind these rules will familiar if you have ever taken a logic course before. 
+Now, as far as our rules are concerned, we will not have rules for $P$ and $\neg P$, but we will have rules for every other form. The principles behind these rules will be familiar if you have ever taken a logic course before. 
 
 \subsection{Non-branching rules}
 
@@ -237,7 +237,7 @@ Here is a representation of the above in a truth table:
 
 \subsubsection{Conjunction}
 
-The conjunction rule is another one of these really simple rules. It says that if you have a formula of form $X \wedge Y$ on a branch, then you can extend that branch with either $X$ or $Y$, i.e., the left or the right side. Like this:
+The conjunction rule is another one of these really simple rules. It says that if you have a formula of form $X \wedge Y$ on a branch, then you can extend that branch with either $X$ or $Y$, i.e., with either the left or the right side. Like this:
 
 \begin{figure}[h]
 	\begin{minipage}{0.5\textwidth}\centering
@@ -351,7 +351,7 @@ Let's get back to our other rules before we go further into examples.
 
 \subsubsection{Negated conditional}
 
-The negated conditional is another one of those non-branching rules that is not immediately obvious. It is specified as follows: 
+The negated conditional is another one of those non-branching rules that are not immediately obvious. It is specified as follows: 
 
 \begin{figure}[h]
 	\begin{minipage}{0.5\textwidth}\centering
@@ -425,7 +425,7 @@ The disjunction rule is the simplest rule of the branching ones. In many ways, i
 	\caption{Disjunction rule}
 \end{figure}
 
-Here is the reasoning behind this rule. As we know, $\mathbf{S} \models X \vee Y$ \textit{iff} $\mathbf{S} \models X$ or $\mathbf{S} \models Y$ (or both). The problem is that just the fact that $\mathbf{S} \models X \vee Y$ does not tell us whether $\mathbf{S} \models X$ or $\mathbf{S} \models Y$ or both. It only tells us that \textit{it is at least one of these}. Given this lack of information, we need to consider the consequences separately. Interestingly, we need not consider the case where \textit{both} $X$ and $Y$ is true separately. But we also don't make any explicit assumptions about what the truth-value of the \textit{other} formula is on either branch. So all we do is consider the case where $X$ is true, whatever truth value $Y$ may have ($T$ or $F$), and consider the case where $Y$ is true, whatever truth value $X$ may have $T$ or $F$. Here is the table representation:
+Here is the reasoning behind this rule. As we know, $\mathbf{S} \models X \vee Y$ \textit{iff} $\mathbf{S} \models X$ or $\mathbf{S} \models Y$ (or both). The problem is that just the fact that $\mathbf{S} \models X \vee Y$ does not tell us whether $\mathbf{S} \models X$ or $\mathbf{S} \models Y$ or both. It only tells us that \textit{it is at least one of these}. Given this lack of information, we need to consider the consequences separately. Interestingly, we need not consider the case where \textit{both} $X$ and $Y$ is true separately. But we also don't make any explicit assumptions about what the truth-value of the \textit{other} formula is on either branch. So all we do is consider the case where $X$ is true, whatever truth value $Y$ may have ($T$ or $F$), and consider the case where $Y$ is true, whatever truth value $X$ may have ($T$ or $F$). Here is the table representation:
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -479,9 +479,10 @@ Again, on either branch, we do not make assumptions about the truth value of the
 	\end{tabular}
 \end{center}
 
+\clearpage
 \subsubsection{Conditional}
 
-The rule for conditionals is our last rule for the system. It also has a form that may make you stop and think why it is formulated as such. Here it is:
+The rule for conditionals is our last rule for the system. It also has a form that may make you stop and think why it is formulated as such. 
 
 \begin{figure}[h]
 	\centering
@@ -491,7 +492,7 @@ The rule for conditionals is our last rule for the system. It also has a form th
 		[{Y}]
 		]
 	\end{prooftree}
-	\caption{Negated conjunction rule}
+	\caption{Conditional rule}
 \end{figure}
 
 The reasoning behind it is as follows:
@@ -556,7 +557,7 @@ The next step is to apply one of the rules. For this, you need to identify wheth
 	\end{prooftree}
 \end{center}
 
-Now that we have two formulas, we have a choice how we want to proceed. On the other hand, unlike with other systems, we do not have a choice about which rules to apply. Each formula admits of one, and only, one rule, depending on its form. 
+Now that we have two formulas, we have a choice how we want to proceed. On the other hand, unlike with other systems, we do not have a choice about which rules to apply. Each formula admits of one, and only one, rule, depending on its form. 
 
 In general, it is usually better to apply first all the rules that do not branch, and \textit{then} apply any branching rules. If you think about it, this makes sense, since each branching rule doubles the work we have to carry out. At any rate, the non-branching rule is the one for $\neg \vee$, so we can start with that, and apply it twice: 
 
@@ -667,6 +668,10 @@ The symbol $\vdash$ means something like `\textit{syntactically provable}'. It i
 \]
 This makes sense, as it is just like writing $\mathbf{S} \models (X \rightarrow Y) \rightarrow (\neg X \vee Y)$, except we omit a specific structure designation $\mathbf{S}$, since it is modeled by \textit{all} structures, not just a specific one. 
 
+\begin{defn}[Theorem]
+Let $X$, $Y$ be any formulas. We call a branch of a tree \textit{closed} provided there are some formulas of form $Y$, $\neg Y$ occurring on it. We call a tree \textit{closed} if all its branches are closed. Then, $X$ is a \textit{theorem of zeroth-order logic} provided there is a closed tree with $\neg X$ at its root. In such cases, we also write $\vdash X$, and call the closed tree for $\neg X$ the tableau (tree) proof of $X$. 
+\end{defn}
+
 \medskip\hrule\medskip
 
 Here is another proof to inspect, with more branching, before it is your turn:
@@ -697,7 +702,7 @@ Here is another proof to inspect, with more branching, before it is your turn:
 
 Note that we could have made this derivation even longer, but we opted to apply $\neg\wedge$ to line 3 to extend only the right-side branch of the tree (to line 5). This is because it would not have made any difference on the left-hand side, given that it closed by $\neg (Y \vee \neg Y)$ alone (line 4, then 8 and 9). In any derivation, you are looking to close every branch and nothing more. Thus, you can make derivations significantly shorter if you cut out the steps that are not necessary to close a branch. 
 
-\fpboxstar{Here is an intuitive understanding of why $((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y))$ is a tautology. If you look at the first half of the formula, it says that $(Y \vee \neg Y) \rightarrow X$. I.e., if $Y \vee \neg Y$, then $X$. But since $Y \vee \neg Y$ is known to be a tautology that holds in all structures, \textit{if} it entails $X$, then $X$ would also be a tautology (since again, $Y \vee \neg Y$ holds in every structure, and so if in every structure, it entails $X$, $X$ holds in every structure). But \textit{if} that is the case, then both $Y \vee \neg Y$ and $X$ must hold (both being tautologies).}
+\fpboxstar{Here is an intuitive explanation of why $((Y \vee \neg Y)\rightarrow X) \rightarrow (X \wedge (Y \vee \neg Y))$ is a tautology. If you look at the first half of the formula, it says that $(Y \vee \neg Y) \rightarrow X$. I.e., if $Y \vee \neg Y$, then $X$. But since $Y \vee \neg Y$ is known to be a tautology that holds in all structures, \textit{if} it entails $X$, then $X$ would also be a tautology (since again, $Y \vee \neg Y$ holds in every structure, and so if in every structure, it entails $X$, $X$ holds in every structure). But \textit{if} that is the case, then both $Y \vee \neg Y$ and $X$ must hold (both being tautologies).}
 
 \begin{exc}
 	Prove that the following formulas are all theorems of the tableau system: 
@@ -709,9 +714,13 @@ Note that we could have made this derivation even longer, but we opted to apply 
 		\item $\neg (X \wedge Y) \rightarrow (\neg X \vee \neg Y)$;
 		\item $\neg (X \vee Y) \rightarrow (\neg X \wedge \neg Y)$;
 		\item $(\neg X \vee Y) \rightarrow (X \rightarrow Y)$;
-		\item $(X \rightarrow Y) \rightarrow (\neg Y \rightarrow \neg X)$.
+		\item $(X \rightarrow Y) \rightarrow (\neg Y \rightarrow \neg X)$;
+		\item $((X \vee Y) \wedge ((X \rightarrow Z) \wedge (Y \rightarrow Z))) \rightarrow Z$.
 	\end{enumerate}
 \end{exc}
+
+
+\section{Some facts about the tableau system}
 
 \subsection{On soundness and completeness}
 
@@ -755,7 +764,7 @@ Students of logic are usually taught at first about tautologies, contradictions,
 
 One thing that we can immediately extend to sets of formulas is contingency. Sometimes, it is not just one formula that has a model, but a whole set of them. Indeed, perhaps an infinitely large set of them! In these cases, we sometimes say that the set $S$ of formulas is (zeroth-order) \textit{satisfiable} or \textit{semantically consistent}. This can be captured in a precise manner as follows:
 
-\begin{defn}
+\begin{defn}[Satisfiability]
 A set $S$ of formulas of $\mathcal{L}_0$ is (zeroth-order) \textit{satisfiable} or \textit{semantically consistent} \textit{iff} there is a structure $\mathbf{S}$ such that $\mathbf{S} \models X$ for each $X \in S$. We say $S$ is (zeroth-order) \textit{unsatisfiable} or \textit{semantically inconsistent} provided it is not semantically consistent. 
 \end{defn}
 
@@ -793,7 +802,7 @@ If $S$ is a set of tautologies, $S$ is semantically consistent.
 The proof is left as an exercise. 
 \end{exc}
  
-\section{Validity}
+\subsection{Validity}
 
 Here comes something magical. So far, we talked about certain sets of formulas that are satisfiable, and certain sets of formulas that are unsatisfiable. And this boiled down to whether the set of formulas have a common model, or they do not. Now as it turns out, satisfiability and unsatisfiability are sufficient to define the central notion of logic: validity. 
 
@@ -825,6 +834,313 @@ Suppose you have an argument with (possibly infinite) premises $P=\set{X_1, X_2,
 
 But note that now we really are talking about unsatisfiability! For what we just described may simply be put: the set $\{X_1, X_2, ..., \neg Y\}$ is unsatisfiable. And this is, indeed, what validity boils down to. In particular, an argument is valid \textit{if, and only if} its premises, together with the negation of its conclusion, are unsatisfiable. And again, all this just means that it is impossible for a valid argument to have true premises and a false conclusion. Thus:
 
-\begin{defn}
+\begin{defn}[Validity]
 Let $A=\{X_1, X_2, ...\}$ be any set of formulas and let $Y$ be any formula of $\mathcal{L}_0$. Then, the argument from \textit{premises} $A$ to the \textit{conclusion} $Y$ is \textit{valid} \textit{iff} the set $\set{X_1, X_2, ..., \neg Y}$ is not satisfiable. If an argument from $A$ to $Y$ is \textit{valid}, we write $A \models Y$, or say that $Y$ is a \textit{semantic consequence} of, or \textit{semantically entailed} by $A$.  
 \end{defn}
+
+\subsection{Validity and tableau}
+
+From the above, you may already see how reasoning with sets of formulas is implemented in our system. With single formulas, we had that if \textit{every} possible tree for $\neg X$ remained open, that must mean $\neg X$ is satisfiable (i.e., it is a tautology or contingent), which in turn ensures that $X$ is \textit{not} a tautology. On the other hand, if there is a possible tree for $\neg X$ that closes (closes on all its branches), then $X$ is indeed a tautology, since its negation is not satisfiable. Similarly, but with sets of formulas, if a tree for $\{X_1, X_2, ..., \neg Y\}$ closes at least once, then $\{X_1, X_2, ..., \neg Y\}$ is \textit{not} satisfiable, which in turn means that $\{X_1, X_2, ..\}$ entails $Y$. On the other hand, if \textit{no} tree for $\{X_1, X_2, ..., \neg Y\}$ closes, that means the set is satisfiable, and $\{X_1, X_2, ...\}$ does not entail $Y$. 
+
+The only question is: how do we work with multiple formulas, when in the simpler case, we put the sole formula $\neg X$ at the root of the tree (when trying to prove $X$ is a tautology)? First, with arguments, ws we put the \textit{negation} of the \textit{conclusion} at the root of the tree. So if we are considering whether the set $S=\set{X_1, X_2, ...}$ of premises is such that $S \vdash Y$, we put $\neg Y$ at the root of the tree. 
+
+The other change is more substantial. We introduce a very simple new rule into the system that enables us to inject any one of the premises at any part of our derivation. Thus: 
+
+\begin{figure}[h]
+	\centering
+	\begin{prooftree}{}
+		[{X}
+		[{Y}, just=Pr.]
+		]
+	\end{prooftree}
+	
+	\medskip
+	\textit{Provided $Y$ is one of the premises.}
+	\caption{Premise rule}
+\end{figure}
+
+Note that $X$ and $Y$ here are completely independent of one another. $X$ may be any formula that you happen to consider at any one point of your proof, and $Y$ can be any formula as long as it is one of the premises under consideration. Accordingly, the premise rule is radically different from all the previous rules, since it does not `depend' on any formula at any one point of tree. In other words, you can put any premise down at any one point of your derivation, and in fact, as many times as you want. 
+
+\fpboxstar{The relationship between the premise rule and all the other rules of our tableau system is similar to the relationship between the base rule and the productive rule(s) in our syntactic derivations.}
+
+Suppose you want to show that $\{X, X \rightarrow Y\} \vdash Y$. This is usually called \textit{Modus Ponens}, and it is a valid argument form. In other words, for any choice of $X$, $Y$, it is true that $\{X, X \rightarrow Y\} \models Y$. So let's show the corresponding fact syntactically. 
+
+As noted above, the first step here is to put the \textit{negation} of the conclusion at the root of tree derivation. Since $Y$ is the conclusion, the tree will start out as such: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg Y}, just=Start]
+	\end{prooftree}
+\end{center}
+
+Now unlike with tautologies, just having the negation of the conclusion gets us nowhere (if the conclusion is not itself a tautology). In fact, in this case, there is no rule you can use on $\neg Y$ to get further. On the other hand, what you \textit{can} do is use the premise rule. There are two premises, so you have a choice. It is not \textit{always} the case that all the premises are used, and in fact, the order in which they are used is also not predetermined, so there is a degree of freedom here. 
+
+Let's start with the more complex premise:
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg Y}, just=Start
+		[{X \rightarrow Y}, just=Pr.]
+		]
+	\end{prooftree}
+\end{center}
+
+Great! You should now see that you can use one of your other rules on the new formula. Thus: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg Y}, just=Start
+		[{X \rightarrow Y}, just=Pr.
+			[{\neg X}, just=$\rightarrow$:!u]
+			[{Y}]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+You may have immediately noticed that the right side branch closes by the occurrence of $Y$ and $\neg Y$ on it. Thus, we have: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg Y}, just=Start
+		[{X \rightarrow Y}, just=Pr.
+		[{\neg X}, just=$\rightarrow$:!u]
+		[{Y}, close={:!uu,!c}]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+On the other hand, you might also see that the left hand side branch of the tree remains open, and there are no formulas left on which we might apply a rule. Thus, we have to look for another premise. (Not) incidentally, our other premise, $X$ is just what we need. In particular:  
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg Y}, just=Start
+		[{X \rightarrow Y}, just=Pr.
+			[{\neg X}, just=$\rightarrow$:!u
+			[{X}, just=Pr., close={:!u, !c}]
+			]
+			[{Y}, close={:!uu,!c}]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+Accordingly, we can conclude that $\{X, X \rightarrow Y\} \vdash Y$. 
+
+\begin{defn}
+	Let $A=\{X_1, X_2, ...\}$ be any set of formulas and let $Y$ be any formula of $\mathcal{L}_0$. Then, the set of premises $A$ \textit{syntactically entails} $Y$, or $Y$ is a \textit{syntactic consequence} of $A$, \textit{iff} there is a closed tree with $\neg Y$ at its origin, and with possible uses of the rule Pr. with any member of $A$. In such cases, we write $A \vdash Y$, and call the closed tree a \textit{proof} of $Y$ from the premise set (or simply, premises) $A$. 
+\end{defn}
+
+Let's look at a more complicated proof before it is your turn. Suppose you want to evaluate the following argument:
+
+\begin{center}
+\begin{tabular}{ll}
+(P1) & $X \vee \neg Y$ \\
+(P2) & $\neg \neg Y$ \\
+(C) & $(Q \vee Z) \rightarrow X$ 
+\end{tabular}
+\end{center}
+
+As a first step, like before, we put the negation of the conclusion at the root of our tree. Thus: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+			]
+	\end{prooftree}
+\end{center}
+
+Note that we are negating the whole formula, so you have to provide the outer parentheses if they were omitted previously. 
+
+It is a good idea to break this down a bit more immediately, since it won't branch. 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+			[{Q \vee Z}, just=$\neg\rightarrow$:!u
+			[{\neg X}, just=$\neg\rightarrow$:!uu
+		]
+		]
+		]	
+	\end{prooftree}
+\end{center}
+
+As before, there are various ways to proceed, some shorter than others. In particular, we could start breaking down $Q \vee Z$. However, this would make the proof longer than necessary. Once you are more comfortable with how the system works, you will be able to see this. 
+
+For now, let's proceed by adding $\neg \neg Y$ with our premise rule. We could immediately simplify it further, but for now, we will leave it as is. So we have:  
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+		[{Q \vee Z}, just=$\neg\rightarrow$:!u
+		[{\neg X}, just=$\neg\rightarrow$:!uu
+		[{\neg \neg Y}, just=Pr.
+		]
+		]
+		]
+		]
+		]	
+	\end{prooftree}
+\end{center}
+
+Then, we can add the other premise to our tree, again, non-branching:
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+		[{Q \vee Z}, just=$\neg\rightarrow$:!u
+		[{\neg X}, just=$\neg\rightarrow$:!uu
+		[{\neg \neg Y}, just=Pr.
+		[{X \vee \neg Y}, just=Pr.]
+		]
+		]
+		]
+		]
+		]	
+	\end{prooftree}
+\end{center}
+
+We now have a choice to branch. But doing the proof briefly in our head, we immediately see that if we branch to $X$ and $\neg Y$, our tree immediately closes by $\neg X$ and $\neg \neg Y$. On the other hand, if we branch to $Q$ and $Z$, nothing happens, and we still need to branch further to $X$ and $\neg Y$ to close the tree. And in fact, in the latter case, we have to do it twice, resulting in four branches in the end. 
+
+So the simplest way is to go immediately to: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+		[{Q \vee Z}, just=$\neg\rightarrow$:!u
+		[{\neg X}, just=$\neg\rightarrow$:!uu
+		[{\neg \neg Y}, just=Pr.
+		[{X \vee \neg Y}, just=Pr.
+			[{X}, just=$\vee$:!u, close={:!uuu, !c}]
+			[{\neg Y}, just=$\vee$:!u, close={:!uu, !c}]
+		]
+		]
+		]
+		]
+		]
+		]	
+	\end{prooftree}
+\end{center}
+
+Again, you can compare this to: 
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+		[{Q \vee Z}, just=$\neg\rightarrow$:!u
+		[{\neg X}, just=$\neg\rightarrow$:!uu
+		[{\neg \neg Y}, just=Pr.
+		[{X \vee \neg Y}, just=Pr.
+			[{Q}, just=$\vee$:!uuuu
+				[{X}, just=$\vee$:!uu, close={:!uuuu, !c}]
+				[{\neg Y}, close={:!uuu, !c}]
+			]
+			[{Z}
+				[{X}, just=$\vee$:!uu, close={:!uuuu, !c}]
+				[{\neg Y}, close={:!uuu, !c}]
+			]
+		]
+		]
+		]
+		]
+		]
+		]	
+	\end{prooftree}
+\end{center}
+
+And in fact, if you branched immediately at the beginning as many times as possible, and applied every rule as many times as possible, you would have had this:
+
+\begin{center}
+	\begin{prooftree}{}
+		[{\neg ((Q \vee Z) \rightarrow X)}, just=Start
+		[{Q \vee Z}, just=$\neg\rightarrow$:!u
+			[{Q}, just=$\vee$:!u
+				[{X \vee \neg Y}, just=Pr.
+					[{X}, just=$\vee$:!u
+						[{\neg X}, just=$\neg\rightarrow$:!uuuuu
+						[{\neg \neg Y}, just=Pr.
+						[{Y}, just=$\neg\neg$:!u, close={:!uuu, !uu}
+						]
+						]
+						]
+					]
+					[{\neg Y}
+						[{\neg X}
+						[{\neg \neg Y}
+						[{Y}, close={:!uuu,!c}
+						]
+						]
+						]
+					]
+				]
+			]
+			[{Z}
+				[{X \vee \neg Y}
+					[{X}
+						[{\neg X}
+						[{\neg \neg Y}
+						[{Y}, close={:!uuu, !uu}
+						]
+						]
+						]
+					]
+					[{\neg Y}
+						[{\neg X}
+						[{\neg \neg Y}
+						[{Y}, close={:!uuu,!c}
+						]
+						]
+						]
+					]
+				]
+			]
+		]
+		]
+	\end{prooftree}
+\end{center}
+
+Now this may not look \textit{that} bad on paper, but notice that the first proof had 7 occurrences of formulas, the second had 11, while the last one had 22! On the other hand, none of these proofs are incorrect. It is just that they become less and less elegant.
+
+\subsection{On soundness and completeness, again}
+
+Note that we can now reformulate our soundness and completeness claims from above in a stronger form. Previously, we had:
+
+\[
+\models X \textit{ iff } \vdash X
+\]
+
+Again, from left to right, this is completeness, and from right to left, this is soundness. But we also have a stronger version of this, with multiple formulas, as opposed to singular ones. In particular:
+%
+\[
+A \models X \textit{ iff } A \vdash X
+\] 
+%
+Or in words, $A$ \textit{semantically} entails X \textit{iff} $A$ \textit{syntactically} entails X. And once again, from left to right, this is (strong) completeness, and from right to left, this is (strong) soundness (for zeroth-order logic). 
+
+We shall not prove this biconditional in this book, as it involves more advanced techniques than we are now ready for. However, we can note the following. 
+
+Let's negate both sides of the biconditional again, just as before. Then, we get: 
+%
+\[
+A \not\models X \textit{ iff } A \nvdash X
+\] 
+%
+Again, we can try and unpack the two sides, and see what we get. First, if $A \nvdash X$, that means that $\neg X$ cannot have a closed tableau, no matter which members of $A$ are used in any of the attempted trees. In other words, all the trees starting with $\neg X$ will remain open, no matter how long they might be. 
+
+On the other side, we have that $A \not\models X$, i.e., that $A$ does not semantically entail $X$. Now previously, we defined semantic entailment in terms of unsatisfiability. In particular, $A$ semantically entails $X$ provided the set $A$ together with $\neg X$ form a set (precisely $A \cup \{\neg X\}$) that is unsatisfiable. Accordingly, $A$ does \textit{not} semantically entail $X$ provided $A$ together with $\neg X$ is not unsatisfiable. Or in other words, $A$ together with $\neg X$ \textit{is} satisfiable.
+
+Putting the above two results together, we then get that $A$ together with $\neg X$ is satisfiable \textit{iff} $\neg X$ does not have a closed tableau from premises $A$. 
+
+\begin{exc}
+For each set of formulas $A$ and formula $B$ of $\mathcal{L}_0$ below, show that $A \vdash B$ using the tableau method. 
+
+\begin{enumerate}
+	\item $A=\{X \rightarrow Y, Y \rightarrow Z, \neg Z\}$ and $B=\neg X$;
+	\item $A=\{X \vee (Z \rightarrow Q), R \wedge Z, \neg Q\}$ and $B=X$;
+	\item $A=\{\neg ((X \vee \neg Y) \wedge (Z \wedge \neg Q))\}$ and $B=(\neg X \wedge Y) \vee (\neg Z \vee Q)$
+	\item $A=\{Z \rightarrow (X \wedge \neg X), \neg Q \vee Z, X \rightarrow Q\}$, $B=\neg X$;
+	\item $A=\{(\neg X \wedge Y) \vee (Z \wedge \neg Q), \neg X \rightarrow \neg Y, Z \rightarrow Q\}$, $B=R$;
+	\item $A=\{X \mid X\text{ is a formula of }\mathcal{L}_0\}$, $B=\neg Y$.
+	\end{enumerate} 
+\end{exc}
