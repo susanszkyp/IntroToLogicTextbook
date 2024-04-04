@@ -1,0 +1,145 @@
+\chapter{The semantics of first-order logic}
+
+We are now ready to tackle the semantics of first-order logic. In some sense, the semantics of first-order logic is very much like the semantics of zeroth-order logic, with the exception of the newly introduced variables and the quantifiers that bind them. On the other hand, the \textit{expressive power} of the language $\mathcal{L}_1$ is vastly more powerful than that of $\mathcal{L}_0$. Indeed, for some, first-order classical logic is \textit{the} logical system, or at any rate, the \textit{strongest but still well-behaved} logical system. At any rate, this added expressive power comes with added complexity, and everything starts with dealing with the semantic values of our variables. 
+
+\section{On the values of variables}
+
+For a moment, let's forget about our logics and consider everyday mathematical practice. Suppose you have a simple equation of one unknown variable as follows: 
+\[
+(2\times x)+7=57
+\]
+If you `solve' this equation, you get that $x=25$. Now really, all this means is that if you take the \textit{value of the variable} $x$ to be $25$, then $(2\times x)+7=57$ will come out \textit{true}, while if you take \textit{the value of the variable} $x$ to be anything else, it will come out \textit{false}. Thus, one way we can talk about variables is to assign them a value and see whether the resulting formula is true, computing with the value assigned. In such cases, the variables function like \textit{temporary constants}. Essentially, what we are saying above is that for a moment, you should understand $(2\times x)+7=57$ the same way as you would understand $(2 \times 25) + 7= 57$. Of course, unlike with constants, what the value of $x$ is is temporarily assigned. For example, in $(5 \times x)+7=107$, the formula will now come out true provided $x$ is assigned the value $20$, not $25$. Clearly, the value of $20$ and $25$ did not change from one equation to the other, but the assigned value of $x$ did, provided the aim is to make the formula true. And of course, we can assign a value to $x$ that makes neither of these equations come out true. For example, if $x$ is assigned the value $97$, both equations will come out false. As we shall see presently, our semantics for first-order logic will be founded on these temporary assignments of values to the variables of the language $\mathcal{L}_1$.
+
+Ultimately, our goal is to assign meaning to quantified formulas with no free variables, i.e., quantified closed formulas, in a systematic way. This will be based on a generalization of the idea of temporary assignments of values. For example, take the claim:
+\begin{center}
+	The equation $(2\times x)+7=57$ has a solution. 
+\end{center}
+What this means is that \textit{there is} a temporary assignment of a value to the variable $x$ such that $(2\times x)+7=57$ comes out true. This is clearly a use of the existential quantifier. And clearly, this is true if there really is such an assignment. Moreover, as demonstrated, there is such an assignment (assigning $25$ to $x$), so it is true that the equation has a solution. 
+
+On the other hand, take the claim: 
+\begin{center}
+	The equation $(0\times x)+7=57$ has a solution. 
+\end{center}
+This is false, and the reason why it is false is because \textit{there is no} assignment of a value to the variable $x$ such that $(0\times x)+7=57$. 
+
+The same type of reasoning holds for the universal quantifier. For example, for the equation $2 \times (x + 2)=(2 \times x) + 4$, \textit{every} temporary assignment of a value to the variable $x$ makes the equation come out true. Incidentally, this is equivalent to the fact that \textit{there is no} assignment of a value to the variable $x$ which would make the equation come out \textit{false}. 
+
+\section{The meaning of terms}
+
+As specified above, the terms of $\mathcal{L}_1$ are the constants and variables of $\mathcal{L}_1$. For $\mathcal{L}_0$, assigning a semantic value to any constant was done through the interpretation function of the structure $\mathbf{S}=\oset{\mathbf{D}, I}$. This will be retained, so that the value of a constant $\cons{n}$ ($n \in \mathbb{N}$) relative to the structure $\mathbf{S}$, in other words (symbols), $I(\cons{n})$, is just some member of $\mathbf{D}$. But again, though variables have a function similar to constants, their semantic value is only temporarily assigned, and is otherwise \textit{variable}. Accordingly, we do not use the interpretation function $I$ to assign values to our variables, but a separate function $\mathbf{a}$ called a \textit{variable assignment}. 
+
+The variable assignment function $\mathbf{a}$ assigns to each \textit{variable} $\var{n}$ ($n \in \mathbb{N}$) a member of $\mathbf{D}$, like $I$ does for constants. But unlike with $I$, we will introduce a device that will allow us to change the variable assignment \textit{inside} a structure $\mathbf{S}$. The basis of this is what is called an $x$-variant assignment $\mathbf{a}'$ for an existing assignment $\mathbf{a}$. Unsurprisingly, $\mathbf{a}'$ is called an $x$-variant assignment of $\mathbf{a}$ because it differs from it in at most what it assigns to the variable $x$. (It should be noted that in usual mathematical fashion, $\mathbf{a}$ may be its own (trivial) $x$-variant assignment, in which case nothing is changed from the initial assignment.) 
+
+Let's look at an example for this. Suppose you have a mathematical statement as follows:
+\[
+x \times 4 < 2 \times y
+\]
+Here, we have multiple variables, so each assignment of values to the variables will assign a value to $x$, and to $y$. Suppose we assign the value $5$ to $x$ and $10$ to $y$. This will result in a false statement, since $20<20$ is false. So now take the $x$-variant assignment that assigns $4$ to $x$, but otherwise leaves the assignment as it was. This time, we get a true statement, since $16 <20$. Of course, we can also take a $y$-variant assignment. And in general, not all $x$- or $y$-variant assignment will make the statement true. For example, the $y$-variant assignment (to the initial one) where $y=5$ will clearly make it false again. 
+
+We can make the above ideas more precise as follows:
+
+\begin{defn}[Variable assignment]
+Given a structure $\mathbf{S}=\oset{\mathbf{D}, I}$, the function $\mathbf{a}: \textsf{VAR}_{\mathcal{L}_1} \to \mathbf{D}$ is a \textit{variable assignment} in $\mathbf{D}$. If $\mathbf{a}'$ is a variable assignment in $\mathbf{D}$ just like $\mathbf{a}$, except possibly for some $x$, $\mathbf{a}'(x)\neq \mathbf{a}(x)$, we call $\mathbf{a}'$ an $x$-variant variable assignment of $\mathbf{a}$. If $\mathbf{a}'(x)=d$ ($d \in D$), i.e., $\mathbf{a}'$ is the $x$-variant variable assignment of $\mathbf{a}$ such that $x$ is sent to $d$ by $\mathbf{a}'$, we may also write $\mathbf{a}^x_d$.
+\end{defn}
+
+Let's return to the general picture. Since some terms of the language $\mathcal{L}_1$ are variables, it won't be enough to work solely with the interpretation function $I$ to assign semantic values to our terms in $\mathcal{L}_1$ -- we need a variable assignment too. Clearly, since these terms then go into forming atomic and complex formulas, we will need to relativize the semantic values of expressions of $\mathcal{L}_1$ both to a particular structure $\mathbf{S}=\oset{\mathbf{D}, I}$ and to a corresponding variable assignment $\mathbf{a}$ in $\mathbf{D}$ at any one time. We will introduce some new notation for this. In particular, if $X$ is any expression of $\mathcal{L}_1$, then its semantic value relative to a structure $\mathbf{S}=\oset{\mathbf{D}, I}$ \textit{and} variable assignment $\mathbf{a}$ in $\mathbf{D}$ will be denoted:
+\[
+I(X)[\mathbf{a}]
+\]
+Using this notation, we can easily specify what it means to assign a semantic value to a \textit{term} of $\mathcal{L}_1$ as follows:
+\begin{defn}[Term values]
+Let $\mathbf{S}=\oset{\mathbf{D}, I}$ be any ordered pair such that $\mathbf{D}$ is a non-empty set and $I$ is defined for each $c \in \mathsf{CONS}_{\mathcal{L}_1}$ so that $I(c) \in \mathbf{D}$. Let $\mathbf{a}$ be a variable assignment in $\mathbf{D}$. Then, for each term $t \in \mathsf{TERM}_{\mathcal{L}_1}$, we define the value of $t$ in the structure $\mathbf{S}$ relative to the variable assignment $\mathbf{a}$ as follows:
+\begin{enumerate}
+	\item if $t=x$ for some $x \in \textsf{VAR}_{\mathcal{L}_1}$, $I(t)[\mathbf{a}]=\mathbf{a}(t)$;
+	\item if $t=c$ for some $c \in \textsf{CONS}_{\mathcal{L}_1}$, $I(t)[\mathbf{a}]=I(c)$.
+\end{enumerate}
+\end{defn}
+
+\begin{remark}
+Take some time to try and thoroughly understand the above definition. What it says is that if a term is a variable, then its value is taken care of by the variable assignment, while if it's a constant, then the interpretation function decides. 
+\end{remark}
+
+\begin{exc}
+Let $\mathbf{S}=\oset{\mathbf{D}, I}$ be such that $\mathbf{D}=\mathbb{N}$, $I(\cons{n})=n \times 2$, and let $\mathbf{a}(\var{n})= n + 7$ ($n \in \mathbb{N}$). Then, determine for each of the expressions below which natural number they stand for. In each case, specify how you reduced the calculation to one of two options, in accordance with the definition. 
+%
+\begin{enumerate}
+	\item $I(\cons{4})[\mathbf{a}]$
+	\item $I(\var{4})[\mathbf{a}]$
+	\item $I(\var{2})[\mathbf{a}]$
+	\item $I(\var{5})[\mathbf{a}^{\var{5}}_9]$
+	\item $I(\var{5})[\mathbf{a}^{\var{8}}_4]$
+\end{enumerate}
+\end{exc}
+
+\begin{remark}
+Your answers should look something like this: 
+\[
+I(\var{1})[\mathbf{a}]=\mathbf{a}(\var{1})=1+7=8.
+\]
+\end{remark}
+
+\section{On truth and satisfaction}
+
+Now that we know how to assign values to our terms relative to a structure $\mathbf{S}$ and a variable assignment $\mathbf{a}$, it is easy to see how each \textit{quantifier-free} formula gets its value in the language $\mathcal{L}_1$. In particular, the calculations are essentially identical to those of $\mathcal{L}_0$, except if you encounter a variable (all of which will be free by assumption of the formulas being quantifier-free), you need to calculate with the assignment $\mathbf{a}$ instead of the interpretation function $I$. 
+
+In particular, for \textit{atomic} formulas, of form $P^n(t_1, ..., t_n)$, their semantic value, as determined relative to $\mathbf{S}=\oset{\mathbf{D}, I}$ and the variable assignment $\mathbf{a}$ in $\mathbf{D}$, will just be:
+\[
+\mathbf{S}\models P^n(t_1, ..., t_n)[\mathbf{a}] \textit{ iff } \oset{I(t_1)[\mathbf{a}], ..., I(t_n)[\mathbf{a}]} \in I(P)
+\]
+In other words, for each term in our atomic formula, we check if their value under $\mathbf{S}$ and $\mathbf{a}$ is \textit{in} the interpretation of $P$ or not. Notice that this means most of the time, the value of an atomic formula of $\mathcal{L}_1$ with free variables relative to a structure $\mathbf{S}$ will depend on the particular variable assignment we are calculating with. 
+
+One crucial thing regarding our terminology is that technically, if the atomic formula $P^n(t_1, ..., t_n)$ is \textit{open} because it has some (trivially, free) variables occurring in it, then what $\mathbf{S}\models P^n(t_1, ..., t_n)[\mathbf{a}]$ says is \textit{not}, in general, that the formula is \textit{true}. Rather, what it says is that the formula $P^n(t_1, ..., t_n)$ is \textit{satisfiable} in $\mathbf{S}$, and specifically, satisfied in $\mathbf{S}$ under $\mathbf{a}$. The formula cannot be called \textit{true} because relative to some other assignment $\mathbf{b}$, it may \textit{not} be the case that $\mathbf{S}\models P^n(t_1, ..., t_n)[\mathbf{b}]$. 
+
+Indeed, \textit{truth} in a structure $\mathbf{S}$ will be defined just as satisfaction in $\mathbf{S}$ under \textit{every} variable assignment $\mathbf{a}$ in $\mathbf{D}$. And incidentally, sentences will get their value independent of any particular assignment $\mathbf{a}$ so they will all be \textit{truth-apt}; either true or false in a structure. This is partly why sentences are so crucial. Because we are interested (as of now) in \textit{truth}, and not \textit{satisfaction under an assignment}. 
+
+Accordingly, to say that a formula $X$ is \textit{true} in $\mathbf{S}$, we will suppress the notation $[\mathbf{a}]$ (as by definition, it is irrelevant), and write: 
+\[
+\mathbf{S} \models X
+\]
+If we want to say that a formula $X$ is \textit{satisfied} in $\mathbf{S}$ under $\mathbf{a}$, we write: 
+\[
+\mathbf{S} \models X[\mathbf{a}]
+\]
+
+\fpbox{You can think of the distinction between satisfaction under an assignment and truth as follows. If you say something like ``$x$ is tall'', you cannot really say that this is either a true or false statement as it is. Clearly, \textit{if} we understand `$x$' as former professional basketball player Yao Ming (height: 7' 6"), it would be `true', and \textit{if} we understand `$x$' as movie star Danny DeVito (height: 4'10"), it would be `false'. But in itself, it is neither true nor false, because $x$ may stand for anything! On the other hand, the sentence ``Yao Ming is tall'' \textit{is} true, because he \textit{is} tall independent of how we understand `$x$' (because it is not even part of the sentence).}
+
+For example, let $\mathbf{S}=\oset{\mathbf{D}, I}$ be such that $\mathbf{D}=\mathbb{N}$, $I(\cons{n})=n \times 2$, and let $\mathbf{a}(\var{n})= n + 7$ ($n \in \mathbb{N}$) as before. Let $I(\pred{3}{1})=\set{\oset{n, j, k}\mid n+j=k}$, and $I(\pred{3}{2})=\set{\oset{n, j, k}\mid n+j=k}$. Then, consider an atomic formula, such as:
+\[
+\pred{3}{1}(\cons{1}, \cons{3}, \var{5})
+\]
+Is the above formula satisfied in $\mathbf{S}$ under to the assignment $\mathbf{a}$? Well, $I(\cons{1})[\mathbf{a}]=2$, $I(\cons{3})[\mathbf{a}]=6$, and $I(\var{5})[\mathbf{a}]=12$. On the other hand, $2+6\neq 12$, so this triple is not in $I(\pred{3}{1})$. Thus: 
+\[
+\mathbf{S} \not\models \pred{3}{1}(\cons{1}, \cons{3}, \var{5})[\mathbf{a}]
+\]
+Of course, as we discussed above, a well-chosen $\var{5}$-variant of $\mathbf{a}$ may very well satisfy this formula in $\mathbf{S}$ relative to it. Of course, this is easy to specify with our explicit notation: 
+\[
+\mathbf{S} \models \pred{3}{1}(\cons{1}, \cons{3}, \var{5})[\mathbf{a}^{\var{5}}_8]
+\]
+Clearly, we can also consider: 
+\[
+\mathbf{S} \models \pred{3}{1}(\cons{1}, \cons{3}, \var{1})[\mathbf{a}].
+\]
+And in fact, with a different change in our formula, we get: 
+\[
+\mathbf{S} \models \pred{3}{2}(\cons{1}, \cons{3}, \var{5})[\mathbf{a}]
+\]
+\begin{exc}
+Explain in detail, demonstrating the calculations at each turn, why it is the case that: 
+\begin{gather}
+\mathbf{S} \models \pred{3}{1}(\cons{1}, \cons{3}, \var{1})[\mathbf{a}]\\
+\mathbf{S} \models \pred{3}{2}(\cons{1}, \cons{3}, \var{5})[\mathbf{a}]\\
+\mathbf{S} \not\models \pred{3}{2}(\cons{1}, \cons{3}, \var{5})[\mathbf{a}^{\var{5}}_8]\\
+\mathbf{S} \not\models \pred{3}{1}(\cons{1}, \cons{3}, \var{1})[\mathbf{a}^{\var{1}}_{12}]
+\end{gather}
+\end{exc}
+
+As far as the connectives go, there is no change in how their meaning is specified relative to their less complex constituents, except again, we are calculating with both $I$ and $\mathbf{a}$ at each turn. 
+
+Thus, we get that:
+
+\begin{enumerate}
+	\item $\mathbf{S} \models \neg X[\mathbf{a}]$ if, and only if, $\mathbf{S} \not\models X[\mathbf{a}]$;
+	\item $\mathbf{S} \models (X \wedge Y)[\mathbf{a}]$ if, and only if, $\mathbf{S} \models X[\mathbf{a}]$ and $\mathbf{S}\models Y[\mathbf{a}]$;
+	\item $\mathbf{S} \models (X \vee Y)[\mathbf{a}]$ if, and only if, $\mathbf{S} \models X[\mathbf{a}]$ or $\mathbf{S}\models Y[\mathbf{a}]$ (or both);
+	\item $\mathbf{S} \models (X \rightarrow Y)[\mathbf{a}]$ if, and only if, if $\mathbf{S} \models X[\mathbf{a}]$, then $\mathbf{S} \models Y[\mathbf{a}]$. 
+\end{enumerate}

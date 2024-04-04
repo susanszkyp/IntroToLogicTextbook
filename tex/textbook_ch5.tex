@@ -1,0 +1,227 @@
+\chapter{The syntax of first-order logic}
+
+Now that we are comfortable with the syntax, semantics, and tableau system of zeroth-order logic, we are in a position to consider a more expressive language, the language of \textit{first-order} logic. Unsurprisingly, we will denote the language of first-order logic by $\mathcal{L}_1$. Just as before, the language has a syntactic aspect, the way its expressions are formed, and a semantic aspect, the way its expressions are given meaning. Clearly, the second depends on the first, so we shall start, again, with the syntax of the language under consideration. 
+
+In fact, the language $\mathcal{L}_1$ is very similar to $\mathcal{L}_0$, save for one crucial device; quantification. Accordingly, we still have the same predicates and constants as before, and the same connectives to connect atomic formulas together. However, what we \textit{also} have are \textit{variables}, and \textit{quantifier symbols} that bind these variables. 
+
+\section{Variables and atomic formulas}
+
+Let's start with the variables. Variables in $\mathcal{L}_1$ function similar to constants. In particular, just as there is a set of constants $\mathfrak{c}_n$ for each natural number $n$, in $\mathcal{L}_1$, there is also a set of \textit{variables} $\mathfrak{x}_n$, for each natural number $n$. In list format, we have:
+
+\[
+\var{1}, \var{2}, \var{3}, \var{5}, \var{6}, ....
+\]
+
+
+Moreover, these variables can take exactly the same places as the constants. For example, if you have a predicate $\pred{2}{2}$, then both $\pred{2}{2}(\cons{4}, \cons{2})$ and $\pred{2}{2}(\var{4}, \var{9})$ are atomic formulas. Because of this, constants and variables \textit{together} are usually called \textit{terms}, to simplify the definition of what it means for something to be an atomic formula. Thus first, we have:
+
+\begin{defn}[Constants, variables, terms]
+The set $\mathsf{CON}_{\mathcal{L}_1}=\{\cons{n} \mid n \in \mathbb{N}\}$, and we call it the \textit{constants} of $\mathcal{L}_1$. The set $\mathsf{VAR}_{\mathcal{L}_1}=\{\var{n} \mid n \in \mathbb{N}\}$ and we call it the \textit{variables} of $\mathcal{L}_1$. The set $\mathsf{TERM}_{\mathcal{L}_1}=\set{t \mid \text{for some } n\in \mathbb{N}, t = \var{n} \vee t = \cons{n} }$, and we call it the \textit{terms} of $\mathcal{L}_1$. 
+\end{defn}
+
+\begin{remark}
+Notice that we do not use our special font for denoting terms, because technically, every $t_n$ stands for either a variable or a constant of $\mathcal{L}_1$ 
+\end{remark}
+
+Once we have the notion of a \textit{term}, which is, again, either a variable or a constant of the language $\mathcal{L}_1$, we can easily define again what it means for something to be an atomic formula -- this time for $\mathcal{L}_1$.
+
+As just mentioned, there is nothing more to this than specifying that if you have an $n$-place predicate $\pred{n}{k}$, and it is followed by $n$ \textit{terms} (constants or variables) of $\mathcal{L}_1$ in parentheses, separated by commas, then the expression $\pred{n}{k}(t_1, ..., t_n)$ is an atomic formula of $\mathcal{L}_1$.
+
+Here are a few examples of atomic formulas of $\mathcal{L}_1$
+%
+\begin{gather*}
+	\pred{3}{3}(\cons{3},  \var{5}, \var{9})\\
+	\pred{3}{3}(\var{2},  \cons{6}, \cons{7})\\
+	\pred{2}{4}(\cons{3}, \cons{5})\\
+	\pred{2}{4}(\var{7}, \var{8})
+\end{gather*}
+%
+There are a few things you should notice here. First, there are atomic formulas in which both variables and constants occur. Moreover, there are other atomic formulas which are just like the ones before, but in place of variables, there are now constants, and in place of constants, there are now variables. So in general, constants and variables can always take each others' places. Second, there are atomic formulas that \textit{only} have constants, and atomic formulas that only have variables, and in each of these cases, for any predicate $\pred{}{}$, the situation could have been the converse.
+
+So again, we have:
+
+\begin{defn}[Atomic formula]
+If $P^n$ is an $n$-place predicate of $\mathcal{L}_1$ (i.e., $P^n \in \textsf{PRED}_{\mathcal{L}_1}$), and $t_1, ..., t_n$ are terms of $\mathcal{L}_1$ (i.e., $t_1, ..., t_n \in \mathsf{TERM}_{\mathcal{L}_1}$), then:
+\[
+P^n(t_1, ..., t_n)
+\]
+is an atomic formula of $\mathcal{L}_1$. The set of atomic formulas of $\mathcal{L}_1$ is denoted $\textsf{ATOM}_{\mathcal{L}_1}$.
+\end{defn}
+
+\section{Complex formulas and quantifiers}
+
+So far so good. Now comes the more confusing part. When we are forming more complex formulas in $\mathcal{L}_1$, we can not only use connectives, but also \textit{quantifiers}. And quantifiers work nothing like the connectives! Moreover, quantifiers and variables have an important relation to each other. In fact, they really make sense (for our purposes) only in relation to one another. Let's look at this phenomenon more closely.  
+
+Let's start with the \textit{formulas} of $\mathcal{L}_1$. In fact, it is not hard to define what it means for something to be a formula of our new language. We already know what the atomic formulas are, we still have our connectives as usual, and we add two other symbols, $\forall$ (`for all', `for every') for the \textit{universal} quantifier, and $\exists$ (`for some', `there exists') for the \textit{existential quantifier}. Thus:
+
+\begin{center}
+	\begin{tabular}{c|c|l}
+		$\forall$ & Universal quantifier &`For all', `For every'\\\hline
+		$\exists$ & Existential quantifier & `For some', `There exists'  
+	\end{tabular}
+\end{center}
+
+How the quantifiers show up in our formulas is as follows. In each case, for a formula $X$, you can form a quantified formulas by adding the quantifier \textit{with a specific variable} in front of the formula. So again, if $X$ is any formula of $\mathcal{L}_1$, then for example, $\forall \var{1} X$ is also a formula of $\mathcal{L}_1$. And so is $\exists \var{1} X$. And so is $\exists \var{45967} X$. But of course, since $X$ can be \textit{any} formula of $\mathcal{L}_1$, $X$ might already be a \textit{quantified} formula (that is, it might already have quantifiers), and it might even be a complex formula with quantifiers and connectives (or just connectives). So this new rule of ours gets us infinitely many new formulas in a very strong sense. For example, it gets us infinitely many new formulas even if we fix a quantifier and a variable. 
+
+Thus, we have the definition:
+
+\begin{defn}[Formulas]
+The set of formulas $\textsf{FORM}_{\mathcal{L}_1}$ of $\mathcal{L}_1$ is the smallest set such that: 
+%
+\begin{enumerate}
+	\item every $X \in \textsf{ATOM}_{\mathcal{L}_1}$ is in $\textsf{FORM}_{\mathcal{L}_1}$;
+	\item if $X, Y$ are in  $\textsf{FORM}_{\mathcal{L}_1}$, then $\neg X$, $(X \wedge Y)$, $(X \vee Y)$, and $(X \rightarrow Y)$ are in $\textsf{FORM}_{\mathcal{L}_1}$;
+	\item if $Y$ is in  $\textsf{FORM}_{\mathcal{L}_1}$ and $x$ is in $\mathsf{VAR}_{\mathcal{L}_1}$, then $\forall x Y$ and $\exists x Y$ are in  $\textsf{FORM}_{\mathcal{L}_1}$.  
+\end{enumerate}
+\end{defn}
+
+\begin{exc}
+	For each of the following expressions, determine if it is a formula of $\mathcal{L}_1$ or not. If it is, provide a linear or tree derivation of it. If it is not, explain why it is not. 
+	
+	\begin{enumerate}
+	\item $\forall \var{3} \pred{1}{3}(\cons{9})$
+	\item $(\pred{2}{5}(\var{9}, \var{3}) \vee \neg \exists \var{4}(\pred{1}{1}(\var{9}) \vee \neg \pred{1}{1}(\var{7})))$
+	\item $\neg \forall \var{5} (\pred{3}{2}(\cons{4}, \cons{1}, \var{3}) \vee \exists \var{1} \pred{1}{2}(\cons{13}))$
+	\item $\exists \var{3}(\pred{1}{5}(\cons{9}))$
+	\item $(\exists \var{6} \pred{1}{4}(\var{3}))$
+	\item $\forall x \neg (\pred{2}{1}(\cons{2}, \var{4}) \vee \exists \var{3}\pred{1}{5}(\cons{9}))$
+	\item $\neg\neg\neg\exists \var{6} \pred{1}{4}(\var{3})$
+	\item $\neg(\exists \var{3}\pred{1}{5}(\cons{9}))$
+	\end{enumerate}
+\end{exc}
+
+So far, not very complicated. But here's the rub. In first-order logic, we are not (at least currently) interested in \textit{all} formulas. Instead, we are interested in a special subset of them; those that are called `closed formulas'. The formulas that are not closed are called `open'. So there are open and closed formulas, and we want the closed ones. These closed formulas are also sometimes called `sentences'. Again, this way, sentences are just a special subset of all formulas -- the closed ones. 
+
+Here is the basic idea behind what makes a formula closed or its opposite, open. Note that the quantifiers $\forall$ and $\exists$ always come with some specific variable after them. They also have a \textit{scope}, which is just the formula which they flank from the left. In other words, the scope of $\exists x Y$ is $Y$, and the scope of $\forall x Y$ is, again, $Y$, and in either case, the variable is $x$. This is important for the following reason. 
+
+If a certain variable that occurs after the quantifier also occurs in the \textit{scope} of the quantifier (and is not already bound), then we say that that variable's occurrence is bound by that  quantifier. If an occurrence of a variable is bound, it is not free, and it is free if it is not bound. 
+
+Let's look at some examples:
+
+\begin{gather}
+	\pred{1}{1}(\var{1}) \wedge \pred{1}{1}(\var{2})\label{form1}\\
+	\forall \var{1} (\pred{1}{1}(\overline{\var{1}}) \wedge \pred{1}{1}(\var{2}))\label{form2}\\
+	\forall \var{1} (\pred{1}{1}(\overline{\var{1}}) \wedge \pred{1}{1}(\var{2})) \wedge \pred{1}{1}(\var{1})\label{form3}\\
+	\exists \var{2} \forall \var{1}(\pred{1}{1}(\overline{\var{1}}) \wedge \pred{1}{1}(\overline{\var{2}}))\label{form4}\\
+	\forall \var{1}(\pred{1}{1}(\overline{\var{1}}) \wedge \exists \var{2} \pred{1}{1}(\overline{\var{2}}))\label{form5}\\
+	\forall \var{1} \exists \var{1} \pred{1}{1}(\overline{\var{1}}) \label{form6}
+	\end{gather}
+
+To have a visual representation, I put a horizontal line over each of the \textit{bound} occurrences of the variables. Every other occurrence of a variable occurs \textit{free}.
+
+First, with formula \ref{form1}, there are no quantifiers so none of the occurrences of the variables are bound. In other words, all the variables occur free. In formula \ref{form2}, $\var{1}$ is in the scope of the quantifier $\forall$ with $\var{1}$, so it gets bound by it. But there is no quantifier for $\var{2}$, so that remains open. 
+
+The next formula, formula \ref{form3} shows something important. Sometimes, some \textit{occurrences} of variables are bound, but some other \textit{occurrences} remain free. As you can see, the \textit{first} occurrence of $\var{1}$ gets bound by the universal quantifier with $\var{1}$, but the \textit{second} occurrence does \textit{not}. Why? Because that occurrence of $\var{1}$ is not in the \textit{scope} of the quantifier. If you made a syntax tree for the formula, that specific occurrence of the variable would not be \textit{underneath} the quantifier, it would be on a different branch altogether, while the first occurrence would be. This is why we talk of occurrences of variables, and not simply variables. 
+
+Formulas \ref{form4} and \ref{form5} show two ways in which both variables can be bound. Note that though $\exists \var{2}$ takes a different place in the second, it still manages to have the sole occurrence of $\var{2}$ be in its scope, so it binds it either way. 
+
+Finally, \ref{form6} shows something unfortunate. As our syntax is defined, there can be \textit{overlapping} quantifiers with identical variables. In such cases, we need a rule to determine which quantifier binds the variable. In this case, that quantifier is $\exists$. Why? Because in $\pred{1}{1}(\var{1})$, $\var{1}$ occurs free. In $\exists \var{1} \pred{1}{1}(\var{1})$, $\var{1}$ no longer occurs free, it gets bound by $\exists \var{1}$. So when $\forall \var{1}$ arrives to the party late, it has no \textit{free} occurrences of variables to bind anymore. Thus $\forall \var{1}$ does nothing -- it binds no variables because there are no \textit{free} variables to bind. 
+
+As mentioned above, formulas in which all the occurrences of the variables are bound are \textit{closed}, and they are \textit{sentences}. Formulas in which there is at least one unbound (free) occurrence of a variable are called \textit{open}, and they are \textit{not} sentences. 
+
+So above, \ref{form4}, \ref{form5}, and \ref{form6} are closed formulas, and are therefore sentences. On the other hand, \ref{form1}, \ref{form2}, \ref{form3} are open formulas, and are therefore \textit{not} sentences. 
+
+Now there is a clever way to define what it means to be a sentence of $\mathcal{L}_1$, by keeping count at each turn of forming a formula which variables have at least one free occurrence. It is as follows:
+
+\begin{defn}[Sentences]
+Let $Y, Z$ be any formulas and $x$ be any variable of $\mathcal{L}_1$. We define the variables with at least one occurrence free in a formula, the free variables of a formula, as follows: 
+\begin{enumerate}
+	\item if $Y$ is an \textit{atomic} formula, all its variables are free;
+	\item the free variables of $\neg Y$ are the same as the free variables of $Y$;
+	\item the free variables of $(Y \wedge Z)$, $(Y \vee Z)$, $(Y \rightarrow Z)$ are the free variables of $Y$ and of $Z$ taken together;
+	\item the free variables of $\forall x Y$ and $\exists x Y$ are the free variables of $Y$ \textit{minus} the variable $x$.
+\end{enumerate}
+
+A formula $Y$ of $\mathcal{L}_1$ is \textit{open} \textit{iff} does not have a free variable, and \textit{closed} otherwise. The formula $Y$ is a \textit{sentence} \textit{iff} it is closed. 
+\end{defn}
+
+\begin{exc}
+Determine for each of the following formulas whether they are a sentence of $\mathcal{L}_1$ or not. If any formula is \textit{not} a sentence, underline the \textit{unbound} occurrences of its variables. 
+
+\begin{enumerate}
+	\item $\pred{1}{4}(\var{4})$
+	\item $\pred{1}{4}(\cons{4})$
+	\item $\forall \var{5}\pred{2}{5}(\var{3}, \cons{1})$
+	\item $\pred{1}{7}(\var{9}) \rightarrow \exists \var{4}\pred{2}{6}(\var{4}, \cons{9})$
+	\item $\pred{1}{7}(\cons{9}) \rightarrow \exists \var{4}\pred{2}{6}(\var{4}, \var{4})$
+	\item $\forall \var{1} (\pred{1}{4}(\var{1}) \rightarrow \neg \forall \var{1} \pred{1}{5}(\var{1}))$
+\end{enumerate}
+\end{exc}
+
+\section{Some further conventions}
+
+As before, we shall make some simplifications to our notation to make our formulas more readable, and our claims more general. We already know that we can refer to any predicate $\pred{n}{k}$ (for some $n, k \in \mathbb{N})$ by the metavariables $P$, $Q$, $R$, $...$, and we can refer to any constant $\cons{n}$ ($n \in \mathbb{N}$) by the metavariables $a$, $b$, $c$, $...$. We also had that formulas can be referred to by the metavariables $X$, $Y$, $Z$, $...$. We can now further add that for each \textit{variable} $\var{n}$ ($n \in \mathbb{N}$), we can use the metavariables $x$, $y$, $z$, $...$. 
+
+It's important here to understand the distinction between \textit{meta}variables and variables. Previously, we had less of a problem distinguishing between the two because we were using a language, $\mathcal{L}_0$, without variables. But now that we are using $\mathcal{L}_1$, \textit{with} variables, we need to distinguish between the two types. We shall see how the \textit{variables} of $\mathcal{L}_1$ function once we get to its semantics. But we can already say how its \textit{metavariables} function. In particular, metavariables `range over' the \textit{symbols} of the language. In other words, if we write something like $P(x)$, it means some formula of the language \textit{of form} $\pred{1}{n}(\var{k})$ for any $n, k \in \mathbb{N}$. Given this, $P(x)$ could be any one of \textit{infinitely many} formulas of the language, \textit{of that form}. In context, we may use this to mean \textit{one particular} formula \textit{of that form}, without specifying which one \textit{exactly} we mean (e.g., in an exercise). Or we can talk about all of them at once, like when we specify that $(X \rightarrow Y) \rightarrow (\neg X \vee Y)$ is a tautology, meaning \textit{all} formulas of this form are tautologies. 
+
+\section{The definition of $\mathcal{L}_1$}
+
+Let's put together everything into some neater definitions. 
+
+\begin{defn}[Formulas of $\mathcal{L}_1$] \label{language1}
+Let:
+	\begin{enumerate}
+		\item $\mathsf{CON}_{\mathcal{L}_1}=\set{\neg, \wedge, \vee, \rightarrow}$, the \textit{connectives} of $\mathcal{L}_1$;
+		\item $\mathsf{QUAN}_{\mathcal{L}_1}=\set{\exists, \forall}$, the \textit{quantifiers} of $\mathcal{L}_1$;
+		\item $\mathsf{CONS}_{\mathcal{L}_1}=\set{\cons{n} \mid n \in \mathbb{N}}$, the \textit{constants} of $\mathcal{L}_1$;
+		\item $\mathsf{VAR}_{\mathcal{L}_1}=\set{\var{n} \mid n \in \mathbb{N}}$, the \textit{variables} of $\mathcal{L}_1$;
+		\item $\mathsf{PRED}_{\mathcal{L}_1}=\set{\pred{n}{k} \mid n, k \in \mathbb{N}}$, the \textit{predicates} of $\mathcal{L}_1$, and;
+		\item $\mathsf{S}_{\mathcal{L}_1}=\set{\mathsf{,} , (, )}$.
+	\end{enumerate}
+Let $\mathsf{ALPH}_{\mathcal{L}_1}$, the \textit{alphabet} of $\mathcal{L}_1$, be the smallest set such that $\mathsf{S}_{\mathcal{L}_1}$, $\mathsf{QUAN}_{\mathcal{L}_1}$, $\mathsf{CON}_{\mathcal{L}_1}$, $\mathsf{CONS}_{\mathcal{L}_1}$, $\mathsf{VAR}_{\mathcal{L}_1}$, $\mathsf{PRED}_{\mathcal{L}_1} \subseteq \mathsf{ALPH}_{\mathcal{L}_1}$. Let $\textsf{TERM}_{\mathcal{L}_1}=\set{t \mid t \in \mathsf{CONS}_{\mathcal{L}_1}\text{ or } t\in\mathsf{VAR}_{\mathcal{L}_1}}$, the terms of $\mathcal{L}_1$.
+
+Let $\mathsf{ATOM}_{\mathcal{L}_1}$, the \textit{atomic formulas} of $\mathcal{L}_1$, be the smallest set such that if $P$ is a predicate of arity $n$ in $\mathsf{PRED}_{\mathcal{L}_1}$, and $t_1, ..., t_n$ are (not necessarily distinct) terms in $\mathsf{TERM}_{\mathcal{L}_1}$, then $P(t_1, ..., t_n) \in \mathsf{ATOM}_{\mathcal{L}_1}$. 
+	
+The set of (well-formed) \textit{formulas} of $\mathcal{L}_1$ is the smallest set $\mathsf{FORM}_{\mathcal{L}_1}$ such that:
+	%
+	\begin{enumerate}
+		\item $\mathsf{ATOM}_{\mathcal{L}_1} \subseteq \mathsf{FORM}_{\mathcal{L}_1}$;
+		\item if $X$ and $Y$ are in $\mathsf{FORM}_{\mathcal{L}_1}$, and $x \in \mathsf{VAR}_{\mathcal{L}_1}$, then:
+		\begin{enumerate}
+			\item $\neg X \in \mathsf{FORM}_{\mathcal{L}_1}$;
+			\item $(X \wedge Y) \in \mathsf{FORM}_{\mathcal{L}_1}$;
+			\item $(X \vee Y) \in \mathsf{FORM}_{\mathcal{L}_1}$; 
+			\item $(X \rightarrow Y) \in \mathsf{FORM}_{\mathcal{L}_1}$;
+			\item $\exists x Y \in \mathsf{FORM}_{\mathcal{L}_1}$, and;
+			\item $\forall x Y \in \mathsf{FORM}_{\mathcal{L}_1}$.
+		\end{enumerate}
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Sentences of $\mathcal{L}_1$]
+Let $\mathcal{F}: \mathsf{FORM}_{\mathcal{L}_1} \to \mathsf{VAR}_{\mathcal{L}_1}$ be the function defined for each $X \in \mathsf{FORM}_{\mathcal{L}_1}$ such that:
+
+\begin{enumerate}
+	\item if $X$ is of form $P(t_1, ..., t_n)$, then $\mathcal{F}(X)=\set{x \mid x \in \mathsf{VAR}_{\mathcal{L}_1}\text{ and } x=t_k, 1 \leq k \leq n}$;
+	\item if $X$ is of form $\neg Y$, then $\mathcal{F}(X)=\set{x \mid x \in \mathcal{F}(Y)}$;
+	\item if $X$ is of form $(Y \wedge Z)$, $(Y \vee Z)$, $(Y \rightarrow Z)$, then $\mathcal{F}(X)=\set{x \mid x \in \mathcal{F}(Y) \text{ or } x \in \mathcal{F}(Z)}$;
+	\item if $y \in \mathsf{VAR}_{\mathcal{L}_1}$ and $X$ is of form $\forall y Z$, $\mathcal{F}(X)=\set{x \mid x\in \mathcal{F}(Z) \text{ and } x\neq y}$. 
+	\end{enumerate}
+
+Let $\mathsf{SEN}_{\mathcal{L}_1}=\set{X \mid \mathcal{F}(X)=\emptyset}$, the set of \textit{closed formulas} or \textit{sentences} of $\mathcal{L}_1$. If $\mathcal{F}(X)\neq \emptyset$, we say $X$ is an open formula, and $\mathcal{F}(X)$ is the set of variables which have at least one free occurrence in $X$. 
+\end{defn}
+
+\begin{exc}
+Read the above two definitions carefully, and try to understand every part. Then, explain in your own terms what the main aim of $\mathcal{F}$ is, and how it achieves it with this specific definition. 
+\end{exc}
+
+\begin{defn}
+Provide a proof for the following claim: 
+\begin{center}Every atomic formula with at least one occurrence of a variable is open.
+	\end{center}
+\end{defn}
+
+\section{Yet another convention}
+
+Finally, here is yet another convention we shall make use of. Sometimes, we want to state exactly which variables of a \textit{complex} formula $Y$ have at least one free occurrence in $Y$. In such cases, we may write $Y[x_1, ..., x_n]$, with the list of free variables of $Y$ occurring between the brackets. This is useful, for example, if we write $Y[x]$, meaning that $Y$ only has $x$ occurring free somewhere, and then writing $\forall x Y[x]$, which immediately shows that the latter formula is now closed. 
+
+\begin{exc}
+Determine for each of the following formulas whether they are open or closed. In each case, explain your reasoning. 
+
+\begin{enumerate}
+	\item $\forall x_1, \forall x_2 ... \forall x_{10} X[x_1, x_2, ..., x_{10}]$
+	\item $\forall x \exists y X[y]$
+	\item $\exists y X[z]$
+	\item $\exists x \exists y \exists z X[x, y, z]$
+\end{enumerate}
+\end{exc}

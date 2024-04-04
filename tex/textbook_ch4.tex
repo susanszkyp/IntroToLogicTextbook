@@ -682,15 +682,15 @@ Here is another proof to inspect, with more branching, before it is your turn:
 		[{(Y \vee \neg Y) \rightarrow X}, just=$\neg\rightarrow$:!u
 		[{\neg (X \wedge (Y \vee \neg Y))}, just=$\neg\rightarrow$:!uu
 		[{\neg(Y \vee \neg Y)}, just=$\rightarrow$:!uu
-		[{Y}, just=$\neg\vee$:!u
-		[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
+		[{\neg Y}, just=$\neg\vee$:!u
+		[{\neg\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
 		]
 		]
 		[{X}
 		[{\neg X}, just=$\neg\wedge$:!uu, close={:!u, !c}]
 		[{\neg (Y \vee \neg Y)}
-		[{Y}, just=$\neg\vee$:!u
-		[{\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
+		[{\neg Y}, just=$\neg\vee$:!u
+		[{\neg\neg Y}, just=$\neg\vee$:!uu, close={:!u, !c}]
 		]
 		]
 		]
@@ -734,7 +734,7 @@ Or again, $X$ is a theorem \textit{iff} it is a tautology. I have been using the
 	\item if whenever $\mathbf{S} \models X$, then $\mathbf{S} \vdash X$, the system relative to the semantics is \textit{complete}. 
 \end{enumerate}
 
-Of course, if you put together these two conditionals, you get the biconditional above. In general, it is important to keep in mind that our semantics and our deductive system are two distinct things, and that they coincide on their judgments using two distinct methods is not a trivial feat (in fact, large classes of logics \textit{cannot} have a sound and complete deductive system). On the other hand, \textit{proving} soundness and completeness is rather involved and takes more machinery than we currently possess (or will possess by the end of this book). Thus, for now, you will have to trust the process. 
+Of course, if you put together these two conditionals, you get the biconditional above. In general, it is important to keep in mind that our semantics and our deductive system are two distinct things, and that they coincide on their judgments using two distinct methods is not a trivial feat (in fact, large classes of logics \textit{cannot} have a non-trivial sound and complete deductive system). On the other hand, \textit{proving} soundness and completeness is rather involved and takes more machinery than we currently possess (or will possess by the end of this book). Thus, for now, you will have to trust the process. 
 
 The process, our tableau method, is in many ways better than other approaches you may have seen before, like natural deduction. The reason is because the tableau method does not require you to be creative in your proofs at all. In fact, it is provable that given a formula $X$, if $X$ is a tautology, then applying the relevant rule as many times as possible to $ \neg X$ and each resulting formula completely mindlessly will result in a tree all of whose branches \textit{will} close, and if $X$ is not a tautology, there will be at least one open branch left in the end. So in general, all you have to do is recognize for each formula which rules can be applied, and apply them. Of course, if you are an expert in using the system, you will be able to do shorter proofs by using your brain (e.g., by using non-branching rules only once, deriving the relevant side only). 
 
@@ -838,11 +838,15 @@ But note that now we really are talking about unsatisfiability! For what we just
 Let $A=\{X_1, X_2, ...\}$ be any set of formulas and let $Y$ be any formula of $\mathcal{L}_0$. Then, the argument from \textit{premises} $A$ to the \textit{conclusion} $Y$ is \textit{valid} \textit{iff} the set $\set{X_1, X_2, ..., \neg Y}$ is not satisfiable. If an argument from $A$ to $Y$ is \textit{valid}, we write $A \models Y$, or say that $Y$ is a \textit{semantic consequence} of, or \textit{semantically entailed} by $A$.  
 \end{defn}
 
+\begin{remark}
+Indeed, from this, we get an alternative definition of being a tautology for free. For note that the premise set $A$ was not required to be non-empty. So $A$ may be $\emptyset$. So by definition, $\emptyset \models Y$ \textit{iff} $\set{\neg Y}$ is unsatisfiable. And $\set{\neg Y}$ is unsatisfiable \textit{iff} $Y$ is a tautology. In such cases, we can just write $\models Y$, as we have been doing. 
+\end{remark}
+
 \subsection{Validity and tableau}
 
 From the above, you may already see how reasoning with sets of formulas is implemented in our system. With single formulas, we had that if \textit{every} possible tree for $\neg X$ remained open, that must mean $\neg X$ is satisfiable (i.e., it is a tautology or contingent), which in turn ensures that $X$ is \textit{not} a tautology. On the other hand, if there is a possible tree for $\neg X$ that closes (closes on all its branches), then $X$ is indeed a tautology, since its negation is not satisfiable. Similarly, but with sets of formulas, if a tree for $\{X_1, X_2, ..., \neg Y\}$ closes at least once, then $\{X_1, X_2, ..., \neg Y\}$ is \textit{not} satisfiable, which in turn means that $\{X_1, X_2, ..\}$ entails $Y$. On the other hand, if \textit{no} tree for $\{X_1, X_2, ..., \neg Y\}$ closes, that means the set is satisfiable, and $\{X_1, X_2, ...\}$ does not entail $Y$. 
 
-The only question is: how do we work with multiple formulas, when in the simpler case, we put the sole formula $\neg X$ at the root of the tree (when trying to prove $X$ is a tautology)? First, with arguments, ws we put the \textit{negation} of the \textit{conclusion} at the root of the tree. So if we are considering whether the set $S=\set{X_1, X_2, ...}$ of premises is such that $S \vdash Y$, we put $\neg Y$ at the root of the tree. 
+The only question is: how do we work with multiple formulas, when in the simpler case, we put the sole formula $\neg X$ at the root of the tree (when trying to prove $X$ is a tautology)? First, with arguments, we put the \textit{negation} of the \textit{conclusion} at the root of the tree. So if we are considering whether the set $S=\set{X_1, X_2, ...}$ of premises is such that $S \vdash Y$, we put $\neg Y$ at the root of the tree. 
 
 The other change is more substantial. We introduce a very simple new rule into the system that enables us to inject any one of the premises at any part of our derivation. Thus: 
 
@@ -859,13 +863,13 @@ The other change is more substantial. We introduce a very simple new rule into t
 	\caption{Premise rule}
 \end{figure}
 
-Note that $X$ and $Y$ here are completely independent of one another. $X$ may be any formula that you happen to consider at any one point of your proof, and $Y$ can be any formula as long as it is one of the premises under consideration. Accordingly, the premise rule is radically different from all the previous rules, since it does not `depend' on any formula at any one point of tree. In other words, you can put any premise down at any one point of your derivation, and in fact, as many times as you want. 
+Note that $X$ and $Y$ here are completely independent of one another. $X$ may be any formula that you happen to consider at any one point of your proof, and $Y$ can be any formula as long as it is one of the premises under consideration. Accordingly, the premise rule is radically different from all the previous rules, since it does not `depend' on any formula at any one point of the tree. In other words, you can put any premise down at any one point of your derivation, and in fact, as many times as you want. 
 
 \fpboxstar{The relationship between the premise rule and all the other rules of our tableau system is similar to the relationship between the base rule and the productive rule(s) in our syntactic derivations.}
 
 Suppose you want to show that $\{X, X \rightarrow Y\} \vdash Y$. This is usually called \textit{Modus Ponens}, and it is a valid argument form. In other words, for any choice of $X$, $Y$, it is true that $\{X, X \rightarrow Y\} \models Y$. So let's show the corresponding fact syntactically. 
 
-As noted above, the first step here is to put the \textit{negation} of the conclusion at the root of tree derivation. Since $Y$ is the conclusion, the tree will start out as such: 
+As noted above, the first step here is to put the \textit{negation} of the conclusion at the root of the tree derivation. Since $Y$ is the conclusion, the tree will start out as such: 
 
 \begin{center}
 	\begin{prooftree}{}
@@ -1118,7 +1122,7 @@ A \models X \textit{ iff } A \vdash X
 %
 Or in words, $A$ \textit{semantically} entails X \textit{iff} $A$ \textit{syntactically} entails X. And once again, from left to right, this is (strong) completeness, and from right to left, this is (strong) soundness (for zeroth-order logic). 
 
-We shall not prove this biconditional in this book, as it involves more advanced techniques than we are now ready for. However, we can note the following. 
+We shall not prove this biconditional in this book, as it involves more advanced techniques than we are ready for. However, we can note the following. 
 
 Let's negate both sides of the biconditional again, just as before. Then, we get: 
 %
@@ -1128,7 +1132,7 @@ A \not\models X \textit{ iff } A \nvdash X
 %
 Again, we can try and unpack the two sides, and see what we get. First, if $A \nvdash X$, that means that $\neg X$ cannot have a closed tableau, no matter which members of $A$ are used in any of the attempted trees. In other words, all the trees starting with $\neg X$ will remain open, no matter how long they might be. 
 
-On the other side, we have that $A \not\models X$, i.e., that $A$ does not semantically entail $X$. Now previously, we defined semantic entailment in terms of unsatisfiability. In particular, $A$ semantically entails $X$ provided the set $A$ together with $\neg X$ form a set (precisely $A \cup \{\neg X\}$) that is unsatisfiable. Accordingly, $A$ does \textit{not} semantically entail $X$ provided $A$ together with $\neg X$ is not unsatisfiable. Or in other words, $A$ together with $\neg X$ \textit{is} satisfiable.
+On the other side, we have that $A \not\models X$, i.e., that $A$ does not semantically entail $X$. Now previously, we defined semantic entailment in terms of unsatisfiability. In particular, $A$ semantically entails $X$ provided the set $A$ together with $\neg X$ form a set (precisely $A$ plus $\neg X$) that is unsatisfiable. Accordingly, $A$ does \textit{not} semantically entail $X$ provided $A$ together with $\neg X$ is not unsatisfiable. Or in other words, $A$ together with $\neg X$ \textit{is} satisfiable.
 
 Putting the above two results together, we then get that $A$ together with $\neg X$ is satisfiable \textit{iff} $\neg X$ does not have a closed tableau from premises $A$. 
 
