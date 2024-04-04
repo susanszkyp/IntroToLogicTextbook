@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{logictextbook}
+
+\title{Zeroth-order tableau rule sheet}
+\author{Peter Susanszky: Learning Logic Backwards}
+\date{}
+
+\begin{document}
+\maketitle
+\centering
+
+\begin{tabular}{cc}
+\parbox{0.5\textwidth}{\centering{\fbox{
+	\begin{prooftree}{}
+		[{X\wedge Y}
+		[{X}, just=$\wedge$:!u]
+		]
+\end{prooftree}}
+
+\fbox{
+	\begin{prooftree}{}
+		[{X\wedge Y}
+		[{Y}, just=$\wedge$:!u]
+		]
+\end{prooftree}}
+}}
+&
+\parbox{0.5\textwidth}{\centering\fbox{
+	\begin{prooftree}{}
+		[{\neg (X\vee Y)}
+		[{\neg X}, just=$\neg\vee$:!u]
+		]
+\end{prooftree}}
+
+\fbox{
+	\begin{prooftree}{}
+		[{\neg(X\vee Y)}
+		[{\neg Y}, just=$\neg\vee$:!u]
+		]
+\end{prooftree}}
+}
+\\
+$\wedge$: Conjunction rule& $\neg \vee$: Negated disjunction rule\\
+\end{tabular}
+
+\begin{center}
+\fbox{
+		\begin{prooftree}{}
+			[{\neg (X\rightarrow Y)}
+			[{X}, just=$\neg\rightarrow$:!u]
+			]
+		\end{prooftree}}
+
+\fbox{
+		\begin{prooftree}{}
+			[{\neg(X\rightarrow Y)}
+			[{\neg Y}, just=$\neg\rightarrow$:!u]
+			]
+		\end{prooftree}}
+
+
+\medskip
+$\neg\rightarrow$: Negated conditional rule
+\end{center}
+
+\begin{tabular}{cc}
+\parbox{0.5\textwidth}{\centering\fbox{
+	\begin{prooftree}{}
+		[{X\vee Y}
+		[{X}, just=$\vee$:!u]
+		[{Y}]
+		]
+	\end{prooftree}}}
+&
+\parbox{0.5\textwidth}{\centering\fbox{
+	\begin{prooftree}{}
+		[{\neg (X\wedge Y)}
+		[{\neg X}, just=$\neg\wedge$:!u]
+		[{\neg Y}]
+		]
+	\end{prooftree}}}
+
+\\
+$\vee$:	Disjunction rule & $\neg\wedge$: Negated conjunction rule\\
+\parbox{0.5\textwidth}{\centering\fbox{
+	\begin{prooftree}{}
+		[{X \rightarrow Y}
+		[{\neg X}, just=$\rightarrow$:!u]
+		[{Y}]
+		]
+	\end{prooftree}}}
+&
+\parbox{0.5\textwidth}{\centering\fbox{
+	\begin{prooftree}{}
+		[{\neg\neg X}
+		[{X}, just=$\neg\neg$:!u]
+		]
+	\end{prooftree}}}
+\\
+$\rightarrow$: Conditional rule& $\neg\neg$: Double negation rule
+\end{tabular}
+
+\end{document}
