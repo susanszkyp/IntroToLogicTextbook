@@ -1,8 +1,6 @@
 \chapter{Formal languages}
 
-The purpose of this textbook is to teach you some of the ins and outs of formal logic. However, if you have ever come across an introductory logic textbook, you will see that this one is nothing like it. Logic is a very abstract science, and this abstract nature is very intimidating at first. It certainly was for me when I first started! I think this is hindered, not helped by immediately trying to relate the formal stuff to bigger, and even harder, topics like natural language (think English) and the nature of human reasoning. 
 
-Instead, we will start by getting familiar with the formal stuff itself. The idea is to make seemingly complicated ideas easy to grasp and understand (or at least, eas\textit{ier}). After all, in formal logic, being formal is very important. It is part of what it means to be rigorous. On the other hand, some of this rigour can make things seem more complicated than they really are, and that gap is exactly what we will be focusing on. 
 
 \section{The simplest writing game}
 
@@ -167,7 +165,10 @@ Of course, this is very wordy. But we already know how to make this reasoning mo
 	\nl{\bbox\bcirc\bbox}{\textsc{Productive Rule}: 2}
 	\nl{\bbox\bcirc\bbox\btri}{\textsc{Productive Rule}: 3}
 \end{axiomatic}
-\medskip
+
+\begin{remark}
+We call this a \textit{formal derivation}, or simply, \textit{derivation} of the formula \bbox\bcirc\bbox\btri\ in the language. Indeed, this is a formal \textit{proof} that the sequence of symbols \bbox\bcirc\bbox\btri\ \textit{is} a formula of the language. 
+\end{remark}
 
 Notice that we are now referring not only to the rule, but to the line number on which the rule is used. This is so since the \textsc{Productive Rule} needs two `inputs': something we already know to be a formula, the other a member of the alphabet. And what we know to be a formula is what appears on one of the previous lines. 
 
@@ -282,7 +283,7 @@ It is obvious that the new rule does not allow the construction of formulas like
 A trickier question. After you have a specification for the language $\mathcal{L}_\mathbb{N}$, can you give one for $\mathcal{L}_\mathbb{Z}$, which consists of all integers? Note: integers are the positive and negative natural numbers, plus zero. 
 \end{exc}
 
-\section{A more elaborate writing game}
+\section{More elaborate writing games}
 
 So far, our writing games basically put us into the role of a typewriter, where at each step, we could make a formula 1 symbol longer from our alphabet than it was before. The problem with this approach is that as it stands, it doesn't really distinguish between those sequences of symbols that may be interesting for one reason or another, and those which are just gibberish.
 
@@ -292,19 +293,19 @@ In fact, we \textit{really} didn't need to go to the lengths we did, using base 
 As just mentioned, for the languages preceding $\mathcal{L}_\mathbb{N}$ and $\mathcal{L}_\mathbb{Z}$, we could specify immediately: \textit{Any finite sequence of symbols of the alphabet is a formula of the language.} How would you change this definition to capture being a formula of $\mathcal{L}_\mathbb{N}$ and $\mathcal{L}_\mathbb{Z}$? 
 \end{exc}
 
-\subsection{The language $\mathcal{L}_f$}
+\section{The language $\mathcal{L}_f$}
 
 To illustrate another way, most languages you are familiar with have various levels of expressions, and at each level, certain `well-formed' expressions are distinguished from those that are not so. For example, as mentioned above, $\mathcal{L}_{EA}$ is the English Alphabet language, which has as formulas all finite sequences of letters of the English alphabet. This entails that every English word is a formula of $\mathcal{L}_{EA}$, but most formulas of $\mathcal{L}_{EA}$ are just random combinations of letters and not words of the English language. Similarly, when it comes to combinations of words in English, most of them are not well-formed. For example, while ``I am running late from class'' is a well-formed expression, ``am class running I late from'' is not. In other words, English sentences make up a small subset of all combinations of words of English. 
 
 To make these ideas more vivid, we can introduce a new language, which we will call $\mathcal{L}_F$. `$F$' in the subscript stands for \textit{file system}. You are probably familiar with file systems on your computer, that is, the \textit{files} and \textit{folders} on your computer that you can navigate with a click of a button. These file systems have several `levels', based on the folders you have. Importantly, folders are stackable, so that you can have a folder inside a folder, and a folder inside a folder inside a folder, etc. The language $\mathcal{L}_F$ will be able to specify which folders and files are in which folders, and once given an expression, you will be able to read off the file structure given by a certain formula of the language. 
 
 \fpboxstar{
-One thing that you may be less familiar with is the idea of a \textit{root} folder. Note that on every computer, files and folders are in other folders, but only until they aren't. Specifically, there is a folder on your computer that is not itself in any folder. That is your \textsf{root} (on Windows, think of \textsf{C:\textbackslash}). As we specify the language $\mathcal{L}_f$ in the following, we will be assuming that we are either in the root folder or a relative root folder. Essentially, we will be able to specify what is `under' the folder we are working in, but not anything above it.  
+One thing that you may be less familiar with is the idea of a \textit{root} folder. Note that on every computer, files and folders are in other folders, but only until they aren't. Specifically, there is a folder on your computer that is not itself in any folder. That is your \textsf{root} (on Windows, think of \textsf{C:\textbackslash}). As we specify the language $\mathcal{L}_f$ in the following, we will be assuming that we are either in the root folder or a relative root folder (the `working directory'). Essentially, we will be able to specify what is `under' the folder we are working in, but not anything above it.  
 }
 
 To start with our usual specification of the alphabet, we shall make use of certain base expressions, denoting (intuitively) the single files of our file system, and other expressions that are used merely to give structure to more complex expressions. 
 
-Let's suppose that we have 5 distinct files, which we may denote $f_1$, $f_2$, $f_3$, $f_4$ and $f_5$ for simplicity. Next, we shall use the comma symbol ($,$) to delineate individual files and folders that are `on the same level', that is, in the same folder. For example, we may say something like $f_1, f_3, f_5$ to specify there are three files. We also need a way to signal that some files and folders together form a folder. For this, we can put everything that belongs to a folder into curly brackets $\{$ and $\}$. So $f_1, f_3, f_5$ denotes the files at the highest level, while $\{f_1, f_3, f_5\}$ denotes these files in a single folder. 
+Let's suppose that we have 5 distinct files, which we may denote $f_1$, $f_2$, $f_3$, $f_4$ and $f_5$ for simplicity. Next, we shall use the comma symbol `$,$' to delineate individual files and folders that are `on the same level', that is, in the same folder. For example, we may say something like $f_1, f_3, f_5$ to specify there are three files. We also need a way to signal that some files and folders together form a folder. For this, we can put everything that belongs to a folder into curly brackets `$\{$' and `$\}$'. So $f_1, f_3, f_5$ denotes the files at the highest level, while $\{f_1, f_3, f_5\}$ denotes these files in a single folder. 
 
 The above `intuitive' specification can be put into our usual notation as follows.
 
@@ -617,13 +618,13 @@ We now have most of what we need to specify a very important logical language we
 \mathfrak{c}_1, \mathfrak{c}_2, \mathfrak{c}_3, \mathfrak{c}_4, \mathfrak{c}_5, ...
 \]
 
-You can read this as: $\mathfrak{c}_1$ is the first constant, $\mathfrak{c}_2$ is the second constant, $\mathfrak{c}_3$ is the third constant, and so on. Clearly, we cannot list all of the constants (for each $n$), just as we cannot list \textit{all} the natural numbers. That would take an infinitely long paper, and let's not talk about the time involved! This is why we have the three dots $...$, implying it goes on forever. More succintly, we may say: $\mathfrak{c}_n$ is a constant for every natural number $n$. 
+You can read this as: $\mathfrak{c}_1$ (`cee one') is the first constant, $\mathfrak{c}_2$ (`cee two') is the second constant, $\mathfrak{c}_3$ (`cee three') is the third constant, and so on. (The \textit{indices}, in order, here would be $1$, $2$, $3$, and so on.) Clearly, we cannot list all of the constants (for each $n$), just as we cannot list \textit{all} the natural numbers. That would take an infinitely long paper, and let's not talk about the time involved! This is why we have the three dots $...$, implying it goes on forever. More succinctly, we may say: $\mathfrak{c}_n$ is a constant for every natural number $n$. 
 
 Note also that the use of $\mathfrak{c}$ here is completely arbitrary. I chose it because it is the first letter in the word `constant', but I could have chosen $\mathfrak{a}$ or $\mathfrak{b}$. On the other hand, once we specify that we use $\mathfrak{c}$, we have to stick with it. In other words, the choice of $\mathfrak{c}$ \textit{is} arbitrary, but using $\mathfrak{c}$ afterwards is not arbitrary, since we explicitly chose it over other alternatives. 
 
 \subsection{Predicates}
 
-Second, similar to constants, we also have infinitely many symbols called \textit{predicates} in our alphabet. These will be denoted by $\mathfrak{P}$. In fact, these predicates come with an additional index called their \textit{arity}, denoting the number of arguments they each take (see below). So really, for each natural number $k$, there are infinitely many predicates for that natural number (arity) $k$. This might be a bit confusing at first, so let's look at some examples. 
+Second, similar to constants, we also have infinitely many symbols called \textit{predicates} in our alphabet. These will be denoted by $\mathfrak{P}$ (like $P$, but in a different font). In fact, these predicates come with an additional index called their \textit{arity}, denoting the number of arguments they each take (see below). So really, for each natural number $k$, there are infinitely many predicates for that natural number (arity) $k$. This might be a bit confusing at first, so let's look at some examples. 
 
 First, the infinitely many predicates of arity $1$ can be represented:
 \[
@@ -642,6 +643,8 @@ So really, the list goes on infinitely not just vertically, but horizontally too
 \end{gather*}
 
 Just as before, this may be represented a lot more succintly by simply saying: $\mathfrak{P}^k_n$ is a constant for each pair of natural numbers $k, n$. In other words, no matter what natural number you choose for $k$ and $n$, substituting it for $k$ and $n$ in $\mathfrak{P}^k_n$ will get you a predicate of the language. Sometimes, we may say $\mathfrak{P}^k_n$ is a $k$-place predicate. 
+
+\fpbox{It is important to note that in a predicate like $\pred{4}{9}$, the number $4$ is called its \textit{arity}, and the number $9$ is called its \textit{index}. For example, though $4$ may look like the \textit{power} or \textit{exponent}, this is just because of the similar notation. In reality, these two ideas are not related in any way, and should not be confused.}
 
 \begin{exc}
 Decide for the following symbols whether they are a constant or a predicate. If they are a predicate, identify their arity. 
@@ -803,6 +806,9 @@ Derive the following formulas using either the linear method or the tree method.
 \subsection{Why the weird typeface?}
 
 You may be wondering why we are using this weird typeface where a simple $P$ looks like this: $\mathfrak{P}$; and a simple $c$ looks like this: $\mathfrak{c}$. This is because as we move forward, we will start using $P$, $c$, and some other letters to simplify our formulas if it does not matter at that moment which exact formula of the language we are talking about. This often happens when we want to talk about a class of formulas sharing the same structure. Thus, they will serve a separate, but very important, purpose. 
+
+\fpbox{It is important that you do not mix the notation freely! In logic, different ways of writing the same thing may have a different meaning. For example, $p$, $P$, $\mathbf{P}$ and $\mathfrak{P}$ will all mean different things. You should be careful which is used at any one point (see immediately below for a distinction!).}
+
 
 Variables like $P$ and $c$ are usually called \textit{meta}variables, emphasizing that they are \textit{not} part of the language, but outside of it. You may think of $n$ here and the natural numbers. When we want to talk about some natural number or other, we use $n$, even though $n$ is not a (representation of a) natural number itself (it is not a formula of $\mathcal{L}_\mathbb{N}$). Similarly, when we want to talk about some predicate or other, we may use the uppercase $P, Q, R, ...$, and when we want to talk about some constant or another, we may use the lowercase $a, b, c, ...$. 
 

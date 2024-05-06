@@ -6,16 +6,16 @@ In the following, we will be going through some fundamental aspects of set theor
 
 Set theory is all about sets. For now, we can say that sets are some specific collections of things. These things can be of any sort, including sets themselves. Going back to file systems, in some important aspects, sets are like folders, which may contain other folders, which in turn may contain other folders, and so on. In fact, sets are denoted just as we denoted folders in our language $\mathcal{L}_f$; using curly braces. Thus, the following is a set:
 \[
-\set{\text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}
+\set{\text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}
 \]
 
-Sets have \textit{members}. The members of a set are those things that are in the set. So the members of the set $\set{\text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}$ are Peter, Leonardo, Taylor, and Curtis. Set membership is denoted by $\in$. So for example, 
+Sets have \textit{members}. The members of a set are those things that are in the set. So the members of the set $\set{\text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}$ are Peter, Leo, Taylor, and Curtis. Set membership is denoted by $\in$. So for example, 
 \[
-\text{Peter} \in \set{\text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}
+\text{Peter} \in \set{\text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}
 \]
 We can denote sets by using capital letters. The first choice is usually $S$ (you can guess why...). This makes it easier to talk about them. So for example:
 \begin{gather*}
-	S=\set{\text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}\\
+	S=\set{\text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}\\
 	\text{Peter} \in S
 \end{gather*}
 Similarly, we can denote something not being in the set by using $\notin$. So for example:
@@ -26,8 +26,8 @@ So far, this is rather simple. Now let's look at some complications.
 
 Sets are \textit{extensional} entities. This is a fancy word to say that all a set depends on is what its members are. So in a set, there is no ordering between its members, and it doesn't matter whether the set is represented as having some members twice (or however many times). Each member is only counted once, in whatever order. So for example:
 \begin{align*}
-\set{\text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}&=\set{\text{Peter}, \text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}\\
-\set{\text{Peter}, \text{Leonardo}, \text{Taylor}, \text{Curtis}}&= \set{\text{Curtis}, \text{Leonardo}, \text{Peter}, \text{Taylor}}
+\set{\text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}&=\set{\text{Peter}, \text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}\\
+\set{\text{Peter}, \text{Leo}, \text{Taylor}, \text{Curtis}}&= \set{\text{Curtis}, \text{Leo}, \text{Peter}, \text{Taylor}}
 \end{align*}
 
 \begin{defn}[Set extensionality] Two sets $S$, $Q$, are identical if they have exactly the same members. That is, for all $x$, $x \in S$ if, and only if, $x \in Q$. If $S$ and $Q$ are identical sets, we write $S=Q$.
@@ -142,8 +142,8 @@ Now importantly, $S$ and $Q$ need not be different, so that $S\times S$ is itsel
 Answer the following questions. For each question, don't forget to explain your reasoning. 	
 
 	\begin{enumerate}
-		\item What is the Cartesian product of the set $S=\{Leonardo, Taylor\}$ with itself?
-		\item Is the set $Q=\set{\oset{Taylor, Leonardo}, \oset{Leonardo, Leonardo}}$ a subset of $S \times S$?
+		\item What is the Cartesian product of the set $S=\{Lebron, Taylor\}$ with itself?
+		\item Is the set $Q=\set{\oset{Taylor, Lebron}, \oset{Lebron, Leo}}$ a subset of $S \times S$?
 	\end{enumerate} 
 \end{exc}
 
@@ -169,9 +169,48 @@ Here, $F'$ represents the `is friends with' relation again (in a different situa
 
 Related to sets of ordered pairs are three important notions that are usually specified. First, a relation may be \textit{reflexive}. This means that for any $x$ (that occurs in the `field' of a relation $R$, see below), $\oset{x, x} \in R$. For example, if $L$ encodes the `loves' relation, and everyone loves themselves, then for every person $x$, $\oset{x, x} \in L$. This way, $L$ would be reflexive. On the other hand, if there is a person $y$ such that $\oset{y, y} \notin L$, then $L$ would not be reflexive, because there would be a person who does not love themselves. 
 
+\begin{figure}[h]\centering
+\begin{tikzpicture}
+	\begin{scope}[every node/.style={circle,draw}]
+	\node (a) {$x$};
+\end{scope}
+
+\path [->] (a) edge[loop right] node[right] {$R$} (a);
+\end{tikzpicture}
+\caption{A graphical representation of an instance of reflexivity}
+\end{figure}
+
 Second, a relation may be symmetric, if whenever $\oset{x, y} \in R$, $\oset{y, x} \in R$ as well. This was already illustrated above with our three friends, Jamal, Kerry, and Zoltan. Specifically, $F$ was a relation that was symmetric, since whenever $x$ was a friend of $y$, $y$ was a friend of $x$. On the other hand, $F'$ was not symmetric, since there was a person, Kerry, who was friends with Zoltan, but Zoltan was not friends with Kerry. 
 
+\begin{figure}[h]\centering
+\begin{tikzpicture}
+	\begin{scope}[every node/.style={circle,draw}]
+		\node (a) {$x$};
+		\node [right=2cm of a] (b)  {$y$};
+	\end{scope}
+	
+	\path [->] (a) edge[bend left=60] node[below] {$R$} (b);
+	\path [->] (b) edge[bend right=270] node[above] {$R$} (a);
+\end{tikzpicture}
+\caption{A graphical representation of an instance of symmetricity}
+\end{figure}
+
 Finally, a relation may be transitive. Transitive relations are everywhere in logic, though they are not always apparent. A transitive relation is more elaborate than the above two, since it is specified between three things. Namely, a transitive relation is such that if $\oset{x, y} \in R$, and $\oset{y, z} \in R$, then $\oset{x, z} \in R$. One relation that is usually transitive is airplane travel with connections. Suppose you can travel by plane from New York to Los Angeles, and from Los Angeles to Tokyo. Then, that also means that you can travel from New York to Tokyo (with a connecting flight in Los Angeles). In other words if $A$ represents the set of all pairs of cities reachable by air travel, if $\oset{\text{NYC}, \text{LA}} \in A$, and $\oset{\text{LA}, \text{Tokyo}} \in A$, then $\oset{\text{NYC}, \text{LA}} \in A$. Since this holds for every three cities, the relation $A$ is transitive. Incidentally, this relation is also symmetric, since flights go back and forth (or perhaps in larger circles).  
+
+\begin{figure}[h]\centering
+\begin{tikzpicture}
+	\begin{scope}[every node/.style={circle,draw}]
+		\node (a) {$x$};
+		\node [right=2cm of a] (b)  {$y$};
+		\node [right=2cm of b] (c)  {$z$};
+	\end{scope}
+	
+	\path [->] (a) edge[bend left=60] node[below] {$R$} (b);
+	\path [->] (b) edge[bend left=60] node[below] {$R$} (c);
+	\path [->] (a) edge[bend right=30] node[below] {$R$} (c);
+\end{tikzpicture}
+\caption{A graphical representation of an instance of transitivity}
+\end{figure}
 
 \fpboxstar{%
 If you have taken an introductory logic course before, you may remember the connective `$\rightarrow$', standing for `if ..., then ...'. You may also remember that in your proof system, you could show that if you had as premises $X \rightarrow Y$ and $Y \rightarrow Z$, then you could derive $X \rightarrow Z$. Some systems even have a dedicated rule for this, called the `hypothetical syllogism' or `chain rule'. Now all this rule says is that $\rightarrow$ is transitive! In other words, if you take the set $I$ of all pairs $X$, $Y$ of propositions where $X \rightarrow Y$, and $\oset{X, Y}, \oset{Y, Z} \in I$, then $\oset{X, Z} \in I$ (at least in classical logic). 
@@ -179,8 +218,8 @@ If you have taken an introductory logic course before, you may remember the conn
 
 Note that relations can have many `places', meaning they may be said to hold between several different things. A $2$-place relation, as noted above, is a set of pairs, since it holds (or does not hold) between two things. But you may take other relations like `$x$ is in between, $y$ and $z$', which would be a $3$-place relation, and its representation would be a set of triples $\oset{x, y, z}$, because it holds (or does not hold) between 3 things. So in general, an $n$-place relation will be identified with a set of $n$-tuples, since it holds (or does not hold) between $n$ different things. Notice that in each case, an $n$-place relation $R$ is a subset of some set $S$ taken $n$ times with itself, i.e., $R \subseteq S^n$. 
 
-\begin{defn}
-Let $S$ be any set. An $n$-place \textit{relation} $R$ \textit{defined on} $S$ is a subset of the Cartesian product $S^n$, i.e., the product of $S$ taken $n$ times with itself. In such cases, we call $S$ the \textit{field} of $R$. 
+\begin{defn} \label{refsymtran}
+Let $S$ be any set. An $n$-place \textit{relation} $R$ \textit{defined on} $S$ is a subset of the Cartesian product $S^n$, that is, the product of $S$ taken $n$ times with itself. In such cases, we call $S$ the \textit{field} of $R$. 
 
 If $R$ is a two-place relation with field $S$, then: 
 \begin{enumerate}
@@ -188,6 +227,8 @@ If $R$ is a two-place relation with field $S$, then:
 	\item if for all $x, y \in S$, if $\oset{x, y} \in R$, then $\oset{y, x} \in R$, $R$ is \textit{symmetric};
 	\item if for all $x, y, z \in S$, if $\oset{x, y}, \oset{y, z} \in R$, then $\oset{x, z} \in R$, $R$ is \textit{transitive}. 
 \end{enumerate}
+
+If the relation $R$ is reflexive, symmetric, and transitive, we say it is an \textit{equivalence relation}.
 \end{defn}
 
 \begin{exc}
@@ -244,15 +285,15 @@ Let's start with some useful terminology. According to the above definition, the
 
 What about many-to-one functions? Indeed, these are possible. Suppose we have a function that assigns to each person their age at the moment. At any one moment, this would give us a very large set of ordered pairs:
 \begin{gather*}
-	\oset{\text{Leonardo DiCaprio}, 49}\\
+	\oset{\text{Dwayne Johnson}, 51}\\
 	\oset{\text{Dua Lipa}, 28}\\
-	\oset{\text{Curtis Jackson}, 38}\\
+	\oset{\text{Curtis Jackson}, 48}\\
 	\oset{\text{Idris Elba}, 51}\\
-	\oset{\text{Christian Bale}, 49}\\
+	\oset{\text{Christian Bale}, 50}\\
 	\vdots
 \end{gather*}
 
-Since there are many people on Earth, there will be many that share their age at any one moment (at least as things currently stand). Above, you can immediately see that Leonardo DiCaprio and Christian Bale are the same age at the moment of writing this book. Thus, the person-to-person's-age function is many-to-one. Again, note that it \textit{is} a function, and thus not one-to-many, and this is by nature, since every person only has one age.
+Since there are many people on Earth, there will be many that share their age at any one moment (at least as things currently stand). Above, you can immediately see that Dwayne Johnson and Idris Elba are the same age at the moment of writing this book. Thus, the person-to-person's-age function is many-to-one. Again, note that it \textit{is} a function, and thus not one-to-many, and this is by nature, since every person only has one age.
 
 On the other hand, some functions are not many-to-one, but \textit{one-to-one}. This means that for two distinct inputs, they never have the same output. Take the $+2$ function again. The $+2$ function on the natural numbers is one-to-one, since for each two distinct natural numbers $n, k$, $n+2\neq k+2$. This is easy to see since if $n+2=k+2$ were the case, then $n=k$ would also be the case, even though we specified those two numbers must be distinct. In other words, the same output can only be had if the input is really the same. One-to-one functions are also called \textit{injective}. 
 

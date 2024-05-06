@@ -1,0 +1,69 @@
+% ! TeX root = textbook_main.tex
+
+\noindent
+Learning Logic Backwards\\
+Peter Susanszky\\
+Version 0.4.6.3
+\doclicenseThis
+
+%\chapter{Preface}
+
+\chapter{How to read this book}
+
+This textbook is intended as an introduction to logic. Granted, there are probably hundreds of introductory logic textbooks already available `on the market'.  However, this book is different from most introductory logic textbooks. It is also technically not part of `the market'. But more on that later.
+
+The fundamental idea that inspired the writing of this book has to do with modern logic as a discipline. Around the turn of the 20th century, logic became a highly formalized, mathematized, symbolic discipline. This is why we sometimes call it formal logic, mathematical logic, or symbolic logic! Students, especially those coming from non-mathematical disciplines like philosophy, aren't always ready to face this fact. Indeed, I often hear students say: ``Professor, I know you said this course is going to be like math, but I didn't think it's going to be like actual math!'' 
+
+There are essentially two ways introductory logic textbooks try to tackle this problem. Some of the textbooks attempt to focus on the `logic' part while mostly disregarding the `formal' part of formal logic. This is great for honing your logical and general thinking skills, and it certainly makes some ideas easier to digest. However, if you want to then move on to more advanced topics, or understand works that refer to, or make use of, logical concepts, you cannot circumvent facing the formalism, and the ideas behind it. On the other hand, there are many textbooks that do not shy away from the formal aspects of logic. However, they are also often incomprehensible to the newcomer, for they already assume familiarity with the style in which modern mathematics is written, and basic concepts that they assume have already been covered elsewhere. I have seen syllabi where this hidden prerequisite was referred to as `basic mathmematical sophistication' -- and by the end of the semester, it turned out most students were pretty unsophisticated in this regard!
+
+This book aims to chart a third path. First, unlike textbooks in the first group, it presents various concepts from modern logic in a way similar to what you would find in more advanced textbooks, and even serious, published works on the topic. On the other hand, unlike textbooks in the second group, it does not assume that you already have the skills to read and importantly, write, in the style of modern mathematics. Accordingly, time will be spent explaining in detail how formal notation functions, what basic ideas it allows us to represent in a terse but rigorous form, and how you should go about emulating it in your own writing. All in all, though the book covers the central concepts of basic formal logic, its main aim is to provide the reader with the resources necessary to think, read, and write like a modern logician. 
+
+\section*{What this book is not}
+
+I talked briefly about what this book is -- now for what this book is not. Most importantly, this book is not intended as a reference material for any topic in logic. Though many of the central concepts of basic logic are introduced, no proof of any of the major theorems of propositional logic or first-order logic (like soundness, completeness, compactness, etc.) is sketched. This is partly because almost every interesting proof in logic is essentially inductive, and inductive proofs are not covered in this book (and knowledge of them will certainly not be assumed). 
+
+Though this is not surprising for an introductory textbook, the work is also fairly limited in scope. If you are new to formal logic, you might think that there is one logical language, one logic for that language, one way to prove things in that logic, and so on. In reality, there are a lot of logical languages, to which many logics correspond, for which several proof systems may be formulated. Choices abound. However, as usual, only the classics are covered here, by which I mean classical logic up to first-order (if that means anything to you).   
+
+\section*{Read carefully}
+
+One thing you should keep in mind when reading any work of formal logic is that small things can make a big difference. For example, in the following, you may come across different typographical variants of the letter $p$, like $\mathbf{p}$, $P$, $\mathbf{P}$, $\mathcal{P}$ and even $\mathfrak{P}$. Depending on how and in what context they are introduced, these variants will have entirely different meanings attached to them. Accordingly, it is important that you notice these differences, and follow the relevant conventions when you are doing the exercises. 
+
+Coupled with this is the additional fact that the appearance of a single letter in front of another may radically change its meaning from the initial one. Here is a toy example. Suppose the letter `$C$' stands for `Curtis', and the letter `$\mathbf{f}$' stands for `father of'. If we put these two together, we get that `$\mathbf{f}C$' stands for `the father of Curtis'. Clearly, Curtis is not his own father, so `$C$' and `$\mathbf{f}C$' mean different people. Now sometimes, these formulas might pop up as part of whole sentences. In this case, you have to be extra careful what you are writing. One recurring mistake I see often is to write things like `the father of $\mathbf{f}C$'. Note that this does \textit{not} mean the father of Curtis, it means the father of the father of Curtis, his grandpa (on his father's side). In these cases, you should either write `the father of $C$', of simply, `$\mathbf{f}C$', either of which means, by itself, `the father of Curtis'. And returning to our previous point, you should not write `$FC$' either, since `$\mathbf{f}$' is lowercase, and in bold. 
+
+In my own experience, I might properly digest a 25 page philosophy paper in a few hours, while I have seen 5 page logic papers that took several days to get down (if at all). Given that reading philosophy is itself not a walk in the park (you should at least sit down to do it!), you may get a general sense of the type of attention and concentration required for reading logic, and how different it is from reading something like a novel. 
+
+\section*{Write!}
+
+As mentioned above, this textbook focuses not only on the substance of modern logic, but also its style, both in terms of comprehension \textit{and} composition. Usually, students spend most of their time trying to comprehend the material presented in a textbook, and a lot less time (if any) writing about the material. This is not ideal for a variety of reasons. Most importantly, it may very well be the case that you understand most things (if not everything) presented in the book, yet when it comes to writing about them, you produce nothing more than word salad. Trust me, I have seen this happen. 
+
+This is especially problematic when it comes to writing \textit{proofs}. It is true that at any one time, you \textit{may} happen upon the correct answer to a question (in some way or another). However, if you cannot write a precise, concise and correct proof for a claim, you are no better off than someone who happened across the wrong answer to the question. The following considerations may help you see why. 
+
+The main reason why people write proofs in mathematics is to \textit{persuade} other people that what they believe to be true is actually true. Naturally, in order to persuade someone, you need to present some persuasive reasons as to why you are correct in your assessment of a certain proposition. If you cannot do this, they will not be persuaded by your reasoning, and will not believe that your claim is true, even if you thought about it for a long time and you are really sure about yourself. 
+
+Take for example \textit{Golbach's conjecture} (GB), one of the most famous unsolved problems in mathematics. It states: 
+
+\begin{center}
+(GB) Every even natural number greater than $2$ is a sum of two prime numbers. 
+\end{center}
+
+Now it is not hard to \textit{claim} that this conjecture is true (or false, for that matter). Many people believe it is true. However, providing a satisfactory \textit{proof} of this claim (or its opposite) is so hard that no mathematician has managed to do it since it was first formulated around 1742! In fact, it is also the case that if out of 10 people, 5 claim it is true, and 5 claim it is false, then $50\%$ of them will be correct in their assessment! But again, this information is completely useless, since without a proof, we cannot tell which group has the correct assessment.
+
+This book is full of exercises, interspersed with the material, to get you to write. Admittedly, these exercises are not like Goldbach's conjecture. Ideally, your instructor (if you have one) knows the answer, and can demonstrate its correctness, for each and every one of them. Nevertheless, your approach to these exercises should be no different than how a regular mathematician would go about proving Goldbach's conjecture. Namely, for each, you not only have to come up with the correct answer, but you also have to come up with some persuasive reasons as to why your answer is the correct one -- in this case, persuading your instructor. 
+
+Of course, this is all very abstract. But don't worry! Many of the exercises come with detailed examples, demonstrating how you should go about formulating your answers. The most important thing is that you actually write them down. Again, claiming that you `did it in your head' and got the correct answer is not acceptable, even if you did happen upon the correct answer. 
+
+Sometimes, the answer to a question may not immediately come to you. In such cases, you should not despair -- you should write! In many cases, the answer will come to you once you methodically lay out the relevant available information concerning the question. And if you never arrive at an answer (correct or incorrect), you still have a demonstration of your way of thinking put in writing. For most instructors, this is a lot more valuable than the correct (or incorrect) answer without any justification, for it allows them to identify pain points that need to be addressed. 
+
+\section*{Chapter structure}
+
+Each chapter of this book relies on material presented in previous chapters (except for the first one!). This means that if you skip some sections, or do not read them carefully enough, you might not be able to understand later chapters, or worse still, you may misunderstand what is going on. If you want to make sure that this does not happen, you should try and complete all (or most) of the exercises in each chapter. The exercises are designed to be relatively straightforward, in the sense that you should be able to at least attempt to complete them, even if some mistakes are made here and there. If you find that you do not know how to even start, it is likely that you need to go back and reread the relevant parts of the chapter more closely. 
+
+It should be noted that the reason why the book is structured this way is not incidental. It is a feature of modern logic, not a bug, that every logical system is built from the ground up using some basic principles and definitions. This is to ensure that at each step, we know how some propositions follow from some previous propositions, which follow from some previous propositions, and so on, until we get back to the basic principles and definitions. In turn, this ensures that \textit{if} you accept the basic principles and definitions, you \textit{must} accept what follows from them, since each derived proposition can be traced back to the starting point. Unfortunately, this also means that if you want to know what's happening at any one point, you need to understand how we got there from our starting point. Hence the warning in the previous paragraph. 
+
+If we zoom in a little, the chapters follow the same blueprint. In each chapter, we start with a discussion of the motivations for the ideas, concepts, and mechanisms that are then introduced gradually, through detailed explanation and examples. This makes up the bulk of each chapter. However, in some sense, all of this is just setup for the most important part of the chapters; the definitions. These definitions are heavy with formalism and thus extremely terse yet rich in meaning. In fact, as mentioned above, everything that we say follows from these definitions. 
+
+You might be thinking we are putting the cart before the horse here, since everything we say in a chapter follows from what we say at the end of it. And you would be right! The reason why we do this is because these definitions in themselves are completely incomprehensible for a newcomer without preparation. Be that as it may, once we passed the definition of a concept, you should no longer rely on your preconceptions and intuitions regarding it, since in each case, the definition decides how the concept is to be applied. To borrow a metaphor from the philosopher and logician Ludwig Wittgenstein, these intuitive explanations are meant to function as ladders that should be thrown away after you have climbed up on them. 
+
+\section*{Don't forget to have fun}
+
+Before moving on to the next chapter, one thing you should not forget is to have fun with the material! Admittedly, this might be a tall order at first, but trust me. Though logic might seem like a dry and hopelessly abstract subject, in reality, it gives you tools and techniques to notice patterns and connections in any field of study, and even in everyday life. The examples in this book have been developed specifically to demonstrate this. In each case, you can try to come up with your own examples using the concepts introduced, and you can challenge yourself to make it funny, surprising, insightful, or all three. 
