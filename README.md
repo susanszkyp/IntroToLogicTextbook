@@ -1,3 +1,5 @@
+If you don't really care about anything other than textbook, click here: [DOWNLOAD](https://github.com/susanszkyp/IntroToLogicTextbook/blob/main/tex/textbook_main.pdf)
+
 # Introductory Logic Textbook 
 
 This repository is for an introductory logic textbook authored by Peter Susanszky. The main aim of the textbook is to give a rigorous and precise introduction to first-order logic for students without the required background to understand the niceties of mathematical writing, and to prepare them for more advanced readings in the field. As such, it is an ideal first course for undergraduate students in philosophy, computer science, linguistics, and mathematics. The book also attempts to make use of Writing Across the Curriculum principles, putting an emphasis on written exercises that let students become acquainted with, and practice, writing proofs and presenting their own rigorous reasoning.  
