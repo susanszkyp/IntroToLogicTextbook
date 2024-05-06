@@ -1,4 +1,4 @@
-If you don't really care about anything other than textbook, click here: [DOWNLOAD](https://github.com/susanszkyp/IntroToLogicTextbook/blob/main/tex/textbook_main.pdf)
+If you don't really care about any of the details and just want to see the textbook, click here: [TEXTBOOK](https://github.com/susanszkyp/IntroToLogicTextbook/blob/main/tex/textbook_main.pdf). Otherwise, proceed. 
 
 # Introductory Logic Textbook 
 
