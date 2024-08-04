@@ -227,3 +227,18 @@ Determine for each of the following formulas whether they are open or closed. In
 	\item $\exists x \exists y \exists z X(x, y, z)$
 \end{enumerate}
 \end{exc}
+
+In connection, and this will be crucial when we introduce our first-order tableau system, we will also work with \textit{substitutions}. Most importantly, sometimes we may want to consider formulas where the variables have been substituted for names. In fact, this is one way to turn an open formula into a closed one. 
+
+For example, take the closed formula $\forall x (P(x) \wedge Q(x))$. In the notation above, this may be represented as $\forall x Y(x)$, while the open formula $P(x) \wedge Q(x)$ may be represented as $Y(x)$. Now substituting the name $a$ for the variable $x$ in $Y$, we get $P(a) \wedge Q(a)$. You simply take each unbound occurrence of $x$, and replace it with the name $a$. We use the notation $Y(a/x)$ to denote substituting $a$ for $x$. In full generality, we can say that for any formula $Y(x)$, we denote by $Y(a/x)$ the result of substituting $a$ for each unbound occurrence of the variable $x$ in $Y$.  
+
+\begin{exc}
+For each of the following, write the down the formula that is more concisely represented by our conventions. 
+
+\begin{enumerate}
+	\item $(P(x) \vee Q(y))(a/x)$
+	\item $Y(b/z)$ where $Y=\exists y (R(y, z) \wedge R(b, z))$
+	\item $(Q(x) \wedge \forall x R(x, a))(a/x)$
+	\item $((R(x, y) \vee R(y, x)) \rightarrow P(x))(a/x)(b/y)$
+\end{enumerate}
+\end{exc}

@@ -842,6 +842,18 @@ Let $A=\{X_1, X_2, ...\}$ be any set of formulas and let $Y$ be any formula of $
 Indeed, from this, we get an alternative definition of being a tautology for free. For note that the premise set $A$ was not required to be non-empty. So $A$ may be $\emptyset$. So by definition, $\emptyset \models Y$ \textit{iff} $\set{\neg Y}$ is unsatisfiable. And $\set{\neg Y}$ is unsatisfiable \textit{iff} $Y$ is a tautology. In such cases, we can just write $\models Y$, as we have been doing. 
 \end{remark}
 
+\begin{exc}
+Show that the following hold in zeroth-order logic:
+%
+	\begin{enumerate}
+		\item $\neg \neg X \models X$ and $X \models \neg \neg X$
+		\item $\neg X \wedge \neg Y \models \neg(X \vee Y)$ and $\neg (X \vee Y) \models \neg X \wedge \neg Y$;
+		\item $\neg X \vee \neg Y \models \neg(X \wedge Y)$ and $\neg (X \wedge Y) \models \neg X \vee \neg Y$;
+		\item $\neg X \vee Y \models X \rightarrow Y$ and $X \rightarrow Y \models \neg X \vee Y$;
+		\item $X \rightarrow Y \models \neg Y \rightarrow \neg X$ and $\neg Y \rightarrow \neg X \models X \rightarrow Y$;
+	\end{enumerate}
+\end{exc}
+
 \subsection{Validity and tableau}
 
 From the above, you may already see how reasoning with sets of formulas is implemented in our system. With single formulas, we had that if \textit{every} possible tree for $\neg X$ remained open, that must mean $\neg X$ is satisfiable (i.e., it is a tautology or contingent), which in turn ensures that $X$ is \textit{not} a tautology. On the other hand, if there is a possible tree for $\neg X$ that closes (closes on all its branches), then $X$ is indeed a tautology, since its negation is not satisfiable. Similarly, but with sets of formulas, if a tree for $\{X_1, X_2, ..., \neg Y\}$ closes at least once, then $\{X_1, X_2, ..., \neg Y\}$ is \textit{not} satisfiable, which in turn means that $\{X_1, X_2, ..\}$ entails $Y$. On the other hand, if \textit{no} tree for $\{X_1, X_2, ..., \neg Y\}$ closes, that means the set is satisfiable, and $\{X_1, X_2, ...\}$ does not entail $Y$. 

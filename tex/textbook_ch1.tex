@@ -1,6 +1,6 @@
 \chapter{Formal languages}
 
-
+\textcolor{red}{INTRO HERE!}
 
 \section{The simplest writing game}
 
@@ -154,7 +154,7 @@ Let's look at an example carefully. Suppose that you want to determine whether \
 
 This is so because we know \bbox{} is a formula already, and the \textsc{Productive Rule} tells us that if $X$ (here $X=$ \bbox) is a formula and $Y$ is a member of the alphabet, then $XY$, the result of putting \bbox{} first, then putting down whatever $Y$ we want from the alphabet, is also a formula. So in particular, \bbox\bcirc{} is a formula (when $Y=$ \bcirc).
 
-Now we can use this reasoning again, but this time, the $X$ in our \textsc{Productive Rule} is \bbox\bcirc, and $Y$ needs to be \bbox. So then by the rule, $XY$, that is, \bbox\bcirc\bbox{} is a formula. Finally, using the \textsc{Produce Rule} again with $X=$ \bbox\bcirc\bbox{} and $Y=$ \btri{}, we can see that \bbox\bcirc\bbox\btri{} is a formula too. 
+Now we can use this reasoning again, but this time, the $X$ in our \textsc{Productive Rule} is \bbox\bcirc, and $Y$ needs to be \bbox. So then by the rule, $XY$, that is, \bbox\bcirc\bbox{} is a formula. Finally, using the \textsc{Productive Rule} again with $X=$ \bbox\bcirc\bbox{} and $Y=$ \btri{}, we can see that \bbox\bcirc\bbox\btri{} is a formula too. 
 
 Of course, this is very wordy. But we already know how to make this reasoning more compact. Like this: 
 
@@ -411,7 +411,7 @@ Then, we get the following formulas from above:
 Rewrite all the formulas of $\mathcal{L}_f$ from Exercises \ref{exclfone} and \ref{exclftwo} assuming we changed \textsc{PR1} into \textsc{PR1}$^*$ (in other words, we did away with the previous comma convention).
 \end{exc}
 
-On the other hand, we really cannot do away with our curly braces, since they are the ones that tell us what we should consider as being in a folder. It is very important where we put those braces, since the resulting formula may represent something entirely different from what we intended. For example, if you are interested in how many folders there are in your root folder, it matters whether the formula is $\{\}, \{\}, \{\}, \{\}$ or $\{\{\}, \{\}, \{\}, \{\}\}$. The first one says there are 3 folders, the second says there is only one. 
+On the other hand, we really cannot do away with our curly braces, since they are the ones that tell us what we should consider as being in a folder. It is very important where we put those braces, since the resulting formula may represent something entirely different from what we intended. For example, if you are interested in how many folders there are in your root folder, it matters whether the formula is $\{\}, \{\}, \{\}, \{\}$ or $\{\{\}, \{\}, \{\}, \{\}\}$. The first one says there are 4 folders, the second says there is only one. 
 
 \begin{exc}
 How many files or folders are there in \textsf{root} if the formula specifies the file structure $f_1, f_2, \{\{f_2, f_4\}, \{f_3,f_3\}\}$?
@@ -528,9 +528,9 @@ Our other example, $(34 \times ((99- -36)\times 9))$, will result in a different
 
 You can also read these trees from top to bottom. In fact, for some reason, mathematicians call the highest formula the \textit{root} of the tree, from which it \textit{branches}. The lowest points (to which no other points are connected) are the tree's \textit{leaves}. Finally, any path from the root to one of the leaves is a \textit{branch}. So really, the tree is upside-down! 
 
-At any rate, if reading the tree from bottom-to-top tells you how a formula is formed, reading it from top-to-bottom tells you have a formula can be broken down into its constituent parts. 
+At any rate, if reading the tree from bottom-to-top tells you how a formula is formed, reading it from top-to-bottom tells you how a formula can be broken down into its constituent parts. 
 
-There is a question which formulas to take as constituent when a tree branches. For example, why is it the case that in the first example, we branched to $(414 \times -14134)$ and $(835+345)$, while in the second example, we branched to $34$ and $((99- -36)\times 9)$? The answer: the parentheses tell us. At each step, there is a \textit{main arithmetic operator}, which connects together the two formulas we branch to. Other arithmetic operators occur inside parentheses, and are to be broken down at a later step. 
+You might be wondering: which formulas should I take as constituent when a tree branches? For example, why is it the case that in the first example, we branched to $(414 \times -14134)$ and $(835+345)$, while in the second example, we branched to $34$ and $((99- -36)\times 9)$? The answer: the parentheses tell us. At each step, there is a \textit{main arithmetic operator}, which connects together the two formulas we branch to. Other arithmetic operators occur inside parentheses, and are to be broken down at a later step. 
 
 \begin{exc} \label{lae}
 Decide which is the main operator in each of these formulas:
@@ -634,7 +634,7 @@ Then, the infinitely many predicates of arity $2$ can be represented:
 \[
 \mathfrak{P}^2_1, \mathfrak{P}^2_2, \mathfrak{P}^2_3, \mathfrak{P}^2_4, \mathfrak{P}^2_5, ...
 \]
-So really, the list goes on infinitely not just vertically, but horizontally too! So in full generality: 
+So really, the list goes on infinitely not just horizontally, but vertically too! So in full generality: 
 \begin{gather*}
 \mathfrak{P}^1_1, \mathfrak{P}^1_2, \mathfrak{P}^1_3, \mathfrak{P}^1_4, \mathfrak{P}^1_5, ...\\
 \mathfrak{P}^2_1, \mathfrak{P}^2_2, \mathfrak{P}^2_3, \mathfrak{P}^2_4, \mathfrak{P}^2_5, ...\\
@@ -699,7 +699,7 @@ Now that we have our alphabet, we can look at how our formulas are built up. Jus
 	\textsc{Base Rule of $\mathcal{L}_0$:} if $\mathfrak{c}_{n_1}, ..., \mathfrak{c}_{n_k}$ are $k$-many (not necessarily distinct) individual constants and $\mathfrak{P}^k_i$ is a predicate of arity $k$, then $\mathfrak{P}^k_i(\mathfrak{c}_{n_1}, ..., \mathfrak{c}_{n_k})$ is a formula. We shall also call any such formula an \textit{atomic formula}.
 }
 
-This is an extremely precise formulation of our base rule, and thus can be rather confusing at first. However, it really isn't very complicated, for all it says is that if you take any predicate with arity $k$, then you need to have $k$ individual constants following it in order for it to be a formula. In other words, any predicate $\mathfrak{P}^k_n$ wears on its sleeves how many individual constants it demands -- namely, $k$ many! Note however that these individual constants need not be distinct. For example, for $\mathfrak{P}^2_5$, we may write $\mathfrak{P}^2_5(\mathfrak{c}_5, \mathfrak{c}_5)$ just as well as $\mathfrak{P}^2_5(\mathfrak{c}_5, \mathfrak{c}_3)$. 
+This is an extremely precise formulation of our base rule, and thus can be rather confusing at first. However, it really isn't very complicated, for all it says is that if you take any predicate with arity $k$, then you need to have $k$ individual constants following it in order for it to be a formula. In other words, any predicate $\mathfrak{P}^k_n$ wears on its sleeves the number of individual constants it demands -- namely, $k$ many! Note however that these individual constants need not be distinct. For example, for $\mathfrak{P}^2_5$, we may write $\mathfrak{P}^2_5(\mathfrak{c}_5, \mathfrak{c}_5)$ just as well as $\mathfrak{P}^2_5(\mathfrak{c}_5, \mathfrak{c}_3)$. 
 
 \begin{exc}
 Determine if the following are (atomic) formulas of the language $\mathcal{L}_0$. In each case, explain your reasoning. 
